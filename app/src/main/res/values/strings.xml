@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">diceRoller2</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome_to_dice_roller">Welcome To Dice Roller</string>
+    <string name="add_dice_or_configure_your_dice_by_tapping_the_buttons_below">Add dice or configure your dice by tapping the buttons below</string>
+    <string name="settings">Settings</string>
+    <string name="dice_settings">Dice Settings</string>
+    <string name="number_of_dice_sides">Number of dice sides</string>
+    <string name="_6">6</string>
+    <string name="_8">8</string>
+    <string name="number_of_dice">Number of dice</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="display_total">Display total</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="app_settings">App Settings</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="enable">Enable</string>
+    <string name="disable">Disable</string>
+    <string name="support">Support</string>
+    <string name="version">Version</string>
+    <string name="v1_0_0">v1.0.0</string>
+    <string name="contact_support">Contact Support</string>
+    <string name="Roll">Roll</string>
 </resources>

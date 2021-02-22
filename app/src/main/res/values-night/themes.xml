@@ -3,14 +3,49 @@
     <style name="Theme.DiceRoller2" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimaryVariant">@color/grey</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/statusBarColor</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <!-- Dark theme -->
+
+    <style name="ChipStyle" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="chipCornerRadius">12dp</item>
+        <item name="chipMinHeight">24dp</item>
+        <item name="android:padding">24dp</item>
+        <item name="android:elevation">5dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="checkedIconTint">@color/primary</item>
+        <item name="checkedChip">@color/primary</item>
+        <item name="android:textColor">@color/primary</item>
+    </style>
+
+    <style name="AppBackgroundColor" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="backgroundColor">@color/primary</item>
+    </style>
+
+
+    <style name="CustomCardStyle" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="cardBackgroundColor">@color/cardBackgroundColor</item>
+        <item name="cardCornerRadius">10dp</item>
+    </style>
+
+    <style name="titleStyle" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:fontFamily">@font/baloo_thambi</item>
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+
+    <style name="titleDiceFrag" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:fontFamily">@font/baloo_thambi</item>
+        <item name="android:textColor">@color/diceTitle</item>
+        <item name="android:textSize">25sp</item>
     </style>
 </resources>
