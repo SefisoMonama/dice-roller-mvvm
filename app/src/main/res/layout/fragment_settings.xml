@@ -8,7 +8,7 @@
     android:showDividers="middle"
     android:orientation="vertical"
     style="@style/AppBackgroundColor"
-    tools:context=".SettingsFragment">
+    tools:context=".ui.fragments.fragments.SettingsFragment">
 
     <TextView
         android:id="@+id/diceSetting_title_textView"
@@ -44,6 +44,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/diceSides_textView"
         app:layout_constraintTop_toBottomOf="@+id/diceSides_textView"
+        app:checkedChip="@+id/sixSides_chip"
         app:selectionRequired="true"
         app:singleSelection="true">
 
@@ -89,6 +90,7 @@
         app:layout_constraintEnd_toEndOf="@+id/diceNumber_textView"
         app:layout_constraintStart_toStartOf="@+id/diceNumber_textView"
         app:layout_constraintTop_toBottomOf="@+id/diceNumber_textView"
+        app:checkedChip="@+id/oneDice_chip"
         app:selectionRequired="true"
         app:singleSelection="true">
 
@@ -153,6 +155,7 @@
         app:layout_constraintEnd_toEndOf="@+id/displayTotal_textView"
         app:layout_constraintStart_toStartOf="@+id/displayTotal_textView"
         app:layout_constraintTop_toBottomOf="@+id/displayTotal_textView"
+        app:checkedChip="@+id/yes_chip"
         app:selectionRequired="true"
         app:singleSelection="true">
 
@@ -222,6 +225,7 @@
         app:layout_constraintEnd_toEndOf="@+id/darMode_textView"
         app:layout_constraintStart_toStartOf="@+id/darMode_textView"
         app:layout_constraintTop_toBottomOf="@+id/darMode_textView"
+        app:checkedChip="@+id/disable_chip"
         app:selectionRequired="true"
         app:singleSelection="true">
 

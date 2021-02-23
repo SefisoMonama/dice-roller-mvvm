@@ -7,18 +7,20 @@
 
     <fragment
         android:id="@+id/diceFragment"
-        android:name="com.strixtechnology.diceroller2.DiceFragment"
+        android:name="com.strixtechnology.diceroller2.ui.fragments.fragments.DiceFragment"
         android:label="fragment_dice"
         tools:layout="@layout/fragment_dice" >
         <action
             android:id="@+id/action_diceFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
         <argument
-            android:name="from_dice_fragment_setting_fragment" />
+            android:name="toSettingsFragment"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.strixtechnology.diceroller2.SettingsFragment"
+        android:name="com.strixtechnology.diceroller2.ui.fragments.fragments.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
 </navigation>
