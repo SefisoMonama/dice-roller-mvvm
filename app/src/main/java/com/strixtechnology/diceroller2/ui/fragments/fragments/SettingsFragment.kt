@@ -145,7 +145,7 @@ class SettingsFragment : Fragment() {
 
     fun sendMail(){
         val intent =  Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", "sefiso@strixtechnology.com", null))
-        startActivity(Intent.createChooser(intent, "Sefiso"))
+        startActivity(Intent.createChooser(intent, "Send mail to DiceRoller.co support"))
     }
 
     private fun updateChip(chipId: Int, chipGroup: ChipGroup) {
