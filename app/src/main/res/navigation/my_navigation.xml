@@ -22,5 +22,13 @@
         android:id="@+id/settingsFragment"
         android:name="com.strixtechnology.diceroller2.ui.fragments.fragments.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_diceFragment"
+            app:destination="@id/diceFragment" />
+        <argument
+            android:name="fromSettingsFragment"
+            app:argType="boolean"
+            android:defaultValue="false" />
+    </fragment>
 </navigation>

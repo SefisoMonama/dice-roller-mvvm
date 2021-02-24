@@ -96,20 +96,21 @@
                     android:id="@+id/decrement_imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="250dp"
+                    android:layout_marginStart="200dp"
                     android:src="@drawable/ic_remove"
-                    app:tint="@color/iconColor"
                     app:layout_constraintBottom_toBottomOf="@+id/settings_imageView"
                     app:layout_constraintEnd_toStartOf="@+id/increment_imageView"
                     app:layout_constraintStart_toEndOf="@+id/settings_imageView"
-                    app:layout_constraintTop_toTopOf="@+id/settings_imageView" />
+                    app:layout_constraintTop_toTopOf="@+id/settings_imageView"
+                    app:tint="@color/iconColor" />
 
                 <ImageView
                     android:id="@+id/increment_imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="32dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="24dp"
                     android:src="@drawable/ic_add_circle"
                     app:layout_constraintBottom_toBottomOf="@+id/decrement_imageView"
                     app:layout_constraintEnd_toEndOf="parent"

@@ -12,6 +12,8 @@
     <color name="strokeColors">#1877F2</color>
     <color name="iconColor">#FF000000</color>
     <color name="buttonColor">#20000000</color>
+    <color name="saveButton">#63657A</color>
+    <color name="saveButtonColor">#FFFFFF</color>
 
     <!--Dark Theme -->
     <color name="AppBackgroundColor">@color/white</color>
@@ -20,4 +22,6 @@
     <color name="statusBarColor">@color/black</color>
     <color name="welcomeTitle">@color/diceTitle</color>
     <color name="strokeColor">@color/strokeColors</color>
+    <color name="saveButtonBColor">@color/saveButton</color>
+
 </resources>

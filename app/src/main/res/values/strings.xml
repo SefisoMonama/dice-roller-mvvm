@@ -26,4 +26,6 @@
     <string name="v1_0_0">v1.0.0</string>
     <string name="contact_support">Contact Support</string>
     <string name="Roll">Roll</string>
+    <string name="save">save</string>
+    <string name="seettings">SETTINGS</string>
 </resources>
