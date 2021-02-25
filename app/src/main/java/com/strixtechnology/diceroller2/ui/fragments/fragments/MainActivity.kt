@@ -7,7 +7,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import com.strixtechnology.diceroller2.R
 import com.strixtechnology.diceroller2.databinding.ActivityMainBinding
-import com.strixtechnology.diceroller2.databinding.FragmentDiceBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -23,12 +22,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         navController = findNavController(R.id.hostFragment)
-        val appBarConfiguration: AppBarConfiguration = AppBarConfiguration(
-                setOf(
-                    R.id.diceFragment,
-                    R.id.settingsFragment
-                )
-        )
+
+
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
 }

@@ -14,6 +14,8 @@
     <color name="buttonColor">#20000000</color>
     <color name="saveButton">#63657A</color>
     <color name="saveButtonColor">#FFFFFF</color>
+    <color name="buttonBackgroundActive">#2063657A</color>
+    <color name="buttonBackgroundInActive">#63657A</color>
 
     <!--Dark Theme -->
     <color name="AppBackgroundColor">@color/white</color>

@@ -26,23 +26,39 @@ class DiceFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentDiceBinding.inflate(inflater, container, false)
 
+
+        binding.rollDiceButton.isEnabled = false
+        buttonState()
+
         binding.settingsImageView.setOnClickListener {
             findNavController().navigate(R.id.action_diceFragment_to_settingsFragment)
+            setViewsVisibility()
         }
 
 
-        if(args.fromSettingsFragment){
-            binding.dice1ImageView.visibility = View.VISIBLE
-            binding.dice2ImageView.visibility = View.VISIBLE
-            binding.dice3ImageView.visibility = View.VISIBLE
-            binding.dice3ImageView.visibility = View.VISIBLE
-            binding.welcomeTextView.visibility = View.INVISIBLE
-            binding.welcomeInstructionsTextView.visibility = View.INVISIBLE
-        }else{
-            binding.welcomeTextView.visibility = View.VISIBLE
-            binding.welcomeInstructionsTextView.visibility = View.VISIBLE
+        binding.incrementImageView.setOnClickListener {
+            setViewsVisibility()
         }
 
         return binding.root
+    }
+
+    fun buttonState() {
+        if (!binding.rollDiceButton.isEnabled) {
+            binding.rollDiceButton.setBackgroundColor(resources.getColor(R.color.primary))
+        }else{
+            binding.rollDiceButton.setBackgroundColor(resources.getColor(R.color.buttonBackgroundInActive))
+        }
+    }
+
+    fun setViewsVisibility(){
+        binding.dice1ImageView.visibility = View.VISIBLE
+        binding.dice2ImageView.visibility = View.VISIBLE
+        binding.dice3ImageView.visibility = View.VISIBLE
+        binding.dice3ImageView.visibility = View.VISIBLE
+        binding.totalTextView.visibility = View.VISIBLE
+        binding.rollDiceButton.isEnabled = true
+        binding.welcomeTextView.visibility = View.GONE
+        binding.welcomeInstructionsTextView.visibility = View.GONE
     }
 }

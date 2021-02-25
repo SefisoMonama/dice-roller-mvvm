@@ -32,9 +32,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:minLines="3"
-        android:text="@string/add_dice_or_configure_your_dice_by_tapping_the_buttons_below"
+        android:text="@string/add_dice_or_configure_your_dice_by_tapping_the_buttons_below_or_roll_dice"
         android:textAlignment="center"
         android:textSize="18sp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="@+id/welcome_textView"
         app:layout_constraintStart_toStartOf="@+id/welcome_textView"
         app:layout_constraintTop_toBottomOf="@+id/welcome_textView" />
@@ -73,7 +74,6 @@
                     android:paddingEnd="60dp"
                     android:text="@string/Roll"
                     android:textSize="12sp"
-                    android:backgroundTint="@color/buttonColor"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -126,7 +126,8 @@
             android:id="@+id/dice1_imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="52dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="108dp"
             android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -174,14 +175,14 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:fontFamily="@font/baloo_thambi"
-            android:text="TextView"
+            android:text="@string/dice_total"
             android:textAlignment="center"
             android:textSize="22sp"
             android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/bottom_cardView"
-            app:layout_constraintEnd_toEndOf="@+id/dice2_imageView"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/dice1_imageView" />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

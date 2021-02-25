@@ -30,7 +30,7 @@ class SettingsFragment : Fragment() {
     private val args by navArgs<SettingsFragmentArgs>()
     private lateinit var binding: FragmentSettingsBinding
     private lateinit var mainViewModel: MainViewModel
-    //private lateinit var mToolbar: Toolbar
+
 
     private var diceSidesChip = DEFAULT_DICE_SIDES
     private var diceSidesChipId = 0
@@ -53,13 +53,10 @@ class SettingsFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_settings, container, false)
 
         binding = FragmentSettingsBinding.inflate(layoutInflater)
 
-
-        //val toolbar = binding.settingsToolBar
-
+        setHasOptionsMenu(true)
 
         mainViewModel.readDiceSettings.asLiveData().observe(viewLifecycleOwner, { value ->
             diceSidesChip = value.selectedDiceSides
@@ -127,7 +124,6 @@ class SettingsFragment : Fragment() {
             sendMail()
           }
 
-        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -138,7 +134,6 @@ class SettingsFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == R.id.settings_menu){
             findNavController().navigate(R.id.action_settingsFragment_to_diceFragment)
-            args.fromSettingsFragment
         }
         return super.onOptionsItemSelected(item)
     }*/
