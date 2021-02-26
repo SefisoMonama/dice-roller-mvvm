@@ -2,8 +2,10 @@ package com.strixtechnology.diceroller2.ui.fragments.fragments
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import com.strixtechnology.diceroller2.R
 import com.strixtechnology.diceroller2.databinding.ActivityMainBinding
@@ -22,12 +24,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         navController = findNavController(R.id.hostFragment)
-
-
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.drawable.ic_back_home_arrow){
+            onBackPressed()
+        }
+        return super.onOptionsItemSelected(item)
     }
+
 
 }

@@ -14,6 +14,7 @@
     <color name="buttonColor">#20000000</color>
     <color name="saveButton">#63657A</color>
     <color name="saveButtonColor">#FFFFFF</color>
+    <color name="toolBarBackground">#63657A</color>
     <color name="buttonBackgroundActive">#2063657A</color>
     <color name="buttonBackgroundInActive">#63657A</color>
 
@@ -21,7 +22,7 @@
     <color name="AppBackgroundColor">@color/white</color>
     <color name="cardBackgroundColor">@color/grey</color>
     <color name="checkedChipBackground">@color/primary</color>
-    <color name="statusBarColor">@color/black</color>
+    <color name="statusBarColor">#63657A</color>
     <color name="welcomeTitle">@color/diceTitle</color>
     <color name="strokeColor">@color/strokeColors</color>
     <color name="saveButtonBColor">@color/saveButton</color>

@@ -1,16 +1,16 @@
 package com.strixtechnology.diceroller2.ui.fragments.fragments
 
+import android.app.ActionBar
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -32,6 +32,7 @@ class SettingsFragment : Fragment() {
     private lateinit var mainViewModel: MainViewModel
 
 
+
     private var diceSidesChip = DEFAULT_DICE_SIDES
     private var diceSidesChipId = 0
     private var diceNumberChip = DEFAULT_DICE_NUM
@@ -43,9 +44,8 @@ class SettingsFragment : Fragment() {
     private var darkThemeId = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        setHasOptionsMenu(true)
         mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
-
     }
 
     override fun onCreateView(
@@ -56,7 +56,15 @@ class SettingsFragment : Fragment() {
 
         binding = FragmentSettingsBinding.inflate(layoutInflater)
 
-        setHasOptionsMenu(true)
+        val toolbar = binding.settingsToolBar
+        toolbar.setNavigationIcon(R.drawable.ic_back_home_arrow)
+        toolbar.setNavigationOnClickListener {
+            val action = SettingsFragmentDirections.actionSettingsFragmentToDiceFragment(true)
+            findNavController().navigate(action)
+        }
+
+
+
 
         mainViewModel.readDiceSettings.asLiveData().observe(viewLifecycleOwner, { value ->
             diceSidesChip = value.selectedDiceSides
@@ -123,6 +131,7 @@ class SettingsFragment : Fragment() {
         binding.contactSupportButton.setOnClickListener {
             sendMail()
           }
+
 
         return binding.root
     }

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     style="@style/AppBackgroundColor"
     tools:context=".ui.fragments.fragments.DiceFragment">
-
 
     <TextView
         android:id="@+id/welcome_textView"
@@ -48,7 +48,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="1.0">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/bottom_cardView"
@@ -62,8 +62,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:strokeColor="@color/strokeColor"
-                android:background="@color/cardBackgroundColor">
+                android:background="@color/cardBackgroundColor"
+                app:strokeColor="@color/strokeColor">
 
                 <Button
                     android:id="@+id/roll_dice_button"
@@ -86,21 +86,20 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="32dp"
-                    app:tint="@color/iconColor"
                     android:src="@drawable/ic_settings"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/roll_dice_button" />
+                    app:layout_constraintTop_toBottomOf="@+id/roll_dice_button"
+                    app:tint="@color/iconColor" />
 
                 <ImageView
                     android:id="@+id/decrement_imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="200dp"
+                    android:layout_marginEnd="8dp"
                     android:src="@drawable/ic_remove"
                     app:layout_constraintBottom_toBottomOf="@+id/settings_imageView"
                     app:layout_constraintEnd_toStartOf="@+id/increment_imageView"
-                    app:layout_constraintStart_toEndOf="@+id/settings_imageView"
                     app:layout_constraintTop_toTopOf="@+id/settings_imageView"
                     app:tint="@color/iconColor" />
 
@@ -108,13 +107,10 @@
                     android:id="@+id/increment_imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="24dp"
+                    android:layout_marginEnd="23dp"
                     android:src="@drawable/ic_add_circle"
                     app:layout_constraintBottom_toBottomOf="@+id/decrement_imageView"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/decrement_imageView"
                     app:layout_constraintTop_toTopOf="@+id/decrement_imageView"
                     app:tint="@color/iconColor"
                     tools:ignore="UseAppTint" />
@@ -124,50 +120,57 @@
 
         <ImageView
             android:id="@+id/dice1_imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="108dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="100dp"
+            android:adjustViewBounds="false"
+            android:src="@drawable/dice1"
+            android:cropToPadding="false"
             android:visibility="invisible"
+            app:layout_constraintEnd_toStartOf="@+id/dice2_imageView"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/dice2_imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="81dp"
+            android:src="@drawable/dice1"
             android:visibility="invisible"
+            android:scaleType="centerInside"
             app:layout_constraintBottom_toBottomOf="@+id/dice1_imageView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.388"
-            app:layout_constraintStart_toEndOf="@+id/dice1_imageView"
-            app:layout_constraintTop_toTopOf="@+id/dice1_imageView"
-            app:layout_constraintVertical_bias="0.0"
-            tools:src="@tools:sample/avatars" />
+            app:layout_constraintTop_toTopOf="@+id/dice1_imageView" />
 
         <ImageView
             android:id="@+id/dice3_imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/dice1"
+            android:adjustViewBounds="false"
             android:visibility="invisible"
-            app:layout_constraintStart_toStartOf="@+id/dice1_imageView"
+            android:cropToPadding="false"
+            app:layout_constraintBottom_toTopOf="@+id/total_textView"
+            app:layout_constraintEnd_toStartOf="@+id/dice4_imageView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dice1_imageView"
-            tools:src="@tools:sample/avatars" />
+            app:layout_constraintVertical_bias="0.110000014" />
 
         <ImageView
             android:id="@+id/dice4_imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="81dp"
+            android:src="@drawable/dice1"
+            android:scaleType="centerInside"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/dice3_imageView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.388"
-            app:layout_constraintStart_toEndOf="@+id/dice3_imageView"
-            app:layout_constraintTop_toBottomOf="@+id/dice1_imageView"
-            app:layout_constraintVertical_bias="1.0"
-            tools:src="@tools:sample/avatars" />
+            app:layout_constraintTop_toTopOf="@+id/dice3_imageView" />
+
 
         <TextView
             android:id="@+id/total_textView"
@@ -184,6 +187,8 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent" />
 
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

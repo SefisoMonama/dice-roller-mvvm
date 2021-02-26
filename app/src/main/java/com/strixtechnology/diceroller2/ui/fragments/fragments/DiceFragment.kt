@@ -27,11 +27,13 @@ class DiceFragment : Fragment() {
         binding = FragmentDiceBinding.inflate(inflater, container, false)
 
 
-        binding.rollDiceButton.isEnabled = false
+
         buttonState()
 
         binding.settingsImageView.setOnClickListener {
             findNavController().navigate(R.id.action_diceFragment_to_settingsFragment)
+        }
+        binding.rollDiceButton.setOnClickListener {
             setViewsVisibility()
         }
 
@@ -39,6 +41,7 @@ class DiceFragment : Fragment() {
         binding.incrementImageView.setOnClickListener {
             setViewsVisibility()
         }
+        setHasOptionsMenu(true)
 
         return binding.root
     }
@@ -55,9 +58,8 @@ class DiceFragment : Fragment() {
         binding.dice1ImageView.visibility = View.VISIBLE
         binding.dice2ImageView.visibility = View.VISIBLE
         binding.dice3ImageView.visibility = View.VISIBLE
-        binding.dice3ImageView.visibility = View.VISIBLE
+        binding.dice4ImageView.visibility = View.VISIBLE
         binding.totalTextView.visibility = View.VISIBLE
-        binding.rollDiceButton.isEnabled = true
         binding.welcomeTextView.visibility = View.GONE
         binding.welcomeInstructionsTextView.visibility = View.GONE
     }
