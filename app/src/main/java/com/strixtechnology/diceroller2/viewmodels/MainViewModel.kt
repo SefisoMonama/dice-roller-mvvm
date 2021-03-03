@@ -18,28 +18,5 @@ class MainViewModel @ViewModelInject constructor(
     //private var diceNum = DEFAULT_DICE_NUM
     //private var displayTotal = DEFAULT_DISPLAY_DICE_TOTAL
 
-    private var appTheme = DEFAULT_DARK_THEME
 
-    val readDiceSettings = dataStoreRepository.readDiceSettings
-    val readAppSettings = dataStoreRepository.readAppSettings
-
-    fun saveDiceSettings(diceSidesId: Int,diceSides: String, diceNumId:Int, diceNum: String, displayTotalId: Int, displayTotal: String) =
-            viewModelScope.launch(Dispatchers.IO){
-                dataStoreRepository.saveDiceSettings(
-                    diceSidesId,
-                    diceSides,
-                    diceNumId,
-                    diceNum,
-                    displayTotalId,
-                    displayTotal
-                )
-            }
-
-    fun saveAppSettings(darkTheme: Int, darkThemeId: String) =
-            viewModelScope.launch(Dispatchers.IO){
-                dataStoreRepository.saveAppSettings(
-                        darkTheme,
-                        darkThemeId
-                )
-            }
 }

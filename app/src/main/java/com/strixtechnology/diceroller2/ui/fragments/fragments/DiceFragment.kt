@@ -10,13 +10,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.strixtechnology.diceroller2.R
 import com.strixtechnology.diceroller2.databinding.FragmentDiceBinding
+import com.strixtechnology.diceroller2.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class DiceFragment : Fragment() {
 
-    private val args by navArgs<SettingsFragmentArgs>()
+
+
 
     private lateinit var binding: FragmentDiceBinding
     override fun onCreateView(
@@ -54,13 +56,4 @@ class DiceFragment : Fragment() {
         }
     }
 
-    fun setViewsVisibility(){
-        binding.dice1ImageView.visibility = View.VISIBLE
-        binding.dice2ImageView.visibility = View.VISIBLE
-        binding.dice3ImageView.visibility = View.VISIBLE
-        binding.dice4ImageView.visibility = View.VISIBLE
-        binding.totalTextView.visibility = View.VISIBLE
-        binding.welcomeTextView.visibility = View.GONE
-        binding.welcomeInstructionsTextView.visibility = View.GONE
-    }
 }
