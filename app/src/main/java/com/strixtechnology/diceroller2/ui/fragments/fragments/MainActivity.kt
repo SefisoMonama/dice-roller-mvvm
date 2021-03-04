@@ -21,17 +21,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        setTheme(R.style.Theme_DiceRoller2)
         setContentView(binding.root)
 
         navController = findNavController(R.id.hostFragment)
     }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.drawable.ic_back_home_arrow){
-            onBackPressed()
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-
 }

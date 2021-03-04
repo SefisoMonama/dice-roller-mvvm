@@ -17,7 +17,7 @@
     <color name="toolBarBackground">#63657A</color>
     <color name="buttonBackgroundActive">#2063657A</color>
     <color name="buttonBackgroundInActive">#63657A</color>
-
+    <color name="mainBackgroundColor">#FF000000</color>
     <!--Dark Theme -->
     <color name="AppBackgroundColor">@color/white</color>
     <color name="cardBackgroundColor">@color/grey</color>

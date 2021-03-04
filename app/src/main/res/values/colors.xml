@@ -19,6 +19,7 @@
     <color name="toolBarBackground">#63657A</color>
     <color name="buttonBackgroundActive">#1877F2</color>
     <color name="buttonBackgroundInActive">#C2C5CC</color>
+    <color name="mainBackgroundColor">#FFFFFF</color>
 
     <!--Light Theme -->
     <color name="AppBackgroundColor">@color/white</color>

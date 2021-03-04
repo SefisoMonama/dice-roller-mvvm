@@ -1,5 +1,6 @@
 package com.strixtechnology.diceroller2.viewmodels
 
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,18 +17,6 @@ class SettingsViewModel  @ViewModelInject constructor(
     val readDiceNumbers = dataStoreRepository.readDiceNumbers
     val readDisplayDiceTotal = dataStoreRepository.readDisplayDiceTotal
     val readAppModeSettings = dataStoreRepository.readAppModeSettings
-
-    /**fun saveDiceSettings(diceSidesId: Int,diceSides: String, diceNumId:Int, diceNum: String, displayTotalId: Int, displayTotal: String) =
-            viewModelScope.launch(Dispatchers.IO){
-                dataStoreRepository.saveDiceSettings(
-                        diceSidesId,
-                        diceSides,
-                        diceNumId,
-                        diceNum,
-                        displayTotalId,
-                        displayTotal
-                )
-            }*/
 
     fun saveDiceSides(diceSides: Int, diceSidesId: Int){
         viewModelScope.launch (Dispatchers.IO){
@@ -56,6 +45,4 @@ class SettingsViewModel  @ViewModelInject constructor(
             )
         }
     }
-
-
 }

@@ -16,6 +16,12 @@
 
     <!-- Dark theme -->
 
+    <style name="SplashScreenStyle" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/iphone_12_pro_max__1</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
     <style name="ChipStyle" parent="Widget.MaterialComponents.Chip.Filter">
         <item name="chipCornerRadius">12dp</item>
         <item name="chipMinHeight">24dp</item>

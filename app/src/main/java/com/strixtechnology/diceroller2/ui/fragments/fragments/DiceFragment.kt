@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.strixtechnology.diceroller2.R
 import com.strixtechnology.diceroller2.databinding.FragmentDiceBinding
+import com.strixtechnology.diceroller2.viewmodels.DiceViewModel
 import com.strixtechnology.diceroller2.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,7 +20,7 @@ class DiceFragment : Fragment() {
 
 
 
-
+    private lateinit var diceViewModel: DiceViewModel
     private lateinit var binding: FragmentDiceBinding
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -35,13 +36,13 @@ class DiceFragment : Fragment() {
         binding.settingsImageView.setOnClickListener {
             findNavController().navigate(R.id.action_diceFragment_to_settingsFragment)
         }
+
         binding.rollDiceButton.setOnClickListener {
-            setViewsVisibility()
         }
 
 
         binding.incrementImageView.setOnClickListener {
-            setViewsVisibility()
+            //setViewsVisibility()
         }
         setHasOptionsMenu(true)
 

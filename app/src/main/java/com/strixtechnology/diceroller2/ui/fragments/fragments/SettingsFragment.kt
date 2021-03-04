@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
@@ -108,6 +109,14 @@ class SettingsFragment : Fragment() {
             val selectedDarkThemeOption = chip.text.toString().toLowerCase(Locale.ROOT)
             darkThemeChip = selectedDarkThemeOption
             darkThemeId = selectedChipId
+
+            settingsViewModel.saveAppModeSettings(darkThemeChip, darkThemeId)
+
+            if(chip == binding.disableDarkModeChip){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }else{
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
         }
 
         binding.saveSettingsButton.setOnClickListener{
@@ -118,14 +127,9 @@ class SettingsFragment : Fragment() {
         }
 
 
-        /**binding.darkModeChipGroup.setOnCheckedChangeListener { group, checkedId ->
-            settingsViewModel.saveAppModeSettings(darkTheme, darkThemeId)
-        }*/
-
         binding.contactSupportButton.setOnClickListener {
             sendMail()
-          }
-
+        }
 
         return binding.root
     }

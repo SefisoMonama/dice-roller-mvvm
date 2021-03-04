@@ -21,6 +21,7 @@ import dagger.hilt.android.scopes.ActivityRetainedScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import java.io.IOException
 import javax.inject.Inject
 
@@ -134,6 +135,7 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
                 val selectedDiceNumbersId = preferences[PreferenceKeys.selectedDiceNumbersId] ?: 0
                 DiceNumbers(selectedDiceNumbers, selectedDiceNumbersId)
             }
+
 
     val readDisplayDiceTotal: Flow<DisplayDiceTotal> = dataStore.data
             .catch { exception ->
