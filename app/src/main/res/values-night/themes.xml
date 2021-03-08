@@ -2,10 +2,10 @@
     <!-- Base application theme. -->
     <style name="Theme.DiceRoller2" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/grey</item>
-        <item name="colorOnPrimary">@color/black</item>
-        <!-- Secondary brand color. -->
+         <item name="colorPrimary">@color/purple_200</item>
+         <item name="colorPrimaryVariant">@color/grey</item>
+         <item name="colorOnPrimary">@color/black</item>
+         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
@@ -17,10 +17,12 @@
     <!-- Dark theme -->
 
     <style name="SplashScreenStyle" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:windowBackground">@drawable/iphone_12_pro_max__1</item>
+        <item name="android:windowBackground">@drawable/splashscreen</item>
+        <item name="android:fitsSystemWindows">true</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
+
 
     <style name="ChipStyle" parent="Widget.MaterialComponents.Chip.Filter">
         <item name="chipCornerRadius">12dp</item>

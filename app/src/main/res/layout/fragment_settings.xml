@@ -39,316 +39,316 @@
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                app:layout_constraintBottom_toBottomOf = "parent"
-                app:layout_constraintStart_toStartOf = "parent"
-                app:layout_constraintEnd_toEndOf = "parent"
-                app:layout_constraintTop_toBottomOf="@+id/settings_toolBar">
-
-            <TextView
-                android:id="@+id/diceSetting_title_textView"
-                style="@style/titleStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="16dp"
-                android:text="@string/dice_settings"
-                android:textColor="@color/primary"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@+id/settings_toolBar">
 
-            <TextView
-                android:id="@+id/diceSides_textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="@string/number_of_dice_sides"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/diceSetting_title_textView"
-                app:layout_constraintStart_toStartOf="@+id/diceSetting_title_textView"
-                app:layout_constraintTop_toBottomOf="@+id/diceSetting_title_textView" />
-
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/diceSides_chipGroup"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                app:checkedChip="@+id/sixSides_chip"
-                app:layout_constraintEnd_toEndOf="@+id/diceSides_textView"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="@+id/diceSides_textView"
-                app:layout_constraintTop_toBottomOf="@+id/diceSides_textView"
-                app:selectionRequired="true"
-                app:singleSelection="true">
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/sixSides_chip"
-                    style="@style/ChipStyle"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/diceSetting_title_textView"
+                    style="@style/titleStyle"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:elevation="5dp"
-                    android:text="@string/_6"
-                    app:chipEndPadding="20dp"
-                    app:chipMinHeight="30dp"
-                    app:chipStartPadding="20dp" />
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/dice_settings"
+                    android:textColor="@color/primary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/eightSides_chip"
-                    style="@style/ChipStyle"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/diceSides_textView"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:elevation="5dp"
-                    android:text="@string/_8"
-                    app:chipEndPadding="20dp"
-                    app:chipMinHeight="30dp"
-                    app:chipStartPadding="20dp" />
-            </com.google.android.material.chip.ChipGroup>
+                    android:layout_marginTop="12dp"
+                    android:text="@string/number_of_dice_sides"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/diceSetting_title_textView"
+                    app:layout_constraintStart_toStartOf="@+id/diceSetting_title_textView"
+                    app:layout_constraintTop_toBottomOf="@+id/diceSetting_title_textView" />
 
-            <TextView
-                android:id="@+id/diceNumber_textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="@string/number_of_dice"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/diceSides_chipGroup"
-                app:layout_constraintStart_toStartOf="@+id/diceSides_chipGroup"
-                app:layout_constraintTop_toBottomOf="@+id/diceSides_chipGroup" />
-
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/diceNumber_chipGroup"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                app:checkedChip="@+id/oneDice_chip"
-                app:layout_constraintEnd_toEndOf="@+id/diceNumber_textView"
-                app:layout_constraintStart_toStartOf="@+id/diceNumber_textView"
-                app:layout_constraintTop_toBottomOf="@+id/diceNumber_textView"
-                app:selectionRequired="true"
-                app:singleSelection="true">
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/oneDice_chip"
-                    style="@style/ChipStyle"
-                    android:layout_width="wrap_content"
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/diceSides_chipGroup"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:elevation="5dp"
-                    android:text="@string/_1"
-                    app:chipEndPadding="20dp"
-                    app:chipMinHeight="30dp"
-                    app:chipStartPadding="20dp" />
+                    android:layout_marginTop="4dp"
+                    app:checkedChip="@+id/sixSides_chip"
+                    app:layout_constraintEnd_toEndOf="@+id/diceSides_textView"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="@+id/diceSides_textView"
+                    app:layout_constraintTop_toBottomOf="@+id/diceSides_textView"
+                    app:selectionRequired="true"
+                    app:singleSelection="true">
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/twoDice_chip"
-                    style="@style/ChipStyle"
-                    android:layout_width="wrap_content"
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/sixSides_chip"
+                        style="@style/ChipStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:elevation="5dp"
+                        android:text="@string/_6"
+                        app:chipEndPadding="20dp"
+                        app:chipMinHeight="30dp"
+                        app:chipStartPadding="20dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/eightSides_chip"
+                        style="@style/ChipStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:elevation="5dp"
+                        android:text="@string/_8"
+                        app:chipEndPadding="20dp"
+                        app:chipMinHeight="30dp"
+                        app:chipStartPadding="20dp" />
+                </com.google.android.material.chip.ChipGroup>
+
+                <TextView
+                    android:id="@+id/diceNumber_textView"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/_2"
-                    app:chipEndPadding="20dp"
-                    app:chipMinHeight="30dp"
-                    app:chipStartPadding="20dp" />
+                    android:layout_marginTop="24dp"
+                    android:text="@string/number_of_dice"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/diceSides_chipGroup"
+                    app:layout_constraintStart_toStartOf="@+id/diceSides_chipGroup"
+                    app:layout_constraintTop_toBottomOf="@+id/diceSides_chipGroup" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/threeDice_chip"
-                    style="@style/ChipStyle"
-                    android:layout_width="wrap_content"
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/diceNumber_chipGroup"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/_3"
-                    app:chipEndPadding="20dp"
-                    app:chipMinHeight="30dp"
-                    app:chipStartPadding="20dp" />
+                    android:layout_marginTop="4dp"
+                    app:checkedChip="@+id/oneDice_chip"
+                    app:layout_constraintEnd_toEndOf="@+id/diceNumber_textView"
+                    app:layout_constraintStart_toStartOf="@+id/diceNumber_textView"
+                    app:layout_constraintTop_toBottomOf="@+id/diceNumber_textView"
+                    app:selectionRequired="true"
+                    app:singleSelection="true">
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/fourDice_chip"
-                    style="@style/ChipStyle"
-                    android:layout_width="wrap_content"
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/oneDice_chip"
+                        style="@style/ChipStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:elevation="5dp"
+                        android:text="@string/_1"
+                        app:chipEndPadding="20dp"
+                        app:chipMinHeight="30dp"
+                        app:chipStartPadding="20dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/twoDice_chip"
+                        style="@style/ChipStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_2"
+                        app:chipEndPadding="20dp"
+                        app:chipMinHeight="30dp"
+                        app:chipStartPadding="20dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/threeDice_chip"
+                        style="@style/ChipStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_3"
+                        app:chipEndPadding="20dp"
+                        app:chipMinHeight="30dp"
+                        app:chipStartPadding="20dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/fourDice_chip"
+                        style="@style/ChipStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_4"
+                        app:chipEndPadding="20dp"
+                        app:chipMinHeight="30dp"
+                        app:chipStartPadding="20dp" />
+                </com.google.android.material.chip.ChipGroup>
+
+                <TextView
+                    android:id="@+id/displayTotal_textView"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/_4"
-                    app:chipEndPadding="20dp"
-                    app:chipMinHeight="30dp"
-                    app:chipStartPadding="20dp" />
-            </com.google.android.material.chip.ChipGroup>
+                    android:layout_marginTop="24dp"
+                    android:text="@string/display_total"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/diceNumber_chipGroup"
+                    app:layout_constraintStart_toStartOf="@+id/diceNumber_chipGroup"
+                    app:layout_constraintTop_toBottomOf="@+id/diceNumber_chipGroup" />
 
-            <TextView
-                android:id="@+id/displayTotal_textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="@string/display_total"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/diceNumber_chipGroup"
-                app:layout_constraintStart_toStartOf="@+id/diceNumber_chipGroup"
-                app:layout_constraintTop_toBottomOf="@+id/diceNumber_chipGroup" />
-
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/displayTotal_chipGroup"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                app:checkedChip="@+id/yes_chip"
-                app:layout_constraintStart_toStartOf="@+id/displayTotal_textView"
-                app:layout_constraintTop_toBottomOf="@+id/displayTotal_textView"
-                app:selectionRequired="true"
-                app:singleSelection="true">
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/yes_chip"
-                    style="@style/ChipStyle"
-                    android:layout_width="wrap_content"
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/displayTotal_chipGroup"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/yes"
-                    app:chipEndPadding="20dp"
-                    app:chipMinHeight="30dp"
-                    app:chipStartPadding="20dp" />
+                    android:layout_marginTop="4dp"
+                    app:checkedChip="@+id/yes_chip"
+                    app:layout_constraintStart_toStartOf="@+id/displayTotal_textView"
+                    app:layout_constraintTop_toBottomOf="@+id/displayTotal_textView"
+                    app:selectionRequired="true"
+                    app:singleSelection="true">
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/no_chip"
-                    style="@style/ChipStyle"
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/yes_chip"
+                        style="@style/ChipStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/yes"
+                        app:chipEndPadding="20dp"
+                        app:chipMinHeight="30dp"
+                        app:chipStartPadding="20dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/no_chip"
+                        style="@style/ChipStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no"
+                        app:chipEndPadding="20dp"
+                        app:chipMinHeight="30dp"
+                        app:chipStartPadding="20dp" />
+                </com.google.android.material.chip.ChipGroup>
+
+
+                <View
+                    android:id="@+id/horizontal_line"
                     android:layout_width="wrap_content"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="32dp"
+                    android:background="@color/grey"
+                    app:layout_constraintBottom_toTopOf="@+id/appSettings_textView"
+                    app:layout_constraintEnd_toEndOf="@+id/displayTotal_textView"
+                    app:layout_constraintStart_toStartOf="@+id/displayTotal_chipGroup"
+                    app:layout_constraintTop_toBottomOf="@+id/displayTotal_chipGroup"></View>
+
+
+                <TextView
+                    android:id="@+id/appSettings_textView"
+                    style="@style/titleStyle"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/no"
-                    app:chipEndPadding="20dp"
-                    app:chipMinHeight="30dp"
-                    app:chipStartPadding="20dp" />
-            </com.google.android.material.chip.ChipGroup>
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/app_settings"
+                    app:layout_constraintEnd_toEndOf="@+id/horizontal_line"
+                    app:layout_constraintStart_toStartOf="@+id/horizontal_line"
+                    app:layout_constraintTop_toBottomOf="@+id/horizontal_line" />
 
+                <TextView
+                    android:id="@+id/darMode_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/dark_mode"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/appSettings_textView"
+                    app:layout_constraintStart_toStartOf="@+id/appSettings_textView"
+                    app:layout_constraintTop_toBottomOf="@+id/appSettings_textView" />
 
-            <View
-                android:id="@+id/horizontal_line"
-                android:layout_width="wrap_content"
-                android:layout_height="2dp"
-                android:layout_marginTop="32dp"
-                android:background="@color/grey"
-                app:layout_constraintBottom_toTopOf="@+id/appSettings_textView"
-                app:layout_constraintEnd_toEndOf="@+id/displayTotal_textView"
-                app:layout_constraintStart_toStartOf="@+id/displayTotal_chipGroup"
-                app:layout_constraintTop_toBottomOf="@+id/displayTotal_chipGroup"></View>
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/darkMode_chipGroup"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:checkedChip="@+id/disableDarkMode_chip"
+                    app:layout_constraintEnd_toEndOf="@+id/darMode_textView"
+                    app:layout_constraintStart_toStartOf="@+id/darMode_textView"
+                    app:layout_constraintTop_toBottomOf="@+id/darMode_textView"
+                    app:selectionRequired="true"
+                    app:singleSelection="true">
 
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/disableDarkMode_chip"
+                        style="@style/ChipStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/disable"
+                        app:chipEndPadding="20dp"
+                        app:chipMinHeight="30dp"
+                        app:chipStartPadding="20dp" />
 
-            <TextView
-                android:id="@+id/appSettings_textView"
-                style="@style/titleStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="16dp"
-                android:text="@string/app_settings"
-                app:layout_constraintEnd_toEndOf="@+id/horizontal_line"
-                app:layout_constraintStart_toStartOf="@+id/horizontal_line"
-                app:layout_constraintTop_toBottomOf="@+id/horizontal_line" />
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/enableDarkMode_chip"
+                        style="@style/ChipStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/enable"
+                        app:chipEndPadding="20dp"
+                        app:chipMinHeight="30dp"
+                        app:chipStartPadding="20dp" />
+                </com.google.android.material.chip.ChipGroup>
 
-            <TextView
-                android:id="@+id/darMode_textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/dark_mode"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/appSettings_textView"
-                app:layout_constraintStart_toStartOf="@+id/appSettings_textView"
-                app:layout_constraintTop_toBottomOf="@+id/appSettings_textView" />
+                <TextView
+                    android:id="@+id/support_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/support"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/darkMode_chipGroup"
+                    app:layout_constraintStart_toStartOf="@+id/darkMode_chipGroup"
+                    app:layout_constraintTop_toBottomOf="@+id/darkMode_chipGroup" />
 
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/darkMode_chipGroup"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:checkedChip="@+id/disableDarkMode_chip"
-                app:layout_constraintEnd_toEndOf="@+id/darMode_textView"
-                app:layout_constraintStart_toStartOf="@+id/darMode_textView"
-                app:layout_constraintTop_toBottomOf="@+id/darMode_textView"
-                app:selectionRequired="true"
-                app:singleSelection="true">
+                <Button
+                    android:id="@+id/contactSupport_button"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="200dp"
+                    android:background="@drawable/btnshape"
+                    android:text="@string/contact_support"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/support_textView"
+                    app:layout_constraintStart_toStartOf="@+id/support_textView"
+                    app:layout_constraintTop_toBottomOf="@+id/support_textView"
+                    app:selectionRequired="true"
+                    app:singleSelection="true" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/disableDarkMode_chip"
-                    style="@style/ChipStyle"
+                <TextView
+                    android:id="@+id/VersionTitle_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/version"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/contactSupport_button"
+                    app:layout_constraintStart_toStartOf="@+id/contactSupport_button"
+                    app:layout_constraintTop_toBottomOf="@+id/contactSupport_button" />
+
+                <TextView
+                    android:id="@+id/versionNumber_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/v1_0_0"
+                    android:textColor="@color/primary"
+                    app:layout_constraintEnd_toEndOf="@+id/VersionTitle_textView"
+                    app:layout_constraintStart_toStartOf="@+id/VersionTitle_textView"
+                    app:layout_constraintTop_toBottomOf="@+id/VersionTitle_textView" />
+
+                <Button
+                    android:id="@+id/saveSettingsButton"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/disable"
-                    app:chipEndPadding="20dp"
-                    app:chipMinHeight="30dp"
-                    app:chipStartPadding="20dp" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/enableDarkMode_chip"
-                    style="@style/ChipStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/enable"
-                    app:chipEndPadding="20dp"
-                    app:chipMinHeight="30dp"
-                    app:chipStartPadding="20dp" />
-            </com.google.android.material.chip.ChipGroup>
-
-            <TextView
-                android:id="@+id/support_textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="@string/support"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/darkMode_chipGroup"
-                app:layout_constraintStart_toStartOf="@+id/darkMode_chipGroup"
-                app:layout_constraintTop_toBottomOf="@+id/darkMode_chipGroup" />
-
-            <Button
-                android:id="@+id/contactSupport_button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="200dp"
-                android:backgroundTint="@color/primary"
-                android:text="@string/contact_support"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="@+id/support_textView"
-                app:layout_constraintStart_toStartOf="@+id/support_textView"
-                app:layout_constraintTop_toBottomOf="@+id/support_textView"
-                app:selectionRequired="true"
-                app:singleSelection="true" />
-
-            <TextView
-                android:id="@+id/VersionTitle_textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="@string/version"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/contactSupport_button"
-                app:layout_constraintStart_toStartOf="@+id/contactSupport_button"
-                app:layout_constraintTop_toBottomOf="@+id/contactSupport_button" />
-
-            <TextView
-                android:id="@+id/versionNumber_textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="@string/v1_0_0"
-                android:textColor="@color/primary"
-                app:layout_constraintEnd_toEndOf="@+id/VersionTitle_textView"
-                app:layout_constraintStart_toStartOf="@+id/VersionTitle_textView"
-                app:layout_constraintTop_toBottomOf="@+id/VersionTitle_textView" />
-
-            <Button
-                android:id="@+id/saveSettingsButton"
-                android:layout_width="80dp"
-                android:layout_height="0dp"
-                android:backgroundTint="@color/saveButton"
-                android:text="@string/save"
-                android:textColor="@color/saveButtonColor"
-                android:textSize="11sp"
-                app:layout_constraintBottom_toBottomOf="@+id/displayTotal_chipGroup"
-                app:layout_constraintEnd_toEndOf="@+id/displayTotal_textView"
-                app:layout_constraintHorizontal_bias="0.605"
-                app:layout_constraintStart_toEndOf="@+id/displayTotal_chipGroup"
-                app:layout_constraintTop_toTopOf="@+id/displayTotal_chipGroup"
-                app:layout_constraintVertical_bias="0.0" />
+                    android:layout_height="36dp"
+                    android:background="@drawable/btnsavesettings"
+                    android:text="@string/save"
+                    android:textColor="@color/saveButtonColor"
+                    android:textSize="11sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/displayTotal_chipGroup"
+                    app:layout_constraintEnd_toEndOf="@+id/displayTotal_textView"
+                    app:layout_constraintHorizontal_bias="0.707"
+                    app:layout_constraintStart_toEndOf="@+id/displayTotal_chipGroup"
+                    app:layout_constraintTop_toTopOf="@+id/displayTotal_chipGroup"
+                    app:layout_constraintVertical_bias="0.73" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>

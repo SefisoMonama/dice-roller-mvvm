@@ -123,7 +123,7 @@ class SettingsFragment : Fragment() {
             settingsViewModel.saveDiceSides(diceSidesChip,diceSidesChipId)
             settingsViewModel.saveDiceNumbers(diceNumberChip, diceNumberChipId)
             settingsViewModel.saveDisplayTotalSettings(displayTotalChip, displayTotalChipId)
-            Toast.makeText(context, "Settings saved!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Settings saved!", Toast.LENGTH_LONG).show()
         }
 
 

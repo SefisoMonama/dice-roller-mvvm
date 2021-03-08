@@ -29,11 +29,11 @@
 
     <TextView
         android:id="@+id/welcome_instructions_textView"
-        android:layout_width="250dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:minLines="3"
-        android:text="@string/add_dice_or_configure_your_dice_by_tapping_the_buttons_below_or_roll_dice"
+        android:text="@string/add_dice_or_configure_your_dice_by_tapping_the_buttons_below"
         android:textAlignment="center"
         android:textSize="18sp"
         android:visibility="visible"
@@ -63,11 +63,11 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/cardBackgroundColor"
-                app:strokeColor="@color/strokeColor">
+                android:background="@color/cardBackgroundColor">
 
                 <Button
                     android:id="@+id/roll_dice_button"
+                    android:backgroundTint="@color/primary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
