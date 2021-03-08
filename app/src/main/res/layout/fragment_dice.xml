@@ -67,9 +67,9 @@
 
                 <Button
                     android:id="@+id/roll_dice_button"
-                    android:backgroundTint="@color/primary"
+                   android:background="@drawable/btnshape"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="34dp"
                     android:layout_marginTop="16dp"
                     android:paddingStart="60dp"
                     android:paddingEnd="60dp"
