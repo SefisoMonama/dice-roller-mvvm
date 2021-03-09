@@ -18,6 +18,8 @@
     <color name="buttonBackgroundActive">#2063657A</color>
     <color name="buttonBackgroundInActive">#63657A</color>
     <color name="mainBackgroundColor">#FF000000</color>
+    <color name="uncheckedchipBackground">#FFFFFF</color>
+    <color name="toolbarTextColor">#FFFFFF</color>
 
     <!--Dark Theme -->
     <color name="AppBackgroundColor">@color/white</color>
@@ -27,5 +29,6 @@
     <color name="welcomeTitle">@color/diceTitle</color>
     <color name="strokeColor">@color/strokeColors</color>
     <color name="saveButtonBColor">@color/saveButton</color>
+
 
 </resources>

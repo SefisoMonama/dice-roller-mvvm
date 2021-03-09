@@ -16,10 +16,12 @@
     <color name="statusBarColor">#63657A</color>
     <color name="saveButton">#FFFFFF</color>
     <color name="saveButtonColor">#FFFFFF</color>
-    <color name="toolBarBackground">#63657A</color>
+    <color name="toolBarBackground">#FFFFFF</color>
     <color name="buttonBackgroundActive">#1877F2</color>
     <color name="buttonBackgroundInActive">#C2C5CC</color>
     <color name="mainBackgroundColor">#FFFFFF</color>
+    <color name="toolbarTextColor">#63657A</color>
+
 
     <!--Light Theme -->
     <color name="AppBackgroundColor">@color/white</color>
@@ -29,6 +31,7 @@
     <color name="welcomeTitle">@color/diceTitle</color>
     <color name="strokeColor">@color/strokeColors</color>
     <color name="saveButtonBColor">@color/saveButton</color>
+    <color name="uncheckedchipBackground">@color/white</color>
 
 
 </resources>

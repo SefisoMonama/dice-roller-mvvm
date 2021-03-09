@@ -32,15 +32,8 @@ class SettingsFragment : Fragment() {
     private lateinit var settingsViewModel: SettingsViewModel
 
 
-    private var diceSidesChip = DEFAULT_DICE_SIDES
-    private var diceSidesChipId = 0
-    private var diceNumberChip = DEFAULT_DICE_NUM
-    private var diceNumberChipId = 0
-    private var displayTotalChip = DEFAULT_DISPLAY_DICE_TOTAL
-   private var displayTotalChipId = 0
 
-    private var darkThemeChip = DEFAULT_DARK_THEME
-    private var darkThemeId = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -62,23 +55,23 @@ class SettingsFragment : Fragment() {
         }
 
         settingsViewModel.readDiceSides.asLiveData().observe(viewLifecycleOwner, { value ->
-            diceSidesChip = value.selectedDiceSides
+            settingsViewModel.diceSidesChip = value.selectedDiceSides
             updateChip(value.selectedDiceSidesId, binding.diceSidesChipGroup)
         })
 
         settingsViewModel.readDiceNumbers.asLiveData().observe(viewLifecycleOwner, { value ->
-            diceNumberChip = value.selectedDiceNumbers
+            settingsViewModel.diceNumberChip = value.selectedDiceNumbers
             updateChip(value.selectedDiceNumbersId, binding.diceNumberChipGroup)
         })
 
         settingsViewModel.readDisplayDiceTotal.asLiveData().observe(viewLifecycleOwner, { value ->
-            displayTotalChip = value.selectedDisplayTotal
+            settingsViewModel.displayTotalChip = value.selectedDisplayTotal
             updateChip(value.selectedDisplayTotalId, binding.displayTotalChipGroup)
         })
 
 
         settingsViewModel.readAppModeSettings.asLiveData().observe(viewLifecycleOwner, { value ->
-            darkThemeChip = value.selectedDarkMode
+            settingsViewModel.darkThemeChip = value.selectedDarkMode
            updateChip(value.selectedDarkModeId, binding.darkModeChipGroup)
         })
 
@@ -86,31 +79,31 @@ class SettingsFragment : Fragment() {
         binding.diceSidesChipGroup.setOnCheckedChangeListener { group, selectedChipId ->
             val chip = group.findViewById<Chip>(selectedChipId)
             val selectedDiceSides = chip.text.toString().toLowerCase(Locale.ROOT)
-            diceSidesChip = selectedDiceSides.toInt()
-            diceSidesChipId = selectedChipId
+            settingsViewModel.diceSidesChip = selectedDiceSides.toInt()
+            settingsViewModel.diceSidesChipId = selectedChipId
         }
 
         binding.diceNumberChipGroup.setOnCheckedChangeListener { group, selectedChipId ->
             val chip = group.findViewById<Chip>(selectedChipId)
             val selectedDiceNumbers = chip.text.toString().toLowerCase(Locale.ROOT)
-            diceNumberChip = selectedDiceNumbers.toInt()
-            diceNumberChipId = selectedChipId
+            settingsViewModel.diceNumberChip = selectedDiceNumbers.toInt()
+            settingsViewModel.diceNumberChipId = selectedChipId
         }
 
         binding.displayTotalChipGroup.setOnCheckedChangeListener { group, selectedChipId ->
             val chip = group.findViewById<Chip>(selectedChipId)
             val selectedDisplayTotalOption = chip.text.toString().toLowerCase(Locale.ROOT)
-            displayTotalChip = selectedDisplayTotalOption
-            displayTotalChipId = selectedChipId
+            settingsViewModel.displayTotalChip = selectedDisplayTotalOption
+            settingsViewModel.displayTotalChipId = selectedChipId
         }
 
         binding.darkModeChipGroup.setOnCheckedChangeListener { group, selectedChipId ->
             val chip = group.findViewById<Chip>(selectedChipId)
             val selectedDarkThemeOption = chip.text.toString().toLowerCase(Locale.ROOT)
-            darkThemeChip = selectedDarkThemeOption
-            darkThemeId = selectedChipId
+            settingsViewModel.darkThemeChip = selectedDarkThemeOption
+            settingsViewModel.darkThemeId = selectedChipId
 
-            settingsViewModel.saveAppModeSettings(darkThemeChip, darkThemeId)
+            settingsViewModel.saveAppModeSettings(settingsViewModel.darkThemeChip, settingsViewModel.darkThemeId)
 
             if(chip == binding.disableDarkModeChip){
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -120,10 +113,10 @@ class SettingsFragment : Fragment() {
         }
 
         binding.saveSettingsButton.setOnClickListener{
-            settingsViewModel.saveDiceSides(diceSidesChip,diceSidesChipId)
-            settingsViewModel.saveDiceNumbers(diceNumberChip, diceNumberChipId)
-            settingsViewModel.saveDisplayTotalSettings(displayTotalChip, displayTotalChipId)
-            Toast.makeText(context, "Settings saved!", Toast.LENGTH_LONG).show()
+            settingsViewModel.saveDiceSides(settingsViewModel.diceSidesChip,settingsViewModel.diceSidesChipId)
+            settingsViewModel.saveDiceNumbers(settingsViewModel.diceNumberChip, settingsViewModel.diceNumberChipId)
+            settingsViewModel.saveDisplayTotalSettings(settingsViewModel.displayTotalChip, settingsViewModel.displayTotalChipId)
+            Toast.makeText(context, "Settings saved!", Toast.LENGTH_SHORT).show()
         }
 
 

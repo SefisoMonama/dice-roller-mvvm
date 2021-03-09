@@ -1,17 +1,17 @@
 package com.strixtechnology.diceroller2.ui.fragments.fragments
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import android.view.animation.RotateAnimation
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.strixtechnology.diceroller2.R
 import com.strixtechnology.diceroller2.databinding.FragmentDiceBinding
 import com.strixtechnology.diceroller2.viewmodels.DiceViewModel
-import com.strixtechnology.diceroller2.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -19,9 +19,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class DiceFragment : Fragment() {
 
 
-
     private lateinit var diceViewModel: DiceViewModel
     private lateinit var binding: FragmentDiceBinding
+    private lateinit var rotateAnimation: RotateAnimation
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -30,31 +30,30 @@ class DiceFragment : Fragment() {
         binding = FragmentDiceBinding.inflate(inflater, container, false)
 
 
-
-        buttonState()
-
         binding.settingsImageView.setOnClickListener {
+            val rotateAnimation = RotateAnimation(0.0F, 90F, RotateAnimation.RELATIVE_TO_SELF, .5f, RotateAnimation.RELATIVE_TO_SELF, .5f)
+            rotateAnimation.duration = 200
+            binding.settingsImageView.startAnimation(rotateAnimation)
             findNavController().navigate(R.id.action_diceFragment_to_settingsFragment)
         }
 
         binding.rollDiceButton.setOnClickListener {
+                val toast = Toast.makeText(context, "Please add dice, using '+' button below", Toast.LENGTH_SHORT)
+                toast.setGravity(Gravity.CENTER, 0, 0)
+                toast.show()
+                val rotateAnimation = RotateAnimation(270F, 0F, RotateAnimation.RELATIVE_TO_SELF, .3f, RotateAnimation.RELATIVE_TO_SELF, .3f)
+                rotateAnimation.duration = 20
+                binding.incrementImageView.startAnimation(rotateAnimation)
         }
 
 
         binding.incrementImageView.setOnClickListener {
-            //setViewsVisibility()
+
         }
         setHasOptionsMenu(true)
 
         return binding.root
     }
 
-    fun buttonState() {
-        if (!binding.rollDiceButton.isEnabled) {
-            binding.rollDiceButton.setBackgroundColor(resources.getColor(R.color.primary))
-        }else{
-            binding.rollDiceButton.setBackgroundColor(resources.getColor(R.color.buttonBackgroundInActive))
-        }
-    }
 
 }

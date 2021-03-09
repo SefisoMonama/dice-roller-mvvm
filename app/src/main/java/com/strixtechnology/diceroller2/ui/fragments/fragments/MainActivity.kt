@@ -1,12 +1,10 @@
 package com.strixtechnology.diceroller2.ui.fragments.fragments
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
 import com.strixtechnology.diceroller2.R
 import com.strixtechnology.diceroller2.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,5 +23,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         navController = findNavController(R.id.hostFragment)
+
     }
 }
