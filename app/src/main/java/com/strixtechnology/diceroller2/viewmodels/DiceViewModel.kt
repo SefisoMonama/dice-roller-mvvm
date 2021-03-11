@@ -15,17 +15,16 @@ import com.strixtechnology.diceroller2.util.Constants.Companion.DEFAULT_DICE_SID
 import kotlinx.coroutines.launch
 
 class DiceViewModel @ViewModelInject constructor(
-        val dataStoreRepository: DataStoreRepository,
-        private val context: Context
+        val dataStoreRepository: DataStoreRepository
 ) : ViewModel() {
 
 
     private val getSidesCount = dataStoreRepository.readDiceSides
     private val getDiceCount = dataStoreRepository.readDiceNumbers
-    val _dice: MutableLiveData<ArrayList<Dice>>? = null
-    val dice: LiveData<ArrayList<Dice>>? = null
+    //val _dice: MutableLiveData<ArrayList<Dice>>? = null
+    //val dice: LiveData<ArrayList<Dice>>? = null
 
-    val diceObj = Dice(getSidesCount)
+    /**val diceObj = Dice(getSidesCount)
 
     val currentDice = _dice!!.value
 
@@ -40,10 +39,10 @@ class DiceViewModel @ViewModelInject constructor(
     }
 
     fun addDice() {
-        val newDice = Dice(getSidesCount)
+        val newDice = diceObj
         currentDice!!.add(newDice)
         _dice!!.value = currentDice
-    }
+    }*/
 }
 
 

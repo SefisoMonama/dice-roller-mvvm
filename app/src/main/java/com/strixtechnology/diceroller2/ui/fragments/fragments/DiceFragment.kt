@@ -9,10 +9,12 @@ import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.strixtechnology.diceroller2.R
 import com.strixtechnology.diceroller2.databinding.FragmentDiceBinding
 import com.strixtechnology.diceroller2.viewmodels.DiceViewModel
+import com.strixtechnology.diceroller2.viewmodels.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -26,17 +28,17 @@ class DiceFragment : Fragment() {
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
+
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentDiceBinding.inflate(inflater, container, false)
-
 
         binding.settingsImageView.setOnClickListener {
            findNavController().navigate(R.id.action_diceFragment_to_settingsFragment)
         }
 
         binding.rollDiceButton.setOnClickListener {
-            when()
+
         }
 
 
