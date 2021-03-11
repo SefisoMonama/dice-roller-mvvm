@@ -108,6 +108,28 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
     )
     }*/
 
+    /*
+    * I added a model which contains the 2 values required for the dice.
+    * It just made things easier since I didn't want to subscribe to each
+    * variable individually in the viewModel.
+    *
+    * This entire class can be simplified - but I will leave it to you so that I don't
+    * confuse you any further
+    * */
+    val diceInformation: Flow<DiceInformation> = dataStore.data
+                .catch { exception ->
+                    if (exception is IOException) {
+                        emit(emptyPreferences())
+                    } else {
+                        throw exception
+                    }
+                }
+                .map { preferences ->
+                    val selectedDiceSides = preferences[PreferenceKeys.selectedDiceSides] ?: DEFAULT_DICE_SIDES
+                    val selectedDiceNumbers = preferences[PreferenceKeys.selectedDiceNumbers] ?: DEFAULT_DICE_NUM
+                    return@map DiceInformation(selectedDiceNumbers, selectedDiceSides)
+                }
+
     val readDiceSides: Flow<DiceSides> = dataStore.data
             .catch { exception ->
                 if (exception is IOException) {
@@ -169,6 +191,11 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
 
 
 }
+
+data class  DiceInformation(
+    val numberOfDice: Int,
+    val numberOfSidesPerDice: Int
+)
 
 data class DiceSides(
         val selectedDiceSides: Int,

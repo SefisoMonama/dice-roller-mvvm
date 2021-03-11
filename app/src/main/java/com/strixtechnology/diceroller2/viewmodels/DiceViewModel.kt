@@ -1,48 +1,68 @@
 package com.strixtechnology.diceroller2.viewmodels
 
-import android.content.Context
-import android.view.View
-import android.view.animation.RotateAnimation
-import android.widget.ImageView
-import android.widget.Toast
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import com.strixtechnology.diceroller2.data.DataStoreRepository
 import com.strixtechnology.diceroller2.data.Dice
-import com.strixtechnology.diceroller2.util.Constants.Companion.DEFAULT_DICE_SIDES
-import kotlinx.coroutines.launch
 
 class DiceViewModel @ViewModelInject constructor(
-        val dataStoreRepository: DataStoreRepository,
-        private val context: Context
+        val dataStoreRepository: DataStoreRepository
 ) : ViewModel() {
 
+    /*
+    * LiveData of the Dice properties (number of dice and number of sides)
+    * Whenever the values in the DataStore change, this variable will trigger a change
+    * to all its observers
+    * */
+    private val diceInformation = dataStoreRepository.diceInformation.asLiveData()
 
-    private val getSidesCount = dataStoreRepository.readDiceSides
-    private val getDiceCount = dataStoreRepository.readDiceNumbers
-    val _dice: MutableLiveData<ArrayList<Dice>>? = null
-    val dice: LiveData<ArrayList<Dice>>? = null
+    /*
+    * LiveData of your Dice model.
+    * Read up on what an ArrayList is and how it can be used.
+    *
+    * Basically, It is like an array containing all of your Dice objects.
+    * */
+    private val _dice = MutableLiveData<ArrayList<Dice>>(ArrayList())
+    val dice: LiveData<ArrayList<Dice>> get() = _dice
 
-    val diceObj = Dice(getSidesCount)
 
-    val currentDice = _dice!!.value
-
-    fun rollDice() {
-        for (dice in getSidesCount){
-            diceObj.roll()
+    /*
+    * Live data which executest whenever the DataStore values of your dice info changes.
+    *
+    * In here I update the Dice live data with the new values from the datastore
+    *
+    * Read up on Transformations.map and Transformations.switchMap - they are important
+    * */
+    val diceInformationChanged = Transformations.map(diceInformation){
+        val numberOfDice = it.numberOfDice
+        val numberOfSides = it.numberOfSidesPerDice
+        val currentDiceModel = _dice.value
+        currentDiceModel?.clear()
+        for (i in 1..numberOfDice) {
+            currentDiceModel?.add(Dice(numberOfSides))
         }
     }
+
+    /*
+    * This is called by the fragment when a user taps the roll button.
+    * I then go through the list of Dice objects, and roll each one.
+    *
+    * I then update the Dice liveData, so that the observer in the Fragment gets triggered
+    * */
+    fun rollDice() {
+        val currentDice = _dice.value!!
+        currentDice.forEach { dice ->
+            dice.roll()
+        }
+        _dice.value = currentDice
+    }
+
     fun removeDice(){
-        currentDice!!.removeLast()
-        _dice!!.value = currentDice
+        // Here you need to decrease the appropriate value in the dataStore
     }
 
     fun addDice() {
-        val newDice = Dice(getSidesCount)
-        currentDice!!.add(newDice)
-        _dice!!.value = currentDice
+        // Here you need to increase the appropriate value in the dataStore
     }
 }
 
