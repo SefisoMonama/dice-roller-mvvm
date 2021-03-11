@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.strixtechnology.diceroller2.data.DataStoreRepository
 import com.strixtechnology.diceroller2.util.Constants
+import com.strixtechnology.diceroller2.util.Constants.Companion.DEFAULT_DARK_THEME
 import com.strixtechnology.diceroller2.util.Constants.Companion.DEFAULT_DICE_NUM
 import com.strixtechnology.diceroller2.util.Constants.Companion.DEFAULT_DICE_SIDES
 import com.strixtechnology.diceroller2.util.Constants.Companion.DEFAULT_DISPLAY_DICE_TOTAL
@@ -23,7 +24,7 @@ class SettingsViewModel @ViewModelInject constructor(
     var displayTotalChip = DEFAULT_DISPLAY_DICE_TOTAL
     var displayTotalChipId = 0
 
-    var darkThemeChip = Constants.DEFAULT_DARK_THEME
+    var darkThemeChip = DEFAULT_DARK_THEME
     var darkThemeId = 0
 
     val readDiceSides = dataStoreRepository.readDiceSides
