@@ -43,17 +43,6 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
             name = PREFERENCES_NAME
     )
 
-    suspend fun saveDiceSettings(diceSidesId: Int, diceSides: Int, diceNumbersId: Int, diceNumbers: Int, displayTotalId: Int, displayTotal: String) {
-        dataStore.edit { preferences ->
-            preferences[PreferenceKeys.selectedDiceSidesId] = diceSidesId
-            preferences[PreferenceKeys.selectedDiceSides] = diceSides
-            preferences[PreferenceKeys.selectedDiceNumbersId] = diceNumbersId
-            preferences[PreferenceKeys.selectedDiceNumbers] = diceNumbers
-            preferences[PreferenceKeys.selectedDisplayTotalId] = displayTotalId
-            preferences[PreferenceKeys.selectedDisplayTotal] = displayTotal
-        }
-    }
-
     suspend fun saveDiceSides(diceSides: Int, diceSidesId: Int) {
         dataStore.edit { preferences ->
             preferences[PreferenceKeys.selectedDiceSides] = diceSides
@@ -82,33 +71,29 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
             preferences[PreferenceKeys.selectedDarkMode] = darkMode
         }
     }
+    /*
+    * I added a model which contains the 2 values required for the dice.
+    * It just made things easier since I didn't want to subscribe to each
+    * variable individually in the viewModel.
+    *
+    * This entire class can be simplified - but I will leave it to you so that I don't
+    * confuse you any further
+    * */
+    var diceInformation: Flow<DiceInformation> = dataStore.data
+                .catch { exception ->
+                    if (exception is IOException) {
+                        emit(emptyPreferences())
+                    } else {
+                        throw exception
+                    }
+                }
+                .map { preferences ->
+                    val selectedDiceSides = preferences[PreferenceKeys.selectedDiceSides] ?: DEFAULT_DICE_SIDES
+                    val selectedDiceNumbers = preferences[PreferenceKeys.selectedDiceNumbers] ?: DEFAULT_DICE_NUM
+                    return@map DiceInformation(selectedDiceNumbers, selectedDiceSides)
+                }
 
-    /**val readDiceSettings: Flow<DiceSettings> = dataStore.data
-    .catch { exception ->
-    if(exception is IOException){
-    emit(emptyPreferences())
-    }else{
-    throw exception
-    }
-    }
-    .map { preferences ->
-    val selectedDiceSidesId = preferences[PreferenceKeys.selectedDiceSidesId] ?: 0
-    val selectedDiceSides = preferences[PreferenceKeys.selectedDiceSides] ?: DEFAULT_DICE_SIDES
-    val selectedDiceNumbers = preferences[PreferenceKeys.selectedDiceNumbers] ?: DEFAULT_DICE_NUM
-    val selectedDiceNumbersId = preferences[PreferenceKeys.selectedDiceNumbersId] ?: 0
-    val selectedDisplayTotal = preferences[PreferenceKeys.selectedDisplayTotal] ?: DEFAULT_DISPLAY_DICE_TOTAL
-    val selectedDisplayTotalId = preferences[PreferenceKeys.selectedDisplayTotalId] ?: 0
-    DiceSettings(
-    selectedDiceSidesId,
-    selectedDiceSides,
-    selectedDiceNumbersId,
-    selectedDiceNumbers,
-    selectedDisplayTotalId,
-    selectedDisplayTotal
-    )
-    }*/
-
-    val readDiceSides: Flow<DiceSides> = dataStore.data
+    var readDiceSides: Flow<DiceSides> = dataStore.data
             .catch { exception ->
                 if (exception is IOException) {
                     emit(emptyPreferences())
@@ -169,6 +154,11 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
 
 
 }
+
+data class  DiceInformation(
+    val numberOfDice: Int,
+    val numberOfSidesPerDice: Int
+)
 
 data class DiceSides(
         val selectedDiceSides: Int,

@@ -1,12 +1,11 @@
 package com.strixtechnology.diceroller2.ui.fragments.fragments
 
 import android.os.Bundle
-import android.view.Gravity
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.RotateAnimation
-import android.widget.ImageView
+import android.view.animation.Animation
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -21,36 +20,101 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class DiceFragment : Fragment() {
 
-
-    private lateinit var diceViewModel: DiceViewModel
+    private lateinit var viewModel: DiceViewModel
     private lateinit var binding: FragmentDiceBinding
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(requireActivity()).get(DiceViewModel::class.java)
+    }
+
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
+            inflater: LayoutInflater,
+            container: ViewGroup?,
             savedInstanceState: Bundle?
-
-    ): View? {
-        // Inflate the layout for this fragment
+    ): View {
         binding = FragmentDiceBinding.inflate(inflater, container, false)
-
-        binding.settingsImageView.setOnClickListener {
-           findNavController().navigate(R.id.action_diceFragment_to_settingsFragment)
-        }
-
-        binding.rollDiceButton.setOnClickListener {
-
-        }
-
-
-        binding.incrementImageView.setOnClickListener {
-
-        }
-        setHasOptionsMenu(true)
-
+        setupUi()
+        subscribeUi()
         return binding.root
     }
 
 
+    private fun setupUi() {
+        binding.settingsImageView.setOnClickListener {
+            findNavController().navigate(R.id.action_diceFragment_to_settingsFragment)
+        }
+
+        binding.rollDiceButton.setOnClickListener {
+            binding.welcomeTextView.visibility = View.GONE
+            binding.welcomeInstructionsTextView.visibility = View.GONE
+
+           viewModel.rollDice()
+        }
+
+        binding.incrementImageView.setOnClickListener {
+            viewModel.addDice()
+        }
+
+        binding.decrementImageView.setOnClickListener {
+            viewModel.removeDice()
+        }
+    }
+
+    private fun subscribeUi() {
+        viewModel.diceInformationChanged.observe(viewLifecycleOwner) {
+            // This block of code gets called whenever your DataStore values change
+            // So it will trigger whenever you load the screen or if you change the dice
+            // properties in the  Datastore.
+
+            // Set the appropriate UI values here
+        }
+
+
+        viewModel.dice.observe(viewLifecycleOwner) {
+            //This block of code gets called whenever your dice model changes
+
+            // Run your app and take a look at logcat - Here I print the value of each dice
+            it.forEachIndexed { index, dice ->
+                val diceIndex = index + 1
+                Log.e("Dice $diceIndex", "current value: " + dice.currentDiceValue.toString())
+            }
+            Log.e( " ","current value: " + viewModel.displayTotal().toString())
+
+            // Set the appropriate UI values here
+            it.forEachIndexed { index, dice ->
+                val diceIndex = index + 1;
+
+                if(diceIndex == 1) {
+                    binding.dice1ImageView.visibility = View.VISIBLE
+                    binding.dice1ImageView.setImageResource(dice.getDiceImageResourceFor8Sides())
+                    binding.dice2ImageView.visibility = View.GONE
+                    binding.dice3ImageView.visibility = View.GONE
+                    binding.dice4ImageView.visibility = View.GONE
+                }else if(diceIndex == 2){
+                    binding.dice2ImageView.visibility = View.VISIBLE
+                    binding.dice2ImageView.setImageResource(dice.getDiceImageResourceFor8Sides())
+                    binding.dice3ImageView.visibility = View.GONE
+                    binding.dice4ImageView.visibility = View.GONE
+                }else if(diceIndex == 3) {
+                    binding.dice3ImageView.visibility = View.VISIBLE
+                    binding.dice3ImageView.setImageResource(dice.getDiceImageResourceFor8Sides())
+                    binding.dice4ImageView.visibility = View.GONE
+                }else if(diceIndex == 4){
+                    binding.dice4ImageView.visibility = View.VISIBLE
+                    binding.dice4ImageView.setImageResource(dice.getDiceImageResourceFor8Sides())
+                }
+            }
+        }
+    }
+
+    override fun onResume() {
+        binding.dice1ImageView.visibility = View.GONE
+        binding.dice2ImageView.visibility = View.GONE
+        binding.dice3ImageView.visibility = View.GONE
+        binding.dice4ImageView.visibility = View.GONE
+        super.onResume()
+    }
 }
 
 

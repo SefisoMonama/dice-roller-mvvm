@@ -27,4 +27,8 @@ class MainActivity : AppCompatActivity() {
         navController = findNavController(R.id.hostFragment)
 
     }
+
+    override fun onBackPressed() {
+        //super.onBackPressed()
+    }
 }
