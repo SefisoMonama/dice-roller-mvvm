@@ -17,7 +17,7 @@ class DiceViewModel @ViewModelInject constructor(
     * to all its observers
     * */
     private val diceInformation = dataStoreRepository.diceInformation.asLiveData()
-    private val displayDiceTotal = dataStoreRepository.readDisplayDiceTotal.asLiveData()
+    val displayDiceTotal = dataStoreRepository.readDisplayDiceTotal.asLiveData()
 
     /*
     * LiveData of your Dice model.
@@ -62,29 +62,11 @@ class DiceViewModel @ViewModelInject constructor(
         var currentDice = _dice.value
         currentDice!!.remove(currentDice)
         _dice.value = currentDice
-
-        val diceInformationChanged = Transformations.map(diceInformation) {
-            val numberOfDice = it.numberOfDice
-            val numberOfSides = it.numberOfSidesPerDice
-            val currentDiceModel = _dice.value
-            currentDiceModel?.clear()
-            for (i in 1..numberOfDice) {
-                currentDiceModel?.add(Dice(numberOfSides))
-            }
-        }
         // Here you need to decrease the appropriate value in the dataStore
     }
 
     fun addDice() {
-            val diceInformationChanged = Transformations.map(diceInformation) {
-                val numberOfDice = it.numberOfDice + 1
-                val numberOfSides = it.numberOfSidesPerDice
-                val currentDiceModel = _dice.value
-                currentDiceModel?.clear()
-                for (i in 1..numberOfDice) {
-                    currentDiceModel?.add(Dice(numberOfSides))
-                }
-            }
+
             /**var currentDice = _dice.value
             currentDice = dataStoreRepository.diceInformation()
             _dice.value = currentDice*/

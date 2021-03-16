@@ -171,8 +171,8 @@ data class DiceNumbers(
 )
 
 data class DisplayDiceTotal(
-        val selectedDisplayTotal: String,
-        val selectedDisplayTotalId: Int
+    val selectedDisplayTotal: String,
+    var selectedDisplayTotalId: Int
 )
 
 data class AppModeSettings(
