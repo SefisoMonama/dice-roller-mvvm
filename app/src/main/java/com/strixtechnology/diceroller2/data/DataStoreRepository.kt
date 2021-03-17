@@ -156,7 +156,7 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
 }
 
 data class  DiceInformation(
-    val numberOfDice: Int,
+    var numberOfDice: Int,
     val numberOfSidesPerDice: Int
 )
 
@@ -166,8 +166,8 @@ data class DiceSides(
 )
 
 data class DiceNumbers(
-        val selectedDiceNumbers: Int,
-        val selectedDiceNumbersId: Int
+    val selectedDiceNumbers: Int,
+    val selectedDiceNumbersId: Int
 )
 
 data class DisplayDiceTotal(

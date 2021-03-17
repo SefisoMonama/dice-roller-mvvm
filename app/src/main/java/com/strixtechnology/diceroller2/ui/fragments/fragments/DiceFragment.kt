@@ -69,6 +69,7 @@ class DiceFragment : Fragment() {
 
         binding.decrementImageView.setOnClickListener {
             viewModel.removeDice()
+            Log.e("Dice", "Dice Removed")
         }
     }
 

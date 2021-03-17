@@ -29,7 +29,6 @@ import java.util.*
 class SettingsFragment : Fragment() {
 
     private lateinit var binding: FragmentSettingsBinding
-    //private lateinit var mainViewModel: MainViewModel
     private lateinit var settingsViewModel: SettingsViewModel
 
 
@@ -38,9 +37,6 @@ class SettingsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        //val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
-
-        //}
         settingsViewModel = ViewModelProvider(requireActivity()).get(SettingsViewModel::class.java)
     }
 

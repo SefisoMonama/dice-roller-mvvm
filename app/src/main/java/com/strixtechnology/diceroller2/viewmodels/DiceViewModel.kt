@@ -4,8 +4,10 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.strixtechnology.diceroller2.data.DataStoreRepository
 import com.strixtechnology.diceroller2.data.Dice
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import okhttp3.Dispatcher
 
 class DiceViewModel @ViewModelInject constructor(
     val dataStoreRepository: DataStoreRepository
@@ -59,17 +61,18 @@ class DiceViewModel @ViewModelInject constructor(
     }
 
     fun removeDice() {
-        var currentDice = _dice.value
-        currentDice!!.remove(currentDice)
-        _dice.value = currentDice
+        viewModelScope.launch (Dispatchers.IO){
+            dataStoreRepository.diceInformation.collect {
+                var diceNumber = it.numberOfDice
+                diceNumber -= 1
+                it.numberOfDice = diceNumber
+            }
+        }
         // Here you need to decrease the appropriate value in the dataStore
     }
 
     fun addDice() {
 
-            /**var currentDice = _dice.value
-            currentDice = dataStoreRepository.diceInformation()
-            _dice.value = currentDice*/
             // Here you need to increase the appropriate value in the dataStore
         }
 
