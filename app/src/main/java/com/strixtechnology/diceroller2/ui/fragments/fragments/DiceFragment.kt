@@ -59,18 +59,22 @@ class DiceFragment : Fragment() {
                     binding.totalTextView.visibility = View.GONE
                 }
             }
-
             viewModel.rollDice()
-        }
-
-        binding.incrementImageView.setOnClickListener {
-            viewModel.addDice()
         }
 
         binding.decrementImageView.setOnClickListener {
             viewModel.removeDice()
+            Toast.makeText(context, "Dice was succesfully removed", Toast.LENGTH_SHORT).show()
             Log.e("Dice", "Dice Removed")
         }
+
+        binding.incrementImageView.setOnClickListener {
+            viewModel.addDice()
+            Toast.makeText(context, "Dice was succesfully Added!", Toast.LENGTH_SHORT).show()
+
+        }
+
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -99,34 +103,46 @@ class DiceFragment : Fragment() {
             it.forEachIndexed { index, dice ->
                 val diceIndex = index + 1
                 var sum = 0
-                for(i in 1..diceIndex){
+                for (i in 1..diceIndex) {
                     sum += dice.currentDiceValue
                     binding.totalTextView.text = "You Rolled: " + sum.toString()
                 }
 
-
-                when (diceIndex) {
-                    1 -> {
-                        binding.dice1ImageView.visibility = View.VISIBLE
-                        binding.dice1ImageView.setImageResource(dice.getDiceImageResourceFor8Sides())
-                        binding.dice2ImageView.visibility = View.GONE
-                        binding.dice3ImageView.visibility = View.GONE
-                        binding.dice4ImageView.visibility = View.GONE
+                when {
+                    diceIndex <= 4 -> {
+                        when (diceIndex) {
+                            1 -> {
+                                binding.incrementImageView.isEnabled = true
+                                binding.dice1ImageView.visibility = View.VISIBLE
+                                binding.dice1ImageView.setImageResource(dice.getDiceImageResourceFor8Sides())
+                                binding.dice2ImageView.visibility = View.GONE
+                                binding.dice3ImageView.visibility = View.GONE
+                                binding.dice4ImageView.visibility = View.GONE
+                            }
+                            2 -> {
+                                binding.dice2ImageView.visibility = View.VISIBLE
+                                binding.dice2ImageView.setImageResource(dice.getDiceImageResourceFor8Sides())
+                                binding.dice3ImageView.visibility = View.GONE
+                                binding.dice4ImageView.visibility = View.GONE
+                            }
+                            3 -> {
+                                binding.dice3ImageView.visibility = View.VISIBLE
+                                binding.dice3ImageView.setImageResource(dice.getDiceImageResourceFor8Sides())
+                                binding.dice4ImageView.visibility = View.GONE
+                            }
+                            4 -> {
+                                binding.dice4ImageView.visibility = View.VISIBLE
+                                binding.dice4ImageView.setImageResource(dice.getDiceImageResourceFor8Sides())
+                            }
+                        }
                     }
-                    2 -> {
-                        binding.dice2ImageView.visibility = View.VISIBLE
-                        binding.dice2ImageView.setImageResource(dice.getDiceImageResourceFor8Sides())
-                        binding.dice3ImageView.visibility = View.GONE
-                        binding.dice4ImageView.visibility = View.GONE
+                    diceIndex <= 1 -> {
+                        binding.incrementImageView.isEnabled= true
+                        binding.decrementImageView.isEnabled = false
                     }
-                    3 -> {
-                        binding.dice3ImageView.visibility = View.VISIBLE
-                        binding.dice3ImageView.setImageResource(dice.getDiceImageResourceFor8Sides())
-                        binding.dice4ImageView.visibility = View.GONE
-                    }
-                    4 -> {
-                        binding.dice4ImageView.visibility = View.VISIBLE
-                        binding.dice4ImageView.setImageResource(dice.getDiceImageResourceFor8Sides())
+                    else -> {
+                        binding.incrementImageView.isEnabled = false
+                        binding.decrementImageView.isEnabled = true
                     }
                 }
             }
@@ -142,5 +158,6 @@ class DiceFragment : Fragment() {
             super.onResume()
         }
     }
+
 
 

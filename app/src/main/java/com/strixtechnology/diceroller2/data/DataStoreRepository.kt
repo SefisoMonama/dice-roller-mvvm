@@ -40,7 +40,7 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
     }
 
     private val dataStore: DataStore<Preferences> = context.createDataStore(
-            name = PREFERENCES_NAME
+        name = PREFERENCES_NAME
     )
 
     suspend fun saveDiceSides(diceSides: Int, diceSidesId: Int) {
@@ -64,13 +64,13 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
         }
     }
 
-
     suspend fun saveAppModeSettings(darkMode: String, darkModeId: Int) {
         dataStore.edit { preferences ->
             preferences[PreferenceKeys.selectedDarkModeId] = darkModeId
             preferences[PreferenceKeys.selectedDarkMode] = darkMode
         }
     }
+
     /*
     * I added a model which contains the 2 values required for the dice.
     * It just made things easier since I didn't want to subscribe to each
@@ -80,102 +80,120 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
     * confuse you any further
     * */
     var diceInformation: Flow<DiceInformation> = dataStore.data
-                .catch { exception ->
-                    if (exception is IOException) {
-                        emit(emptyPreferences())
-                    } else {
-                        throw exception
-                    }
-                }
-                .map { preferences ->
-                    val selectedDiceSides = preferences[PreferenceKeys.selectedDiceSides] ?: DEFAULT_DICE_SIDES
-                    val selectedDiceNumbers = preferences[PreferenceKeys.selectedDiceNumbers] ?: DEFAULT_DICE_NUM
-                    return@map DiceInformation(selectedDiceNumbers, selectedDiceSides)
-                }
+        .catch { exception ->
+            if (exception is IOException) {
+                emit(emptyPreferences())
+            } else {
+                throw exception
+            }
+        }
+        .map { preferences ->
+            val selectedDiceSides =
+                preferences[PreferenceKeys.selectedDiceSides] ?: DEFAULT_DICE_SIDES
+            val selectedDiceNumbers =
+                preferences[PreferenceKeys.selectedDiceNumbers] ?: DEFAULT_DICE_NUM
+            return@map DiceInformation(selectedDiceNumbers, selectedDiceSides)
+        }
+
+    suspend fun decreaseDiceNumber() {
+        dataStore.edit{ preferences ->
+            preferences[PreferenceKeys.selectedDiceNumbers] = preferences[PreferenceKeys.selectedDiceNumbers]!! - 1
+        }
+    }
+
+    suspend fun increaseDiceNumber() {
+        dataStore.edit{ preferences ->
+            preferences[PreferenceKeys.selectedDiceNumbers] = preferences[PreferenceKeys.selectedDiceNumbers]!! + 1
+        }
+    }
 
     var readDiceSides: Flow<DiceSides> = dataStore.data
-            .catch { exception ->
-                if (exception is IOException) {
-                    emit(emptyPreferences())
-                } else {
-                    throw exception
-                }
+        .catch { exception ->
+            if (exception is IOException) {
+                emit(emptyPreferences())
+            } else {
+                throw exception
             }
-            .map { preferences ->
-                val selectedDiceSides = preferences[PreferenceKeys.selectedDiceSides] ?: DEFAULT_DICE_SIDES
-                val selectedDiceSidesId = preferences[PreferenceKeys.selectedDiceSidesId] ?: 0
-                DiceSides(selectedDiceSides, selectedDiceSidesId)
-            }
+        }
+        .map { preferences ->
+            val selectedDiceSides =
+                preferences[PreferenceKeys.selectedDiceSides] ?: DEFAULT_DICE_SIDES
+            val selectedDiceSidesId = preferences[PreferenceKeys.selectedDiceSidesId] ?: 0
+            DiceSides(selectedDiceSides, selectedDiceSidesId)
+        }
 
     val readDiceNumbers: Flow<DiceNumbers> = dataStore.data
-            .catch { exception ->
-                if (exception is IOException) {
-                    emit(emptyPreferences())
-                } else {
-                    throw exception
-                }
+        .catch { exception ->
+            if (exception is IOException) {
+                emit(emptyPreferences())
+            } else {
+                throw exception
             }
-            .map { preferences ->
-                val selectedDiceNumbers = preferences[PreferenceKeys.selectedDiceSides] ?: DEFAULT_DICE_NUM
-                val selectedDiceNumbersId = preferences[PreferenceKeys.selectedDiceNumbersId] ?: 0
-                DiceNumbers(selectedDiceNumbers, selectedDiceNumbersId)
-            }
+        }
+        .map { preferences ->
+            val selectedDiceNumbers =
+                preferences[PreferenceKeys.selectedDiceSides] ?: DEFAULT_DICE_NUM
+            val selectedDiceNumbersId = preferences[PreferenceKeys.selectedDiceNumbersId] ?: 0
+            DiceNumbers(selectedDiceNumbers, selectedDiceNumbersId)
+        }
 
 
     val readDisplayDiceTotal: Flow<DisplayDiceTotal> = dataStore.data
-            .catch { exception ->
-                if (exception is IOException) {
-                    emit(emptyPreferences())
-                } else {
-                    throw exception
-                }
+        .catch { exception ->
+            if (exception is IOException) {
+                emit(emptyPreferences())
+            } else {
+                throw exception
             }
-            .map { preferences ->
-                val selectedDisplayTotal = preferences[PreferenceKeys.selectedDisplayTotal] ?: DEFAULT_DISPLAY_DICE_TOTAL
-                val selectedDisplayTotalId = preferences[PreferenceKeys.selectedDisplayTotalId] ?: 0
-                DisplayDiceTotal(selectedDisplayTotal, selectedDisplayTotalId)
-            }
+        }
+        .map { preferences ->
+            val selectedDisplayTotal =
+                preferences[PreferenceKeys.selectedDisplayTotal] ?: DEFAULT_DISPLAY_DICE_TOTAL
+            val selectedDisplayTotalId = preferences[PreferenceKeys.selectedDisplayTotalId] ?: 0
+            return@map DisplayDiceTotal(selectedDisplayTotal, selectedDisplayTotalId)
+        }
 
     val readAppModeSettings: Flow<AppModeSettings> = dataStore.data
-            .catch { exception ->
-                if (exception is IOException) {
-                    emit(emptyPreferences())
-                } else {
-                    throw exception
-                }
+        .catch { exception ->
+            if (exception is IOException) {
+                emit(emptyPreferences())
+            } else {
+                throw exception
             }
-            .map { preferences ->
-                val selectedDarkMode = preferences[PreferenceKeys.selectedDarkMode] ?: DEFAULT_DARK_THEME
-                val selectedDarkModeId = preferences[PreferenceKeys.selectedDarkModeId] ?: 0
-                AppModeSettings(
-                        selectedDarkMode, selectedDarkModeId
-                )
-            }
+        }
+        .map { preferences ->
+            val selectedDarkMode =
+                preferences[PreferenceKeys.selectedDarkMode] ?: DEFAULT_DARK_THEME
+            val selectedDarkModeId = preferences[PreferenceKeys.selectedDarkModeId] ?: 0
+            AppModeSettings(
+                selectedDarkMode, selectedDarkModeId
+            )
+        }
 
 
 }
 
-data class  DiceInformation(
+data class DiceInformation(
     var numberOfDice: Int,
-    val numberOfSidesPerDice: Int
+    val numberOfSidesPerDice: Int,
 )
 
 data class DiceSides(
-        val selectedDiceSides: Int,
-        val selectedDiceSidesId: Int
+    val selectedDiceSides: Int,
+    val selectedDiceSidesId: Int,
 )
 
 data class DiceNumbers(
     val selectedDiceNumbers: Int,
-    val selectedDiceNumbersId: Int
+    val selectedDiceNumbersId: Int,
 )
 
 data class DisplayDiceTotal(
     val selectedDisplayTotal: String,
-    var selectedDisplayTotalId: Int
+    var selectedDisplayTotalId: Int,
 )
 
 data class AppModeSettings(
-        val selectedDarkMode: String,
-        val selectedDarkModeId: Int
+    val selectedDarkMode: String,
+    val selectedDarkModeId: Int,
 )

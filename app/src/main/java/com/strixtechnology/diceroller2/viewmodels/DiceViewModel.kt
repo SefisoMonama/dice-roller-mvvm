@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import okhttp3.Dispatcher
 
 class DiceViewModel @ViewModelInject constructor(
-    val dataStoreRepository: DataStoreRepository
+    val dataStoreRepository: DataStoreRepository,
 ) : ViewModel() {
 
     /*
@@ -46,6 +46,7 @@ class DiceViewModel @ViewModelInject constructor(
             currentDiceModel?.add(Dice(numberOfSides))
         }
     }
+
     /*
     * This is called by the fragment when a user taps the roll button.
     * I then go through the list of Dice objects, and roll each one.
@@ -61,22 +62,20 @@ class DiceViewModel @ViewModelInject constructor(
     }
 
     fun removeDice() {
-        viewModelScope.launch (Dispatchers.IO){
-            dataStoreRepository.diceInformation.collect {
-                var diceNumber = it.numberOfDice
-                diceNumber -= 1
-                it.numberOfDice = diceNumber
-            }
+        viewModelScope.launch(Dispatchers.IO) {
+            dataStoreRepository.decreaseDiceNumber()
         }
         // Here you need to decrease the appropriate value in the dataStore
     }
 
     fun addDice() {
-
-            // Here you need to increase the appropriate value in the dataStore
+        viewModelScope.launch(Dispatchers.IO) {
+            dataStoreRepository.increaseDiceNumber()
         }
-
+        // Here you need to increase the appropriate value in the dataStore
     }
+
+}
 
 
 

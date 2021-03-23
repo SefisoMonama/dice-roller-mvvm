@@ -194,14 +194,17 @@
                     app:layout_constraintStart_toStartOf="@+id/diceNumber_chipGroup"
                     app:layout_constraintTop_toBottomOf="@+id/diceNumber_chipGroup" />
 
+
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/displayTotal_chipGroup"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:paddingEnd="4dp"
                     android:paddingStart="4dp"
+                    android:paddingEnd="4dp"
                     app:checkedChip="@+id/yes_chip"
+                    app:layout_constraintEnd_toEndOf="@+id/displayTotal_textView"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="@+id/displayTotal_textView"
                     app:layout_constraintTop_toBottomOf="@+id/displayTotal_textView"
                     app:selectionRequired="true"
@@ -212,8 +215,8 @@
                         style="@style/customChipStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/yes"
                         android:elevation="5dp"
+                        android:text="@string/yes"
                         app:chipEndPadding="20dp"
                         app:chipMinHeight="30dp"
                         app:chipStartPadding="20dp" />
@@ -223,13 +226,12 @@
                         style="@style/customChipStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/no"
                         android:elevation="5dp"
+                        android:text="@string/no"
                         app:chipEndPadding="20dp"
                         app:chipMinHeight="30dp"
                         app:chipStartPadding="20dp" />
                 </com.google.android.material.chip.ChipGroup>
-
 
                 <View
                     android:id="@+id/horizontal_line"
@@ -238,7 +240,7 @@
                     android:layout_marginTop="32dp"
                     android:background="@color/grey"
                     app:layout_constraintBottom_toTopOf="@+id/appSettings_textView"
-                    app:layout_constraintEnd_toEndOf="@+id/displayTotal_textView"
+                    app:layout_constraintEnd_toEndOf="@+id/displayTotal_chipGroup"
                     app:layout_constraintStart_toStartOf="@+id/displayTotal_chipGroup"
                     app:layout_constraintTop_toBottomOf="@+id/displayTotal_chipGroup"></View>
 
@@ -355,20 +357,6 @@
                     app:layout_constraintStart_toStartOf="@+id/VersionTitle_textView"
                     app:layout_constraintTop_toBottomOf="@+id/VersionTitle_textView" />
 
-                <Button
-                    android:id="@+id/saveSettingsButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="36dp"
-                    android:background="@drawable/btnsavesettings"
-                    android:text="@string/save"
-                    android:textColor="@color/saveButtonColor"
-                    android:textSize="11sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/displayTotal_chipGroup"
-                    app:layout_constraintEnd_toEndOf="@+id/displayTotal_textView"
-                    app:layout_constraintHorizontal_bias="0.707"
-                    app:layout_constraintStart_toEndOf="@+id/displayTotal_chipGroup"
-                    app:layout_constraintTop_toTopOf="@+id/displayTotal_chipGroup"
-                    app:layout_constraintVertical_bias="0.73" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>

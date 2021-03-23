@@ -81,6 +81,8 @@ class SettingsFragment : Fragment() {
             val selectedDiceSides = chip.text.toString().toLowerCase(Locale.ROOT)
             settingsViewModel.diceSidesChip = selectedDiceSides.toInt()
             settingsViewModel.diceSidesChipId = selectedChipId
+
+            settingsViewModel.saveDiceSides(settingsViewModel.diceSidesChip,settingsViewModel.diceSidesChipId)
         }
 
         binding.diceNumberChipGroup.setOnCheckedChangeListener { group, selectedChipId ->
@@ -88,6 +90,8 @@ class SettingsFragment : Fragment() {
             val selectedDiceNumbers = chip.text.toString().toLowerCase(Locale.ROOT)
             settingsViewModel.diceNumberChip = selectedDiceNumbers.toInt()
             settingsViewModel.diceNumberChipId = selectedChipId
+
+            settingsViewModel.saveDiceNumbers(settingsViewModel.diceNumberChip, settingsViewModel.diceNumberChipId)
         }
 
         binding.displayTotalChipGroup.setOnCheckedChangeListener { group, selectedChipId ->
@@ -95,6 +99,8 @@ class SettingsFragment : Fragment() {
             val selectedDisplayTotalOption = chip.text.toString().toLowerCase(Locale.ROOT)
             settingsViewModel.displayTotalChip = selectedDisplayTotalOption
             settingsViewModel.displayTotalChipId = selectedChipId
+
+            settingsViewModel.saveDisplayTotalSettings(settingsViewModel.displayTotalChip, settingsViewModel.displayTotalChipId)
         }
 
         binding.darkModeChipGroup.setOnCheckedChangeListener { group, selectedChipId ->
@@ -112,14 +118,6 @@ class SettingsFragment : Fragment() {
             }
         }
 
-        binding.saveSettingsButton.setOnClickListener{
-            settingsViewModel.saveDiceSides(settingsViewModel.diceSidesChip,settingsViewModel.diceSidesChipId)
-            settingsViewModel.saveDiceNumbers(settingsViewModel.diceNumberChip, settingsViewModel.diceNumberChipId)
-            settingsViewModel.saveDisplayTotalSettings(settingsViewModel.displayTotalChip, settingsViewModel.displayTotalChipId)
-            Toast.makeText(context, "Settings saved!", Toast.LENGTH_SHORT).show()
-        }
-
-
         binding.contactSupportButton.setOnClickListener {
             sendMail()
         }
@@ -127,7 +125,7 @@ class SettingsFragment : Fragment() {
         return binding.root
     }
 
-    fun sendMail(){
+    private fun sendMail(){
         val intent =  Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", "sefiso@strixtechnology.com", null))
         startActivity(Intent.createChooser(intent, "Send mail to DiceRoller.co support"))
     }
