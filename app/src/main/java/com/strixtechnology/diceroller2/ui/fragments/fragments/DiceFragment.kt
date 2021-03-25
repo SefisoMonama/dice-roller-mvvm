@@ -12,11 +12,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.strixtechnology.diceroller2.R
+import com.strixtechnology.diceroller2.data.Dice
 import com.strixtechnology.diceroller2.databinding.FragmentDiceBinding
 import com.strixtechnology.diceroller2.viewmodels.DiceViewModel
 import com.strixtechnology.diceroller2.viewmodels.MainViewModel
 import com.strixtechnology.diceroller2.viewmodels.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 import kotlin.math.max
 
 
@@ -71,10 +73,8 @@ class DiceFragment : Fragment() {
         binding.incrementImageView.setOnClickListener {
             viewModel.addDice()
             Toast.makeText(context, "Dice was succesfully Added!", Toast.LENGTH_SHORT).show()
-
+            Log.e("Dice", "Dice Added")
         }
-
-
     }
 
     @SuppressLint("SetTextI18n")
@@ -96,68 +96,92 @@ class DiceFragment : Fragment() {
             it.forEachIndexed { index, dice ->
                 val diceIndex = index + 1
                 Log.e("Dice $diceIndex", "current value: " + dice.currentDiceValue.toString())
-
             }
 
             // Set the appropriate UI values here
-            it.forEachIndexed { index, dice ->
-                val diceIndex = index + 1
-                var sum = 0
-                for (i in 1..diceIndex) {
-                    sum += dice.currentDiceValue
-                    binding.totalTextView.text = "You Rolled: " + sum.toString()
+            it.forEachIndexed { index, _ ->
+                when (index) {
+                    0 -> {
+                        val firstDiceValue = it[0].currentDiceValue
+                        val diceTotal = firstDiceValue
+                        binding.totalTextView.text = "DiceTotal: $diceTotal"
+                    }
+                    1 -> {
+                        val secondDiceValue = it[1].currentDiceValue
+                        val firstDiceValue = it[0].currentDiceValue
+                        val diceTotal = firstDiceValue + secondDiceValue
+                        binding.totalTextView.text = "DiceTotal: $diceTotal"
+                    }
+                    2 -> {
+                        val thirdDiceValue = it[2].currentDiceValue
+                        val secondDiceValue = it[1].currentDiceValue
+                        val firstDiceValue = it[0].currentDiceValue
+                        val diceTotal = firstDiceValue + secondDiceValue + thirdDiceValue
+                        binding.totalTextView.text = "DiceTotal: $diceTotal"
+                    }
+                    3 -> {
+                        val fourthDiceValue = it[3].currentDiceValue
+                        val thirdDiceValue = it[2].currentDiceValue
+                        val secondDiceValue = it[1].currentDiceValue
+                        val firstDiceValue = it[0].currentDiceValue
+                        val diceTotal =
+                            firstDiceValue + secondDiceValue + thirdDiceValue + fourthDiceValue
+                        binding.totalTextView.text = "DiceTotal: $diceTotal"
+                    }
                 }
 
-                when {
-                    diceIndex <= 4 -> {
-                        when (diceIndex) {
-                            1 -> {
-                                binding.incrementImageView.isEnabled = true
-                                binding.dice1ImageView.visibility = View.VISIBLE
-                                binding.dice1ImageView.setImageResource(dice.getDiceImageResourceFor8Sides())
-                                binding.dice2ImageView.visibility = View.GONE
-                                binding.dice3ImageView.visibility = View.GONE
-                                binding.dice4ImageView.visibility = View.GONE
-                            }
-                            2 -> {
-                                binding.dice2ImageView.visibility = View.VISIBLE
-                                binding.dice2ImageView.setImageResource(dice.getDiceImageResourceFor8Sides())
-                                binding.dice3ImageView.visibility = View.GONE
-                                binding.dice4ImageView.visibility = View.GONE
-                            }
-                            3 -> {
-                                binding.dice3ImageView.visibility = View.VISIBLE
-                                binding.dice3ImageView.setImageResource(dice.getDiceImageResourceFor8Sides())
-                                binding.dice4ImageView.visibility = View.GONE
-                            }
-                            4 -> {
-                                binding.dice4ImageView.visibility = View.VISIBLE
-                                binding.dice4ImageView.setImageResource(dice.getDiceImageResourceFor8Sides())
-                            }
+
+                it.forEachIndexed { diceIndex, dice ->
+                    when (diceIndex) {
+                        0 -> {
+                            binding.incrementImageView.isEnabled = true
+                            binding.decrementImageView.isEnabled = false
+                            binding.dice1ImageView.visibility = View.VISIBLE
+                            binding.dice1ImageView.setImageResource(dice.getDiceImageResourceFor8Sides())
+                            binding.dice2ImageView.visibility = View.GONE
+                            binding.dice3ImageView.visibility = View.GONE
+                            binding.dice4ImageView.visibility = View.GONE
                         }
-                    }
-                    diceIndex <= 1 -> {
-                        binding.incrementImageView.isEnabled= true
-                        binding.decrementImageView.isEnabled = false
-                    }
-                    else -> {
-                        binding.incrementImageView.isEnabled = false
-                        binding.decrementImageView.isEnabled = true
+                        1 -> {
+                            binding.incrementImageView.isEnabled = true
+                            binding.decrementImageView.isEnabled = true
+                            binding.dice2ImageView.visibility = View.VISIBLE
+                            binding.dice2ImageView.setImageResource(dice.getDiceImageResourceFor8Sides())
+                            binding.dice3ImageView.visibility = View.GONE
+                            binding.dice4ImageView.visibility = View.GONE
+                        }
+                        2 -> {
+                            binding.incrementImageView.isEnabled = true
+                            binding.decrementImageView.isEnabled = true
+                            binding.dice3ImageView.visibility = View.VISIBLE
+                            binding.dice3ImageView.setImageResource(dice.getDiceImageResourceFor8Sides())
+                            binding.dice4ImageView.visibility = View.GONE
+                        }
+                        3 -> {
+                            binding.incrementImageView.isEnabled = false
+                            binding.decrementImageView.isEnabled = true
+                            binding.dice4ImageView.visibility = View.VISIBLE
+                            binding.dice4ImageView.setImageResource(dice.getDiceImageResourceFor8Sides())
+                        }
                     }
                 }
             }
         }
     }
 
-        override fun onResume() {
-            binding.dice1ImageView.visibility = View.GONE
-            binding.dice2ImageView.visibility = View.GONE
-            binding.dice3ImageView.visibility = View.GONE
-            binding.dice4ImageView.visibility = View.GONE
-            binding.totalTextView.visibility = View.GONE
-            super.onResume()
-        }
+    override fun onResume() {
+        binding.dice1ImageView.visibility = View.GONE
+        binding.dice2ImageView.visibility = View.GONE
+        binding.dice3ImageView.visibility = View.GONE
+        binding.dice4ImageView.visibility = View.GONE
+        binding.totalTextView.visibility = View.GONE
+        binding.welcomeInstructionsTextView.visibility = View.VISIBLE
+        binding.welcomeTextView.visibility = View.VISIBLE
+        super.onResume()
     }
+}
+
+
 
 
 

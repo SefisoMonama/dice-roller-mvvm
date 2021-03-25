@@ -97,7 +97,7 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
 
     suspend fun decreaseDiceNumber() {
         dataStore.edit{ preferences ->
-            preferences[PreferenceKeys.selectedDiceNumbers] = preferences[PreferenceKeys.selectedDiceNumbers]!! - 1
+            preferences[PreferenceKeys.selectedDiceNumbers] = (preferences[PreferenceKeys.selectedDiceNumbers]!! - 1)
         }
     }
 
