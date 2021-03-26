@@ -62,17 +62,18 @@ class DiceViewModel @ViewModelInject constructor(
     }
 
     fun removeDice() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch{
             dataStoreRepository.decreaseDiceNumber()
+            rollDice()
         }
     }
 
 
     fun addDice() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch{
             dataStoreRepository.increaseDiceNumber()
+            rollDice()
         }
-        // Here you need to increase the appropriate value in the dataStore
     }
 }
 

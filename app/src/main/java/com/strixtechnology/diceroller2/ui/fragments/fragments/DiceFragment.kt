@@ -62,7 +62,6 @@ class DiceFragment : Fragment() {
             binding.welcomeTextView.visibility = View.GONE
             binding.welcomeInstructionsTextView.visibility = View.GONE
             viewModel.removeDice()
-            viewModel.rollDice()
             Log.e("Dice", "Dice Removed")
         }
 
@@ -70,7 +69,6 @@ class DiceFragment : Fragment() {
             binding.welcomeTextView.visibility = View.GONE
             binding.welcomeInstructionsTextView.visibility = View.GONE
             viewModel.addDice()
-            viewModel.rollDice()
             Log.e("Dice", "Dice Added")
         }
     }
