@@ -65,8 +65,8 @@ class DiceViewModel @ViewModelInject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             dataStoreRepository.decreaseDiceNumber()
         }
-        // Here you need to decrease the appropriate value in the dataStore
     }
+
 
     fun addDice() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -74,7 +74,6 @@ class DiceViewModel @ViewModelInject constructor(
         }
         // Here you need to increase the appropriate value in the dataStore
     }
-
 }
 
 

@@ -6,20 +6,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.strixtechnology.diceroller2.R
-import com.strixtechnology.diceroller2.data.Dice
 import com.strixtechnology.diceroller2.databinding.FragmentDiceBinding
 import com.strixtechnology.diceroller2.viewmodels.DiceViewModel
-import com.strixtechnology.diceroller2.viewmodels.MainViewModel
-import com.strixtechnology.diceroller2.viewmodels.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
-import kotlin.math.max
 
 
 @AndroidEntryPoint
@@ -65,14 +59,18 @@ class DiceFragment : Fragment() {
         }
 
         binding.decrementImageView.setOnClickListener {
+            binding.welcomeTextView.visibility = View.GONE
+            binding.welcomeInstructionsTextView.visibility = View.GONE
             viewModel.removeDice()
-            Toast.makeText(context, "Dice was succesfully removed", Toast.LENGTH_SHORT).show()
+            viewModel.rollDice()
             Log.e("Dice", "Dice Removed")
         }
 
         binding.incrementImageView.setOnClickListener {
+            binding.welcomeTextView.visibility = View.GONE
+            binding.welcomeInstructionsTextView.visibility = View.GONE
             viewModel.addDice()
-            Toast.makeText(context, "Dice was succesfully Added!", Toast.LENGTH_SHORT).show()
+            viewModel.rollDice()
             Log.e("Dice", "Dice Added")
         }
     }
@@ -92,32 +90,25 @@ class DiceFragment : Fragment() {
         viewModel.dice.observe(viewLifecycleOwner) {
             //This block of code gets called whenever your dice model changes
 
-            // Run your app and take a look at logcat - Here I print the value of each dice
-            it.forEachIndexed { index, dice ->
-                val diceIndex = index + 1
-                Log.e("Dice $diceIndex", "current value: " + dice.currentDiceValue.toString())
-            }
-
             // Set the appropriate UI values here
             it.forEachIndexed { index, _ ->
                 when (index) {
                     0 -> {
                         val firstDiceValue = it[0].currentDiceValue
-                        val diceTotal = firstDiceValue
-                        binding.totalTextView.text = "DiceTotal: $diceTotal"
+                        binding.totalTextView.text = "Dice total : $firstDiceValue"
                     }
                     1 -> {
                         val secondDiceValue = it[1].currentDiceValue
                         val firstDiceValue = it[0].currentDiceValue
                         val diceTotal = firstDiceValue + secondDiceValue
-                        binding.totalTextView.text = "DiceTotal: $diceTotal"
+                        binding.totalTextView.text = "Dice total : $diceTotal"
                     }
                     2 -> {
                         val thirdDiceValue = it[2].currentDiceValue
                         val secondDiceValue = it[1].currentDiceValue
                         val firstDiceValue = it[0].currentDiceValue
                         val diceTotal = firstDiceValue + secondDiceValue + thirdDiceValue
-                        binding.totalTextView.text = "DiceTotal: $diceTotal"
+                        binding.totalTextView.text = "Dice total : $diceTotal"
                     }
                     3 -> {
                         val fourthDiceValue = it[3].currentDiceValue
@@ -126,14 +117,15 @@ class DiceFragment : Fragment() {
                         val firstDiceValue = it[0].currentDiceValue
                         val diceTotal =
                             firstDiceValue + secondDiceValue + thirdDiceValue + fourthDiceValue
-                        binding.totalTextView.text = "DiceTotal: $diceTotal"
+                        binding.totalTextView.text = "Dice total : $diceTotal"
                     }
                 }
 
 
-                it.forEachIndexed { diceIndex, dice ->
+                it.forEachIndexed { index, dice ->
+                    var diceIndex = index + 1
                     when (diceIndex) {
-                        0 -> {
+                        1 -> {
                             binding.incrementImageView.isEnabled = true
                             binding.decrementImageView.isEnabled = false
                             binding.dice1ImageView.visibility = View.VISIBLE
@@ -142,7 +134,7 @@ class DiceFragment : Fragment() {
                             binding.dice3ImageView.visibility = View.GONE
                             binding.dice4ImageView.visibility = View.GONE
                         }
-                        1 -> {
+                        2 -> {
                             binding.incrementImageView.isEnabled = true
                             binding.decrementImageView.isEnabled = true
                             binding.dice2ImageView.visibility = View.VISIBLE
@@ -150,14 +142,14 @@ class DiceFragment : Fragment() {
                             binding.dice3ImageView.visibility = View.GONE
                             binding.dice4ImageView.visibility = View.GONE
                         }
-                        2 -> {
+                        3 -> {
                             binding.incrementImageView.isEnabled = true
                             binding.decrementImageView.isEnabled = true
                             binding.dice3ImageView.visibility = View.VISIBLE
                             binding.dice3ImageView.setImageResource(dice.getDiceImageResourceFor8Sides())
                             binding.dice4ImageView.visibility = View.GONE
                         }
-                        3 -> {
+                        4 -> {
                             binding.incrementImageView.isEnabled = false
                             binding.decrementImageView.isEnabled = true
                             binding.dice4ImageView.visibility = View.VISIBLE
