@@ -61,6 +61,21 @@ class DiceFragment : Fragment() {
                     binding.totalTextView.visibility = View.GONE
                 }
             }
+            ObjectAnimator.ofFloat(binding.dice1ImageView, View.ROTATION, 0f, 360f).apply{
+                duration = 1000
+            }.start()
+
+            ObjectAnimator.ofFloat(binding.dice2ImageView, View.ROTATION, 0f, 360f).apply{
+                duration = 1000
+            }.start()
+
+            ObjectAnimator.ofFloat(binding.dice3ImageView, View.ROTATION, 0f, 360f).apply{
+                duration = 1000
+            }.start()
+
+            ObjectAnimator.ofFloat(binding.dice4ImageView, View.ROTATION, 0f, 360f).apply{
+                duration = 1000
+            }.start()
             viewModel.rollDice()
         }
 
