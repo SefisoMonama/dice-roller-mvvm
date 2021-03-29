@@ -1,19 +1,25 @@
 package com.strixtechnology.diceroller2.ui.fragments.fragments
 
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.content.Context
+import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.strixtechnology.diceroller2.R
 import com.strixtechnology.diceroller2.databinding.FragmentDiceBinding
 import com.strixtechnology.diceroller2.viewmodels.DiceViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -62,13 +68,24 @@ class DiceFragment : Fragment() {
             binding.welcomeTextView.visibility = View.GONE
             binding.welcomeInstructionsTextView.visibility = View.GONE
             viewModel.removeDice()
+
+            ObjectAnimator.ofFloat(binding.decrementImageView, View.ALPHA, 0.3f,1f).apply {
+                duration = 500
+            }.start()
+
             Log.e("Dice", "Dice Removed")
         }
+
 
         binding.incrementImageView.setOnClickListener {
             binding.welcomeTextView.visibility = View.GONE
             binding.welcomeInstructionsTextView.visibility = View.GONE
             viewModel.addDice()
+
+            ObjectAnimator.ofFloat(binding.incrementImageView, View.ALPHA, 0.3f,1f).apply {
+                duration = 500
+            }.start()
+
             Log.e("Dice", "Dice Added")
         }
     }
@@ -79,8 +96,7 @@ class DiceFragment : Fragment() {
             // This block of code gets called whenever your DataStore values change
             // So it will trigger whenever you load the screen or if you change the dice
             // properties in the  Datastore.
-
-            // Set the appropriate UI values here
+        // Set the appropriate UI values here
         }
 
 
@@ -158,6 +174,8 @@ class DiceFragment : Fragment() {
             }
         }
     }
+
+
 
     override fun onResume() {
         binding.dice1ImageView.visibility = View.GONE
