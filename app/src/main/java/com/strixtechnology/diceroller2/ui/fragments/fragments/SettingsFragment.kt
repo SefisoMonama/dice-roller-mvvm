@@ -1,12 +1,10 @@
 package com.strixtechnology.diceroller2.ui.fragments.fragments
-
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Toast
-import androidx.activity.OnBackPressedDispatcher
+import android.view.animation.OvershootInterpolator
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -16,11 +14,6 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.strixtechnology.diceroller2.R
 import com.strixtechnology.diceroller2.databinding.FragmentSettingsBinding
-import com.strixtechnology.diceroller2.util.Constants.Companion.DEFAULT_DARK_THEME
-import com.strixtechnology.diceroller2.util.Constants.Companion.DEFAULT_DICE_NUM
-import com.strixtechnology.diceroller2.util.Constants.Companion.DEFAULT_DICE_SIDES
-import com.strixtechnology.diceroller2.util.Constants.Companion.DEFAULT_DISPLAY_DICE_TOTAL
-import com.strixtechnology.diceroller2.viewmodels.MainViewModel
 import com.strixtechnology.diceroller2.viewmodels.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -32,8 +25,6 @@ class SettingsFragment : Fragment() {
     private lateinit var settingsViewModel: SettingsViewModel
 
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -41,8 +32,8 @@ class SettingsFragment : Fragment() {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
 
@@ -72,7 +63,7 @@ class SettingsFragment : Fragment() {
 
         settingsViewModel.readAppModeSettings.asLiveData().observe(viewLifecycleOwner, { value ->
             settingsViewModel.darkThemeChip = value.selectedDarkMode
-           updateChip(value.selectedDarkModeId, binding.darkModeChipGroup)
+            updateChip(value.selectedDarkModeId, binding.darkModeChipGroup)
         })
 
 
@@ -82,7 +73,10 @@ class SettingsFragment : Fragment() {
             settingsViewModel.diceSidesChip = selectedDiceSides.toInt()
             settingsViewModel.diceSidesChipId = selectedChipId
 
-            settingsViewModel.saveDiceSides(settingsViewModel.diceSidesChip,settingsViewModel.diceSidesChipId)
+            settingsViewModel.saveDiceSides(
+                settingsViewModel.diceSidesChip,
+                settingsViewModel.diceSidesChipId
+            )
         }
 
         binding.diceNumberChipGroup.setOnCheckedChangeListener { group, selectedChipId ->
@@ -91,7 +85,10 @@ class SettingsFragment : Fragment() {
             settingsViewModel.diceNumberChip = selectedDiceNumbers.toInt()
             settingsViewModel.diceNumberChipId = selectedChipId
 
-            settingsViewModel.saveDiceNumbers(settingsViewModel.diceNumberChip, settingsViewModel.diceNumberChipId)
+            settingsViewModel.saveDiceNumbers(
+                settingsViewModel.diceNumberChip,
+                settingsViewModel.diceNumberChipId
+            )
         }
 
         binding.displayTotalChipGroup.setOnCheckedChangeListener { group, selectedChipId ->
@@ -100,7 +97,10 @@ class SettingsFragment : Fragment() {
             settingsViewModel.displayTotalChip = selectedDisplayTotalOption
             settingsViewModel.displayTotalChipId = selectedChipId
 
-            settingsViewModel.saveDisplayTotalSettings(settingsViewModel.displayTotalChip, settingsViewModel.displayTotalChipId)
+            settingsViewModel.saveDisplayTotalSettings(
+                settingsViewModel.displayTotalChip,
+                settingsViewModel.displayTotalChipId
+            )
         }
 
         binding.darkModeChipGroup.setOnCheckedChangeListener { group, selectedChipId ->
@@ -109,28 +109,41 @@ class SettingsFragment : Fragment() {
             settingsViewModel.darkThemeChip = selectedDarkThemeOption
             settingsViewModel.darkThemeId = selectedChipId
 
-            settingsViewModel.saveAppModeSettings(settingsViewModel.darkThemeChip, settingsViewModel.darkThemeId)
+            settingsViewModel.saveAppModeSettings(
+                settingsViewModel.darkThemeChip,
+                settingsViewModel.darkThemeId
+            )
 
-            if(chip == binding.disableDarkModeChip){
+            if (chip == binding.disableDarkModeChip) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }else{
+            } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }
         }
 
         binding.contactSupportButton.setOnClickListener {
+            binding.contactSupportButton.animate()
+                .scaleX(0.9f).scaleY(0.9f).alpha(0.8f)
+                .setInterpolator(OvershootInterpolator())
+                .start()
             sendMail()
         }
+
+
+
 
         return binding.root
     }
 
-    private fun sendMail(){
-        val intent =  Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", "sefiso@strixtechnology.com", null))
+    private fun sendMail() {
+        val intent = Intent(
+            Intent.ACTION_SENDTO,
+            Uri.fromParts("mailto", "sefiso@strixtechnology.com", null)
+        )
         startActivity(Intent.createChooser(intent, "Send mail to DiceRoller.co support"))
     }
 
-   private fun updateChip(chipId: Int, chipGroup: ChipGroup) {
+    private fun updateChip(chipId: Int, chipGroup: ChipGroup) {
         if (chipId != 0) {
             try {
                 chipGroup.findViewById<Chip>(chipId).isChecked = true

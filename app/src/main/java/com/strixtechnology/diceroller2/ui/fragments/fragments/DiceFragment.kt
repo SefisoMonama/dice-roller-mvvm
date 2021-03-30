@@ -1,16 +1,19 @@
 package com.strixtechnology.diceroller2.ui.fragments.fragments
 
 import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
+import android.animation.ValueAnimator
 import android.annotation.SuppressLint
-import android.content.Context
-import android.graphics.drawable.AnimatedVectorDrawable
+import android.graphics.Color
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.appcompat.content.res.AppCompatResources
+import android.view.animation.OvershootInterpolator
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -47,7 +50,29 @@ class DiceFragment : Fragment() {
 
     private fun setupUi() {
         binding.settingsImageView.setOnClickListener {
-            findNavController().navigate(R.id.action_diceFragment_to_settingsFragment)
+
+            lifecycleScope.launch {
+                binding.totalTextView.visibility = View.VISIBLE
+                val spannableString = SpannableString("Loading...")
+                val transparentColorSpan = ForegroundColorSpan(Color.TRANSPARENT)
+
+                ValueAnimator.ofInt(0, 4).apply {
+                    repeatCount = 10
+                    duration = 500
+                    addUpdateListener { valueAnimator ->
+                        val dotsCount = valueAnimator.animatedValue as Int
+                        if (dotsCount < 4) { // 4 is the number of ellipses + 1
+                            spannableString.setSpan(
+                                transparentColorSpan,
+                                7 + dotsCount, // The length of your string WITHOUT the ellipses + dotsCount
+                                10 // The total length of your string, WITH the ellipses
+                                , Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                            binding.totalTextView.text = spannableString
+                        }
+                    }
+                }.start()
+                findNavController().navigate(R.id.action_diceFragment_to_settingsFragment)
+            }
         }
 
         binding.rollDiceButton.setOnClickListener {
@@ -61,21 +86,33 @@ class DiceFragment : Fragment() {
                     binding.totalTextView.visibility = View.GONE
                 }
             }
-            ObjectAnimator.ofFloat(binding.dice1ImageView, View.ROTATION, 0f, 360f).apply{
-                duration = 1000
+
+            //PropertyValueHolder to specify Scale and Alpha values
+            val scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, 0.5F, 1F)
+            val scaleY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 0.5F, 1F)
+            val alpha = PropertyValuesHolder.ofFloat(View.ALPHA, 0F, 1F)
+
+            ObjectAnimator.ofPropertyValuesHolder(binding.rollDiceButton, scaleX, scaleY, alpha)
+                .apply {
+                    interpolator = OvershootInterpolator()
+                }.start()
+
+            ObjectAnimator.ofFloat(binding.dice1ImageView, View.ROTATION, 0f, 360f).apply {
+                duration = 500
             }.start()
 
-            ObjectAnimator.ofFloat(binding.dice2ImageView, View.ROTATION, 0f, 360f).apply{
-                duration = 1000
+            ObjectAnimator.ofFloat(binding.dice2ImageView, View.ROTATION, 0f, 360f).apply {
+                duration = 500
             }.start()
 
-            ObjectAnimator.ofFloat(binding.dice3ImageView, View.ROTATION, 0f, 360f).apply{
-                duration = 1000
+            ObjectAnimator.ofFloat(binding.dice3ImageView, View.ROTATION, 0f, 360f).apply {
+                duration = 500
             }.start()
 
-            ObjectAnimator.ofFloat(binding.dice4ImageView, View.ROTATION, 0f, 360f).apply{
-                duration = 1000
+            ObjectAnimator.ofFloat(binding.dice4ImageView, View.ROTATION, 0f, 360f).apply {
+                duration = 500
             }.start()
+
             viewModel.rollDice()
         }
 
@@ -84,25 +121,25 @@ class DiceFragment : Fragment() {
             binding.welcomeInstructionsTextView.visibility = View.GONE
             viewModel.removeDice()
 
-            ObjectAnimator.ofFloat(binding.decrementImageView, View.ALPHA, 0.3f,1f).apply {
+            ObjectAnimator.ofFloat(binding.decrementImageView, View.ALPHA, 0.1f, 1f).apply {
                 duration = 500
             }.start()
 
             Log.e("Dice", "Dice Removed")
         }
 
-
         binding.incrementImageView.setOnClickListener {
             binding.welcomeTextView.visibility = View.GONE
             binding.welcomeInstructionsTextView.visibility = View.GONE
             viewModel.addDice()
 
-            ObjectAnimator.ofFloat(binding.incrementImageView, View.ALPHA, 0.3f,1f).apply {
+            ObjectAnimator.ofFloat(binding.incrementImageView, View.ALPHA, 0.1f, 1f).apply {
                 duration = 500
             }.start()
 
             Log.e("Dice", "Dice Added")
         }
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -111,7 +148,7 @@ class DiceFragment : Fragment() {
             // This block of code gets called whenever your DataStore values change
             // So it will trigger whenever you load the screen or if you change the dice
             // properties in the  Datastore.
-        // Set the appropriate UI values here
+            // Set the appropriate UI values here
         }
 
 
@@ -189,7 +226,6 @@ class DiceFragment : Fragment() {
             }
         }
     }
-
 
 
     override fun onResume() {
