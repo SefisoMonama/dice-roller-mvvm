@@ -20,6 +20,7 @@
     <color name="mainBackgroundColor">#FF000000</color>
     <color name="uncheckedchipBackground">#FFFFFF</color>
     <color name="toolbarTextColor">#FFFFFF</color>
+    <color name="subTitleTextColor">#7063657A</color>
 
     <!--Dark Theme -->
     <color name="AppBackgroundColor">@color/white</color>

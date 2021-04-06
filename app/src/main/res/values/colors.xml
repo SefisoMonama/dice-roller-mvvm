@@ -21,6 +21,7 @@
     <color name="buttonBackgroundInActive">#C2C5CC</color>
     <color name="mainBackgroundColor">#FFFFFF</color>
     <color name="toolbarTextColor">#63657A</color>
+    <color name="subTitleTextColor">#7063657A</color>
 
 
     <!--Light Theme -->

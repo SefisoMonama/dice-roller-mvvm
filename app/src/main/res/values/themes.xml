@@ -56,6 +56,11 @@
         <item name="android:textColor">@color/primary</item>
         <item name="android:textSize">25sp</item>
     </style>
+
+    <style name="subTitleStyle" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textSize">15sp</item>
+    </style>
+
     <style name="titleDiceFrag" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:fontFamily">@font/baloo_thambi</item>
         <item name="android:textColor">@color/diceTitle</item>

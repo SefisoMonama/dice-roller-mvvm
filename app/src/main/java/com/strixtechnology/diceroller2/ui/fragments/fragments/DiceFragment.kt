@@ -50,40 +50,44 @@ class DiceFragment : Fragment() {
 
     private fun setupUi() {
         binding.settingsImageView.setOnClickListener {
-
-            lifecycleScope.launch {
-                binding.totalTextView.visibility = View.VISIBLE
-                val spannableString = SpannableString("Loading...")
-                val transparentColorSpan = ForegroundColorSpan(Color.TRANSPARENT)
-
-                ValueAnimator.ofInt(0, 4).apply {
-                    repeatCount = 10
-                    duration = 500
-                    addUpdateListener { valueAnimator ->
-                        val dotsCount = valueAnimator.animatedValue as Int
-                        if (dotsCount < 4) { // 4 is the number of ellipses + 1
-                            spannableString.setSpan(
-                                transparentColorSpan,
-                                7 + dotsCount, // The length of your string WITHOUT the ellipses + dotsCount
-                                10 // The total length of your string, WITH the ellipses
-                                , Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-                            binding.totalTextView.text = spannableString
-                        }
-                    }
-                }.start()
-                findNavController().navigate(R.id.action_diceFragment_to_settingsFragment)
-            }
+            findNavController().navigate(R.id.action_diceFragment_to_settingsFragment)
         }
 
         binding.rollDiceButton.setOnClickListener {
             binding.welcomeTextView.visibility = View.GONE
             binding.welcomeInstructionsTextView.visibility = View.GONE
 
-            viewModel.displayDiceTotal.observe(viewLifecycleOwner) {
-                if (it.selectedDisplayTotalId == R.id.yes_chip) {
-                    binding.totalTextView.visibility = View.VISIBLE
-                } else {
-                    binding.totalTextView.visibility = View.GONE
+           viewModel.displayDiceTotal.observe(viewLifecycleOwner) {
+               if (it.selectedDisplayTotal) {
+                   binding.totalTextView.visibility = View.VISIBLE
+               } else {
+                   binding.totalTextView.visibility = View.GONE
+               }
+            }
+
+            /*
+            *This line of code will wait for selected dice animation to be true, and it'll roll visible dice from 0 - 360, for 500 milliseconds
+            */
+            viewModel.addDiceAnimation.observe(viewLifecycleOwner){
+                if (it.selectedAnimationOption){
+                    ObjectAnimator.ofFloat(binding.dice1ImageView, View.ROTATION, 0f, 360f).apply {
+                        duration = 500
+                    }.start()
+
+                    ObjectAnimator.ofFloat(binding.dice2ImageView, View.ROTATION, 0f, 360f).apply {
+                        duration = 500
+                    }.start()
+
+                    ObjectAnimator.ofFloat(binding.dice3ImageView, View.ROTATION, 0f, 360f).apply {
+                        duration = 500
+                    }.start()
+
+                    ObjectAnimator.ofFloat(binding.dice4ImageView, View.ROTATION, 0f, 360f).apply {
+                        duration = 500
+                    }.start()
+                    viewModel.rollDice()
+                }else{
+                    viewModel.rollDice()
                 }
             }
 
@@ -97,23 +101,7 @@ class DiceFragment : Fragment() {
                     interpolator = OvershootInterpolator()
                 }.start()
 
-            ObjectAnimator.ofFloat(binding.dice1ImageView, View.ROTATION, 0f, 360f).apply {
-                duration = 500
-            }.start()
 
-            ObjectAnimator.ofFloat(binding.dice2ImageView, View.ROTATION, 0f, 360f).apply {
-                duration = 500
-            }.start()
-
-            ObjectAnimator.ofFloat(binding.dice3ImageView, View.ROTATION, 0f, 360f).apply {
-                duration = 500
-            }.start()
-
-            ObjectAnimator.ofFloat(binding.dice4ImageView, View.ROTATION, 0f, 360f).apply {
-                duration = 500
-            }.start()
-
-            viewModel.rollDice()
         }
 
         binding.decrementImageView.setOnClickListener {
@@ -121,11 +109,10 @@ class DiceFragment : Fragment() {
             binding.welcomeInstructionsTextView.visibility = View.GONE
             viewModel.removeDice()
 
+            //when imageView is clicked, it'll make an alpha effect from 0.1 to 1f(it'll go from grey to it's normal fill color)
             ObjectAnimator.ofFloat(binding.decrementImageView, View.ALPHA, 0.1f, 1f).apply {
                 duration = 500
             }.start()
-
-            Log.e("Dice", "Dice Removed")
         }
 
         binding.incrementImageView.setOnClickListener {
@@ -133,6 +120,7 @@ class DiceFragment : Fragment() {
             binding.welcomeInstructionsTextView.visibility = View.GONE
             viewModel.addDice()
 
+            //when imageView is clicked, it'll make an alpha effect from 0.1 to 1f(it'll go from grey to it's normal fill color)
             ObjectAnimator.ofFloat(binding.incrementImageView, View.ALPHA, 0.1f, 1f).apply {
                 duration = 500
             }.start()
@@ -192,6 +180,7 @@ class DiceFragment : Fragment() {
                     var diceIndex = index + 1
                     when (diceIndex) {
                         1 -> {
+                            //when dice index is 1, decrement image view will be disabled (avoid the user having negative dice number
                             binding.incrementImageView.isEnabled = true
                             binding.decrementImageView.isEnabled = false
                             binding.dice1ImageView.visibility = View.VISIBLE
@@ -216,6 +205,7 @@ class DiceFragment : Fragment() {
                             binding.dice4ImageView.visibility = View.GONE
                         }
                         4 -> {
+                            //when dice index is 4, increment image view will be disabled (avoid the user having more than 4 dice numbers)
                             binding.incrementImageView.isEnabled = false
                             binding.decrementImageView.isEnabled = true
                             binding.dice4ImageView.visibility = View.VISIBLE

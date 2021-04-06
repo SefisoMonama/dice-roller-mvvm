@@ -4,6 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.strixtechnology.diceroller2.data.DataStoreRepository
 import com.strixtechnology.diceroller2.data.Dice
+import com.strixtechnology.diceroller2.util.Constants.Companion.DEFAULT_DISPLAY_DICE_TOTAL
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -18,8 +19,10 @@ class DiceViewModel @ViewModelInject constructor(
     * Whenever the values in the DataStore change, this variable will trigger a change
     * to all its observers
     * */
+    //var displayDiceTotalOption = dataStoreRepository.readDisplayDiceTotal()
     private val diceInformation = dataStoreRepository.diceInformation.asLiveData()
     val displayDiceTotal = dataStoreRepository.readDisplayDiceTotal.asLiveData()
+    val addDiceAnimation = dataStoreRepository.readDiceAnimationOption.asLiveData()
 
     /*
     * LiveData of your Dice model.
@@ -61,6 +64,11 @@ class DiceViewModel @ViewModelInject constructor(
         _dice.value = currentDice
     }
 
+    /*
+    *this function will remove 1 dice every time it is called
+    * we used the help of coroutine to specify the sequential order the function should follow
+    * when it is called, it'll remove 1 dice first and roll Dice visible
+     */
     fun removeDice() {
         viewModelScope.launch{
             dataStoreRepository.decreaseDiceNumber()
@@ -69,6 +77,11 @@ class DiceViewModel @ViewModelInject constructor(
     }
 
 
+    /*
+    *this function will add 1 dice every time it is called
+    * we used the help of coroutine to specify the sequential order the function should follow
+    * when it is called, it'll add 1 dice first and roll Dice visible
+     */
     fun addDice() {
         viewModelScope.launch{
             dataStoreRepository.increaseDiceNumber()

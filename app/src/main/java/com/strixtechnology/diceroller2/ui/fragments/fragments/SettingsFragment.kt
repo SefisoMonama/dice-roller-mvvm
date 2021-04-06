@@ -1,4 +1,5 @@
 package com.strixtechnology.diceroller2.ui.fragments.fragments
+
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -45,37 +46,36 @@ class SettingsFragment : Fragment() {
             findNavController().navigateUp()
         }
 
+        //read dice sides as live data, and save it's value in "diceSidesChip" variable
         settingsViewModel.readDiceSides.asLiveData().observe(viewLifecycleOwner, { value ->
             settingsViewModel.diceSidesChip = value.selectedDiceSides
-            updateChip(value.selectedDiceSidesId, binding.diceSidesChipGroup)
         })
 
         settingsViewModel.readDiceNumbers.asLiveData().observe(viewLifecycleOwner, { value ->
             settingsViewModel.diceNumberChip = value.selectedDiceNumbers
-            updateChip(value.selectedDiceNumbersId, binding.diceNumberChipGroup)
         })
 
         settingsViewModel.readDisplayDiceTotal.asLiveData().observe(viewLifecycleOwner, { value ->
             settingsViewModel.displayTotalChip = value.selectedDisplayTotal
-            updateChip(value.selectedDisplayTotalId, binding.displayTotalChipGroup)
         })
 
 
         settingsViewModel.readAppModeSettings.asLiveData().observe(viewLifecycleOwner, { value ->
             settingsViewModel.darkThemeChip = value.selectedDarkMode
-            updateChip(value.selectedDarkModeId, binding.darkModeChipGroup)
         })
+
+        settingsViewModel.readDiceAnimationOption.asLiveData()
+            .observe(viewLifecycleOwner, { value ->
+                settingsViewModel.diceAnimationChip = value.selectedAnimationOption
+            })
 
 
         binding.diceSidesChipGroup.setOnCheckedChangeListener { group, selectedChipId ->
             val chip = group.findViewById<Chip>(selectedChipId)
             val selectedDiceSides = chip.text.toString().toLowerCase(Locale.ROOT)
             settingsViewModel.diceSidesChip = selectedDiceSides.toInt()
-            settingsViewModel.diceSidesChipId = selectedChipId
-
             settingsViewModel.saveDiceSides(
-                settingsViewModel.diceSidesChip,
-                settingsViewModel.diceSidesChipId
+                settingsViewModel.diceSidesChip
             )
         }
 
@@ -83,35 +83,31 @@ class SettingsFragment : Fragment() {
             val chip = group.findViewById<Chip>(selectedChipId)
             val selectedDiceNumbers = chip.text.toString().toLowerCase(Locale.ROOT)
             settingsViewModel.diceNumberChip = selectedDiceNumbers.toInt()
-            settingsViewModel.diceNumberChipId = selectedChipId
 
             settingsViewModel.saveDiceNumbers(
-                settingsViewModel.diceNumberChip,
-                settingsViewModel.diceNumberChipId
+                settingsViewModel.diceNumberChip
             )
         }
 
-        binding.displayTotalChipGroup.setOnCheckedChangeListener { group, selectedChipId ->
-            val chip = group.findViewById<Chip>(selectedChipId)
-            val selectedDisplayTotalOption = chip.text.toString().toLowerCase(Locale.ROOT)
-            settingsViewModel.displayTotalChip = selectedDisplayTotalOption
-            settingsViewModel.displayTotalChipId = selectedChipId
-
-            settingsViewModel.saveDisplayTotalSettings(
-                settingsViewModel.displayTotalChip,
-                settingsViewModel.displayTotalChipId
+        binding.displayTotalChipGroup.setOnCheckedChangeListener { _, selectedChipId ->
+            settingsViewModel.saveDisplayDiceTotal(
+                settingsViewModel.displayTotalChipChanged(selectedChipId, R.id.yes_chip)
             )
         }
 
-        binding.darkModeChipGroup.setOnCheckedChangeListener { group, selectedChipId ->
+        binding.diceAnimationChipGroup.setOnCheckedChangeListener { _, selectedChipId ->
+            settingsViewModel.saveDiceAnimationOption(
+                settingsViewModel.addDiceAnimation(selectedChipId, R.id.addAnimationChip)
+            )
+        }
+
+        binding.darkModeChipGroup.setOnCheckedChangeListener{ group, selectedChipId ->
             val chip = group.findViewById<Chip>(selectedChipId)
             val selectedDarkThemeOption = chip.text.toString().toLowerCase(Locale.ROOT)
             settingsViewModel.darkThemeChip = selectedDarkThemeOption
-            settingsViewModel.darkThemeId = selectedChipId
 
             settingsViewModel.saveAppModeSettings(
-                settingsViewModel.darkThemeChip,
-                settingsViewModel.darkThemeId
+                settingsViewModel.darkThemeChip
             )
 
             if (chip == binding.disableDarkModeChip) {
@@ -121,17 +117,10 @@ class SettingsFragment : Fragment() {
             }
         }
 
-        binding.contactSupportButton.setOnClickListener {
-            binding.contactSupportButton.animate()
-                .scaleX(0.9f).scaleY(0.9f).alpha(0.8f)
-                .setInterpolator(OvershootInterpolator())
-                .start()
+        binding.contactSupportButton.setOnClickListener()
+        {
             sendMail()
         }
-
-
-
-
         return binding.root
     }
 
@@ -144,12 +133,10 @@ class SettingsFragment : Fragment() {
     }
 
     private fun updateChip(chipId: Int, chipGroup: ChipGroup) {
-        if (chipId != 0) {
-            try {
-                chipGroup.findViewById<Chip>(chipId).isChecked = true
-            } catch (e: Exception) {
-                Log.d("DiceSettings", e.message.toString())
-            }
+        try {
+            chipGroup.findViewById<Chip>(chipId).isChecked = true
+        } catch (e: Exception) {
+            Log.d("DiceSettings", e.message.toString())
         }
     }
 }

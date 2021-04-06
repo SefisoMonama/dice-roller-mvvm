@@ -5,10 +5,10 @@
     style="@style/AppBackgroundColor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/mainBackgroundColor"
     android:divider="?android:dividerHorizontal"
     android:orientation="vertical"
     android:showDividers="middle"
-    android:background="@color/mainBackgroundColor"
     tools:context=".ui.fragments.fragments.SettingsFragment">
 
 
@@ -53,7 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="14dp"
                     android:layout_marginEnd="16dp"
                     android:text="@string/dice_settings"
                     android:textColor="@color/primary"
@@ -93,8 +93,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:elevation="5dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="10dp"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="10dp"
                         android:text="@string/_6"
                         app:chipEndPadding="20dp"
                         app:chipMinHeight="30dp"
@@ -116,7 +116,7 @@
                     android:id="@+id/diceNumber_textView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="18dp"
                     android:text="@string/number_of_dice"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/diceSides_chipGroup"
@@ -147,15 +147,15 @@
                         android:text="@string/_1"
                         app:chipEndPadding="20dp"
                         app:chipMinHeight="30dp"
-                        app:chipStartPadding="20dp"/>
+                        app:chipStartPadding="20dp" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/twoDice_chip"
                         style="@style/customChipStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/_2"
                         android:elevation="5dp"
+                        android:text="@string/_2"
                         app:chipEndPadding="20dp"
                         app:chipMinHeight="30dp"
                         app:chipStartPadding="20dp" />
@@ -165,8 +165,8 @@
                         style="@style/customChipStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/_3"
                         android:elevation="5dp"
+                        android:text="@string/_3"
                         app:chipEndPadding="20dp"
                         app:chipMinHeight="30dp"
                         app:chipStartPadding="20dp" />
@@ -176,8 +176,8 @@
                         style="@style/customChipStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/_4"
                         android:elevation="5dp"
+                        android:text="@string/_4"
                         app:chipEndPadding="20dp"
                         app:chipMinHeight="30dp"
                         app:chipStartPadding="20dp" />
@@ -187,7 +187,7 @@
                     android:id="@+id/displayTotal_textView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="18dp"
                     android:text="@string/display_total"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/diceNumber_chipGroup"
@@ -233,6 +233,7 @@
                         app:chipStartPadding="20dp" />
                 </com.google.android.material.chip.ChipGroup>
 
+
                 <View
                     android:id="@+id/horizontal_line"
                     android:layout_width="wrap_content"
@@ -240,10 +241,10 @@
                     android:layout_marginTop="32dp"
                     android:background="@color/grey"
                     app:layout_constraintBottom_toTopOf="@+id/appSettings_textView"
-                    app:layout_constraintEnd_toEndOf="@+id/displayTotal_chipGroup"
-                    app:layout_constraintStart_toStartOf="@+id/displayTotal_chipGroup"
-                    app:layout_constraintTop_toBottomOf="@+id/displayTotal_chipGroup"></View>
-
+                    app:layout_constraintEnd_toEndOf="@+id/diceAnimation_chipGroup"
+                    app:layout_constraintHorizontal_bias="0.644"
+                    app:layout_constraintStart_toStartOf="@+id/diceAnimation_chipGroup"
+                    app:layout_constraintTop_toBottomOf="@+id/diceAnimation_chipGroup"></View>
 
                 <TextView
                     android:id="@+id/appSettings_textView"
@@ -251,7 +252,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="18dp"
                     android:layout_marginEnd="16dp"
                     android:text="@string/app_settings"
                     app:layout_constraintEnd_toEndOf="@+id/horizontal_line"
@@ -273,7 +274,7 @@
                     android:id="@+id/darkMode_chipGroup"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="4dp"
                     android:paddingStart="4dp"
                     android:paddingEnd="4dp"
                     app:checkedChip="@+id/disableDarkMode_chip"
@@ -288,8 +289,8 @@
                         style="@style/customChipStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/disable"
                         android:elevation="5dp"
+                        android:text="@string/disable"
                         app:chipEndPadding="20dp"
                         app:chipMinHeight="30dp"
                         app:chipStartPadding="20dp" />
@@ -299,8 +300,8 @@
                         style="@style/customChipStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/enable"
                         android:elevation="5dp"
+                        android:text="@string/enable"
                         app:chipEndPadding="20dp"
                         app:chipMinHeight="30dp"
                         app:chipStartPadding="20dp" />
@@ -310,7 +311,7 @@
                     android:id="@+id/support_textView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="18dp"
                     android:text="@string/support"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/darkMode_chipGroup"
@@ -338,8 +339,8 @@
                     android:id="@+id/VersionTitle_textView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="@string/version"
+                    android:layout_marginTop="16dp"
+                    android:text="Version"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/contactSupport_button"
                     app:layout_constraintStart_toStartOf="@+id/contactSupport_button"
@@ -351,11 +352,59 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="@string/v1_0_0"
-                    android:textStyle="bold"
                     android:textColor="@color/primary"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/VersionTitle_textView"
                     app:layout_constraintStart_toStartOf="@+id/VersionTitle_textView"
                     app:layout_constraintTop_toBottomOf="@+id/VersionTitle_textView" />
+
+                <TextView
+                    android:id="@+id/diceAnimation_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:text="Dice Animation"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/displayTotal_chipGroup"
+                    app:layout_constraintHorizontal_bias="0.523"
+                    app:layout_constraintStart_toStartOf="@+id/displayTotal_chipGroup"
+                    app:layout_constraintTop_toBottomOf="@+id/displayTotal_chipGroup" />
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/diceAnimation_chipGroup"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    app:checkedChip="@+id/addAnimationChip"
+                    app:layout_constraintEnd_toEndOf="@+id/diceAnimation_textView"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="@+id/diceAnimation_textView"
+                    app:layout_constraintTop_toBottomOf="@+id/diceAnimation_textView"
+                    app:selectionRequired="true"
+                    app:singleSelection="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/addAnimationChip"
+                        style="@style/customChipStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:elevation="5dp"
+                        android:text="Animate"
+                        app:chipEndPadding="20dp"
+                        app:chipMinHeight="30dp"
+                        app:chipStartPadding="20dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/removeAnimationChip"
+                        style="@style/customChipStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:elevation="5dp"
+                        android:text="Inanimate"
+                        app:chipEndPadding="20dp"
+                        app:chipMinHeight="30dp"
+                        app:chipStartPadding="20dp" />
+                </com.google.android.material.chip.ChipGroup>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
