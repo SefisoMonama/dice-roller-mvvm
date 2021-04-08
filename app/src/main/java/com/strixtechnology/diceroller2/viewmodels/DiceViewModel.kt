@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import okhttp3.Dispatcher
 
 class DiceViewModel @ViewModelInject constructor(
-    val dataStoreRepository: DataStoreRepository,
+    private val dataStoreRepository: DataStoreRepository,
 ) : ViewModel() {
 
     val diceInformation = dataStoreRepository.diceInformation.asLiveData()
@@ -26,9 +26,7 @@ class DiceViewModel @ViewModelInject constructor(
 
     /*
     * Live data which executes whenever the DataStore values of your dice info changes.
-    *
     * In here I update the Dice live data with the new values from the datastore
-    *
     * Read up on Transformations.map and Transformations.switchMap - they are important
     * */
     val diceInformationChanged = Transformations.map(diceInformation) {
@@ -40,6 +38,10 @@ class DiceViewModel @ViewModelInject constructor(
             currentDiceModel?.add(Dice(numberOfSides))
         }
         return@map it
+    }
+
+    val diceTotal = Transformations.map(dice) { diceArray ->
+        return@map diceArray.sumOf { it.currentDiceValue }
     }
 
     /*
@@ -75,7 +77,7 @@ class DiceViewModel @ViewModelInject constructor(
     * when it is called, it'll add 1 dice first and roll Dice visible
      */
     fun addDice() {
-        viewModelScope.launch{
+        viewModelScope.launch(){
             dataStoreRepository.increaseDiceNumber()
             rollDice()
         }

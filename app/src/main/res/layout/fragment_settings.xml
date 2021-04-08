@@ -151,7 +151,8 @@
                             android:text="@string/_1"
                             app:chipEndPadding="20dp"
                             app:chipMinHeight="30dp"
-                            app:chipStartPadding="20dp" />
+                            app:chipStartPadding="20dp"
+                            android:checked="@{vm.diceInformation.selectedDiceNumbers == 1}"/>
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/twoDice_chip"
@@ -162,7 +163,8 @@
                             android:text="@string/_2"
                             app:chipEndPadding="20dp"
                             app:chipMinHeight="30dp"
-                            app:chipStartPadding="20dp" />
+                            app:chipStartPadding="20dp"
+                            android:checked="@{vm.diceInformation.selectedDiceNumbers == 2}"/>
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/threeDice_chip"
@@ -173,7 +175,8 @@
                             android:text="@string/_3"
                             app:chipEndPadding="20dp"
                             app:chipMinHeight="30dp"
-                            app:chipStartPadding="20dp" />
+                            app:chipStartPadding="20dp"
+                            android:checked="@{vm.diceInformation.selectedDiceNumbers == 3}"/>
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/fourDice_chip"
@@ -184,7 +187,8 @@
                             android:text="@string/_4"
                             app:chipEndPadding="20dp"
                             app:chipMinHeight="30dp"
-                            app:chipStartPadding="20dp" />
+                            app:chipStartPadding="20dp"
+                            android:checked="@{vm.diceInformation.selectedDiceNumbers == 4}"/>
                     </com.google.android.material.chip.ChipGroup>
 
                     <TextView

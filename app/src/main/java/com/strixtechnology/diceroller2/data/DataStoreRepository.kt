@@ -88,8 +88,8 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
      */
     suspend fun decreaseDiceNumber() {
         dataStore.edit { preferences ->
-            preferences[PreferenceKeys.selectedDiceNumbers] =
-                preferences[PreferenceKeys.selectedDiceNumbers] ?: DEFAULT_DICE_NUM - 1
+            val currentDiceNumber = preferences[PreferenceKeys.selectedDiceNumbers] ?: DEFAULT_DICE_NUM
+            preferences[PreferenceKeys.selectedDiceNumbers] = currentDiceNumber - 1
         }
     }
 
@@ -98,8 +98,8 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
      */
     suspend fun increaseDiceNumber() {
         dataStore.edit { preferences ->
-            preferences[PreferenceKeys.selectedDiceNumbers] =
-                preferences[PreferenceKeys.selectedDiceNumbers] ?: DEFAULT_DICE_NUM + 1
+            val currentDiceNumber = preferences[PreferenceKeys.selectedDiceNumbers] ?: DEFAULT_DICE_NUM
+            preferences[PreferenceKeys.selectedDiceNumbers] = currentDiceNumber + 1
         }
     }
 
