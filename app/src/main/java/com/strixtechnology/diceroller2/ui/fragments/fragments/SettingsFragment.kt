@@ -39,6 +39,7 @@ class SettingsFragment : Fragment() {
 
         binding = FragmentSettingsBinding.inflate(layoutInflater)
         binding.vm = settingsViewModel
+        binding.lifecycleOwner = this
         val toolbar = binding.settingsToolBar
         toolbar.setNavigationIcon(R.drawable.ic_back_home_arrow)
         toolbar.setNavigationOnClickListener {
