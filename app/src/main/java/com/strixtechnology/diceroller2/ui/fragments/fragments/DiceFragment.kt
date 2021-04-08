@@ -109,7 +109,7 @@ class DiceFragment : Fragment() {
             binding.welcomeInstructionsTextView.visibility = View.GONE
             viewModel.removeDice()
 
-            //when imageView is clicked, it'll make an alpha effect from 0.1 to 1f(it'll go from grey to it's normal fill color)
+            //when imageView is clicked, it'll make an alpha effect from 0.1 to 1f(it'll go from grey to it's normal fill color), for the duration of 500 milliseconds
             ObjectAnimator.ofFloat(binding.decrementImageView, View.ALPHA, 0.1f, 1f).apply {
                 duration = 500
             }.start()
@@ -120,7 +120,7 @@ class DiceFragment : Fragment() {
             binding.welcomeInstructionsTextView.visibility = View.GONE
             viewModel.addDice()
 
-            //when imageView is clicked, it'll make an alpha effect from 0.1 to 1f(it'll go from grey to it's normal fill color)
+            //when imageView is clicked, it'll make an alpha effect from 0.1 to 1f(it'll go from grey to it's normal fill color), for the duration of 500 milliseconds
             ObjectAnimator.ofFloat(binding.incrementImageView, View.ALPHA, 0.1f, 1f).apply {
                 duration = 500
             }.start()

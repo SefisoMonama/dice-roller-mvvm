@@ -1,12 +1,12 @@
 package com.strixtechnology.diceroller2.util
 
 class Constants {
-    companion object{
+    companion object {
 
         const val DEFAULT_DICE_SIDES = 6
-        const val DEFAULT_DICE_NUM = 0
+        const val DEFAULT_DICE_NUM = 1
         const val DEFAULT_DISPLAY_DICE_TOTAL = true
-        const val DEFAULT_DARK_THEME ="Disable"
+        const val DEFAULT_DARK_THEME = "Disable"
         const val DEFAULT_DICE_ANIMATION = true
 
         const val PREFERENCES_NAME = "dice preferences"

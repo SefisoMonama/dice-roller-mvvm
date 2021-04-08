@@ -46,7 +46,7 @@ class SettingsFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-        //read dice sides as live data, and save it's value in "diceSidesChip" variable
+        //read dice sides as live data, and save it's value in "diceSidesChip" variable in settings view model
         settingsViewModel.readDiceSides.asLiveData().observe(viewLifecycleOwner, { value ->
             settingsViewModel.diceSidesChip = value.selectedDiceSides
         })
@@ -77,6 +77,11 @@ class SettingsFragment : Fragment() {
             settingsViewModel.saveDiceSides(
                 settingsViewModel.diceSidesChip
             )
+
+            settingsViewModel.readDiceSides.asLiveData().observe(viewLifecycleOwner, {
+                val b = it.selectedDiceSides
+
+            })
         }
 
         binding.diceNumberChipGroup.setOnCheckedChangeListener { group, selectedChipId ->
@@ -90,6 +95,7 @@ class SettingsFragment : Fragment() {
         }
 
         binding.displayTotalChipGroup.setOnCheckedChangeListener { _, selectedChipId ->
+
             settingsViewModel.saveDisplayDiceTotal(
                 settingsViewModel.displayTotalChipChanged(selectedChipId, R.id.yes_chip)
             )
@@ -99,6 +105,7 @@ class SettingsFragment : Fragment() {
             settingsViewModel.saveDiceAnimationOption(
                 settingsViewModel.addDiceAnimation(selectedChipId, R.id.addAnimationChip)
             )
+             Log.e("dice", "")
         }
 
         binding.darkModeChipGroup.setOnCheckedChangeListener{ group, selectedChipId ->
@@ -115,7 +122,11 @@ class SettingsFragment : Fragment() {
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }
+
+
         }
+
+
 
         binding.contactSupportButton.setOnClickListener()
         {
@@ -132,9 +143,9 @@ class SettingsFragment : Fragment() {
         startActivity(Intent.createChooser(intent, "Send mail to DiceRoller.co support"))
     }
 
-    private fun updateChip(chipId: Int, chipGroup: ChipGroup) {
+    private fun updateChip(selectedId: Int, chipGroup: ChipGroup) {
         try {
-            chipGroup.findViewById<Chip>(chipId).isChecked = true
+            chipGroup.findViewById<Chip>(selectedId).isChecked = true
         } catch (e: Exception) {
             Log.d("DiceSettings", e.message.toString())
         }
