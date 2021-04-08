@@ -57,39 +57,37 @@ class DiceFragment : Fragment() {
             binding.welcomeTextView.visibility = View.GONE
             binding.welcomeInstructionsTextView.visibility = View.GONE
 
-           viewModel.displayDiceTotal.observe(viewLifecycleOwner) {
+           viewModel.diceInformation.observe(viewLifecycleOwner) {}
+           viewModel.diceInformationChanged.observe(viewLifecycleOwner) {
+
                if (it.selectedDisplayTotal) {
                    binding.totalTextView.visibility = View.VISIBLE
                } else {
                    binding.totalTextView.visibility = View.GONE
                }
+
+               if (it.selectedAnimationOption){
+                   ObjectAnimator.ofFloat(binding.dice1ImageView, View.ROTATION, 0f, 360f).apply {
+                       duration = 500
+                   }.start()
+
+                   ObjectAnimator.ofFloat(binding.dice2ImageView, View.ROTATION, 0f, 360f).apply {
+                       duration = 500
+                   }.start()
+
+                   ObjectAnimator.ofFloat(binding.dice3ImageView, View.ROTATION, 0f, 360f).apply {
+                       duration = 500
+                   }.start()
+
+                   ObjectAnimator.ofFloat(binding.dice4ImageView, View.ROTATION, 0f, 360f).apply {
+                       duration = 500
+                   }.start()
+                   viewModel.rollDice()
+               }else{
+                   viewModel.rollDice()
+               }
             }
 
-            /*
-            *This line of code will wait for selected dice animation to be true, and it'll roll visible dice from 0 - 360, for 500 milliseconds
-            */
-            viewModel.addDiceAnimation.observe(viewLifecycleOwner){
-                if (it.selectedAnimationOption){
-                    ObjectAnimator.ofFloat(binding.dice1ImageView, View.ROTATION, 0f, 360f).apply {
-                        duration = 500
-                    }.start()
-
-                    ObjectAnimator.ofFloat(binding.dice2ImageView, View.ROTATION, 0f, 360f).apply {
-                        duration = 500
-                    }.start()
-
-                    ObjectAnimator.ofFloat(binding.dice3ImageView, View.ROTATION, 0f, 360f).apply {
-                        duration = 500
-                    }.start()
-
-                    ObjectAnimator.ofFloat(binding.dice4ImageView, View.ROTATION, 0f, 360f).apply {
-                        duration = 500
-                    }.start()
-                    viewModel.rollDice()
-                }else{
-                    viewModel.rollDice()
-                }
-            }
 
             //PropertyValueHolder to specify Scale and Alpha values
             val scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, 0.5F, 1F)
@@ -100,8 +98,6 @@ class DiceFragment : Fragment() {
                 .apply {
                     interpolator = OvershootInterpolator()
                 }.start()
-
-
         }
 
         binding.decrementImageView.setOnClickListener {
@@ -138,8 +134,6 @@ class DiceFragment : Fragment() {
             // properties in the  Datastore.
             // Set the appropriate UI values here
         }
-
-
 
         viewModel.dice.observe(viewLifecycleOwner) {
             //This block of code gets called whenever your dice model changes

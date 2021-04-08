@@ -6,7 +6,7 @@ class Constants {
         const val DEFAULT_DICE_SIDES = 6
         const val DEFAULT_DICE_NUM = 1
         const val DEFAULT_DISPLAY_DICE_TOTAL = true
-        const val DEFAULT_DARK_THEME = "Disable"
+        const val DEFAULT_DARK_THEME = false
         const val DEFAULT_DICE_ANIMATION = true
 
         const val PREFERENCES_NAME = "dice preferences"
