@@ -80,7 +80,6 @@ class SettingsFragment : Fragment() {
 
             settingsViewModel.readDiceSides.asLiveData().observe(viewLifecycleOwner, {
                 val b = it.selectedDiceSides
-
             })
         }
 
@@ -105,7 +104,6 @@ class SettingsFragment : Fragment() {
             settingsViewModel.saveDiceAnimationOption(
                 settingsViewModel.addDiceAnimation(selectedChipId, R.id.addAnimationChip)
             )
-             Log.e("dice", "")
         }
 
         binding.darkModeChipGroup.setOnCheckedChangeListener{ group, selectedChipId ->
