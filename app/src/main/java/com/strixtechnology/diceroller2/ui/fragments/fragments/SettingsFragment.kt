@@ -25,7 +25,6 @@ class SettingsFragment : Fragment() {
     private lateinit var binding: FragmentSettingsBinding
     private lateinit var settingsViewModel: SettingsViewModel
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -37,97 +36,57 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-
         binding = FragmentSettingsBinding.inflate(layoutInflater)
-
+        binding.vm = settingsViewModel
+        binding.lifecycleOwner = this
         val toolbar = binding.settingsToolBar
         toolbar.setNavigationIcon(R.drawable.ic_back_home_arrow)
         toolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
 
-        //read dice sides as live data, and save it's value in "diceSidesChip" variable in settings view model
-        settingsViewModel.readDiceSides.asLiveData().observe(viewLifecycleOwner, { value ->
-            settingsViewModel.diceSidesChip = value.selectedDiceSides
-        })
-
-        settingsViewModel.readDiceNumbers.asLiveData().observe(viewLifecycleOwner, { value ->
-            settingsViewModel.diceNumberChip = value.selectedDiceNumbers
-        })
-
-        settingsViewModel.readDisplayDiceTotal.asLiveData().observe(viewLifecycleOwner, { value ->
-            settingsViewModel.displayTotalChip = value.selectedDisplayTotal
-        })
-
-
-        settingsViewModel.readAppModeSettings.asLiveData().observe(viewLifecycleOwner, { value ->
-            settingsViewModel.darkThemeChip = value.selectedDarkMode
-        })
-
-        settingsViewModel.readDiceAnimationOption.asLiveData()
-            .observe(viewLifecycleOwner, { value ->
-                settingsViewModel.diceAnimationChip = value.selectedAnimationOption
-            })
-
-
-        binding.diceSidesChipGroup.setOnCheckedChangeListener { group, selectedChipId ->
-            val chip = group.findViewById<Chip>(selectedChipId)
-            val selectedDiceSides = chip.text.toString().toLowerCase(Locale.ROOT)
-            settingsViewModel.diceSidesChip = selectedDiceSides.toInt()
-            settingsViewModel.saveDiceSides(
-                settingsViewModel.diceSidesChip
-            )
-
-            settingsViewModel.readDiceSides.asLiveData().observe(viewLifecycleOwner, {
-                val b = it.selectedDiceSides
-            })
+        settingsViewModel.diceInformation.observe(viewLifecycleOwner) { value ->
+            if (value.selectedDarkMode) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
         }
 
-        binding.diceNumberChipGroup.setOnCheckedChangeListener { group, selectedChipId ->
-            val chip = group.findViewById<Chip>(selectedChipId)
-            val selectedDiceNumbers = chip.text.toString().toLowerCase(Locale.ROOT)
-            settingsViewModel.diceNumberChip = selectedDiceNumbers.toInt()
+        binding.diceSidesChipGroup.setOnCheckedChangeListener { group, selectedChipId ->
+            val numberOfSides = when (selectedChipId){
+                R.id.eightSides_chip ->  8
+                else ->  6
+            }
+            settingsViewModel.saveDiceSides(numberOfSides)
+        }
 
-            settingsViewModel.saveDiceNumbers(
-                settingsViewModel.diceNumberChip
-            )
+        binding.diceNumberChipGroup.setOnCheckedChangeListener { _ , selectedChipId ->
+            val diceNumber = when(selectedChipId){
+                R.id.oneDice_chip -> 1
+                R.id.twoDice_chip -> 2
+                R.id.threeDice_chip -> 3
+                else -> 4
+            }
+            settingsViewModel.saveDiceNumbers(diceNumber)
         }
 
         binding.displayTotalChipGroup.setOnCheckedChangeListener { _, selectedChipId ->
-
-            settingsViewModel.saveDisplayDiceTotal(
-                settingsViewModel.displayTotalChipChanged(selectedChipId, R.id.yes_chip)
-            )
+            val shouldDisplayTotal = selectedChipId == R.id.yes_chip
+            settingsViewModel.saveDisplayDiceTotal(shouldDisplayTotal)
         }
 
         binding.diceAnimationChipGroup.setOnCheckedChangeListener { _, selectedChipId ->
-            settingsViewModel.saveDiceAnimationOption(
-                settingsViewModel.addDiceAnimation(selectedChipId, R.id.addAnimationChip)
-            )
+            val shouldAnimate = selectedChipId == R.id.addAnimationChip
+            settingsViewModel.saveDiceAnimationOption(shouldAnimate)
         }
 
-        binding.darkModeChipGroup.setOnCheckedChangeListener{ group, selectedChipId ->
-            val chip = group.findViewById<Chip>(selectedChipId)
-            val selectedDarkThemeOption = chip.text.toString().toLowerCase(Locale.ROOT)
-            settingsViewModel.darkThemeChip = selectedDarkThemeOption
-
-            settingsViewModel.saveAppModeSettings(
-                settingsViewModel.darkThemeChip
-            )
-
-            if (chip == binding.disableDarkModeChip) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            }
-
-
+        binding.darkModeChipGroup.setOnCheckedChangeListener{ _, selectedChipId ->
+            val darkModeSelected = selectedChipId == R.id.enableDarkMode_chip
+            settingsViewModel.saveAppModeSettings(darkModeSelected)
         }
 
-
-
-        binding.contactSupportButton.setOnClickListener()
-        {
+        binding.contactSupportButton.setOnClickListener() {
             sendMail()
         }
         return binding.root
@@ -139,14 +98,6 @@ class SettingsFragment : Fragment() {
             Uri.fromParts("mailto", "sefiso@strixtechnology.com", null)
         )
         startActivity(Intent.createChooser(intent, "Send mail to DiceRoller.co support"))
-    }
-
-    private fun updateChip(selectedId: Int, chipGroup: ChipGroup) {
-        try {
-            chipGroup.findViewById<Chip>(selectedId).isChecked = true
-        } catch (e: Exception) {
-            Log.d("DiceSettings", e.message.toString())
-        }
     }
 }
 

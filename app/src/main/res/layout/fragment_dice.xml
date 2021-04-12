@@ -2,6 +2,14 @@
 <layout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="vm"
+            type="com.strixtechnology.diceroller2.viewmodels.DiceViewModel" />
+    </data>
+
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,13 +27,13 @@
         android:text="@string/welcome_to_dice_roller"
         android:textAlignment="center"
         android:textSize="25sp"
-        android:visibility="visible"
+        android:visibility="@{vm.showWelcomeText ? View.VISIBLE : View.GONE}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.29000002" />
+        app:layout_constraintVertical_bias="0.29000002"/>
 
     <TextView
         android:id="@+id/welcome_instructions_textView"
@@ -36,7 +44,7 @@
         android:text="@string/add_dice_or_configure_your_dice_by_tapping_the_buttons_below"
         android:textAlignment="center"
         android:textSize="18sp"
-        android:visibility="visible"
+        android:visibility="@{vm.showWelcomeText ? View.VISIBLE : View.GONE}"
         app:layout_constraintEnd_toEndOf="@+id/welcome_textView"
         app:layout_constraintStart_toStartOf="@+id/welcome_textView"
         app:layout_constraintTop_toBottomOf="@+id/welcome_textView" />
@@ -64,7 +72,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/cardBackgroundColor">
-
                 <Button
                     android:id="@+id/roll_dice_button"
                     android:layout_width="wrap_content"
@@ -98,6 +105,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:src="@drawable/ic_remove"
+                    android:enabled="@{vm.dice.size() >1}"
                     app:layout_constraintBottom_toBottomOf="@+id/settings_imageView"
                     app:layout_constraintEnd_toStartOf="@+id/increment_imageView"
                     app:layout_constraintTop_toTopOf="@+id/settings_imageView"
@@ -109,13 +117,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="23dp"
                     android:src="@drawable/ic_add_circle"
+                    android:enabled="@{vm.dice.size() &lt; 4}"
                     app:layout_constraintBottom_toBottomOf="@+id/decrement_imageView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/decrement_imageView"
                     app:tint="@color/iconColor"
                     tools:ignore="UseAppTint" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </com.google.android.material.card.MaterialCardView>
 
         <ImageView
@@ -126,7 +134,7 @@
             android:adjustViewBounds="false"
             android:cropToPadding="false"
             android:src="@drawable/dice1"
-            android:visibility="invisible"
+            android:visibility="@{vm.dice.size() >= 1 ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toStartOf="@+id/dice2_imageView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -138,7 +146,7 @@
             android:layout_marginEnd="80dp"
             android:scaleType="centerInside"
             android:src="@drawable/dice1"
-            android:visibility="invisible"
+            android:visibility="@{vm.dice.size() >= 2 ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@+id/dice1_imageView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/dice1_imageView"
@@ -151,7 +159,7 @@
             android:adjustViewBounds="false"
             android:cropToPadding="false"
             android:src="@drawable/dice1"
-            android:visibility="invisible"
+            android:visibility="@{vm.dice.size() >= 3 ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toTopOf="@+id/total_textView"
             app:layout_constraintEnd_toStartOf="@+id/dice4_imageView"
             app:layout_constraintStart_toStartOf="parent"
@@ -165,11 +173,10 @@
             android:layout_marginEnd="80dp"
             android:scaleType="centerInside"
             android:src="@drawable/dice1"
-            android:visibility="invisible"
+            android:visibility="@{vm.dice.size() >= 4 ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@+id/dice3_imageView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/dice3_imageView" />
-
 
         <TextView
             android:id="@+id/total_textView"
@@ -177,17 +184,14 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:fontFamily="@font/baloo_thambi"
-            android:text="@string/dice_total"
+            android:text="@{`Dice Total: ` + vm.diceTotal}"
             android:textAlignment="center"
             android:textSize="22sp"
-            android:visibility="invisible"
+            android:visibility="@{vm.diceInformationChanged.selectedDisplayTotal ? View.VISIBLE : View.GONE }"
             app:layout_constraintBottom_toTopOf="@+id/bottom_cardView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

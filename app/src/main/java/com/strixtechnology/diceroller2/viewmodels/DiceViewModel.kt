@@ -11,19 +11,12 @@ import kotlinx.coroutines.launch
 import okhttp3.Dispatcher
 
 class DiceViewModel @ViewModelInject constructor(
-    val dataStoreRepository: DataStoreRepository,
+    private val dataStoreRepository: DataStoreRepository,
 ) : ViewModel() {
 
-    /*
-    * LiveData of the Dice properties (number of dice and number of sides)
-    * Whenever the values in the DataStore change, this variable will trigger a change
-    * to all its observers
-    * */
-    //var displayDiceTotalOption = dataStoreRepository.readDisplayDiceTotal()
-    private val diceInformation = dataStoreRepository.diceInformation.asLiveData()
-    val displayDiceTotal = dataStoreRepository.readDisplayDiceTotal.asLiveData()
-    val addDiceAnimation = dataStoreRepository.readDiceAnimationOption.asLiveData()
 
+
+    val diceInformation = dataStoreRepository.diceInformation.asLiveData()
     /*
     * LiveData of your Dice model.
     * Read up on what an ArrayList is and how it can be used.
@@ -33,30 +26,34 @@ class DiceViewModel @ViewModelInject constructor(
     private val _dice = MutableLiveData<ArrayList<Dice>>(ArrayList())
     val dice: LiveData<ArrayList<Dice>> get() = _dice
 
+    val showWelcomeText = MutableLiveData<Boolean>(true)
     /*
     * Live data which executes whenever the DataStore values of your dice info changes.
-    *
     * In here I update the Dice live data with the new values from the datastore
-    *
     * Read up on Transformations.map and Transformations.switchMap - they are important
     * */
     val diceInformationChanged = Transformations.map(diceInformation) {
-        val numberOfDice = it.numberOfDice
-        val numberOfSides = it.numberOfSidesPerDice
+        val numberOfDice = it.selectedDiceNumbers
+        val numberOfSides = it.selectedDiceSides
         val currentDiceModel = _dice.value
         currentDiceModel?.clear()
         for (i in 1..numberOfDice) {
             currentDiceModel?.add(Dice(numberOfSides))
         }
+        return@map it
+    }
+
+    val diceTotal = Transformations.map(dice) { diceArray ->
+        return@map diceArray.sumOf { it.currentDiceValue }
     }
 
     /*
     * This is called by the fragment when a user taps the roll button.
     * I then go through the list of Dice objects, and roll each one.
-    *
     * I then update the Dice liveData, so that the observer in the Fragment gets triggered
     * */
     fun rollDice() {
+        showWelcomeText.value = false
         val currentDice = _dice.value!!
         currentDice.forEach { dice ->
             dice.roll()
@@ -71,11 +68,11 @@ class DiceViewModel @ViewModelInject constructor(
      */
     fun removeDice() {
         viewModelScope.launch{
+            showWelcomeText.value = false
             dataStoreRepository.decreaseDiceNumber()
             rollDice()
         }
     }
-
 
     /*
     *this function will add 1 dice every time it is called
@@ -84,11 +81,14 @@ class DiceViewModel @ViewModelInject constructor(
      */
     fun addDice() {
         viewModelScope.launch{
+            showWelcomeText.value = false
             dataStoreRepository.increaseDiceNumber()
             rollDice()
         }
     }
 }
+
+
 
 
 
