@@ -87,8 +87,6 @@ class DiceFragment : Fragment() {
                 animateDice()
             }
         }
-        //0827402704
-        viewModel.rollDice()
 
         viewModel.dice.observe(viewLifecycleOwner) {
             if (it.size > 0) {
@@ -104,6 +102,7 @@ class DiceFragment : Fragment() {
                 binding.dice4ImageView.setImageResource(it[3].getDiceImageResourceFor8Sides())
             }
         }
+        viewModel.rollDice()
     }
 
     private fun animateDice() {
