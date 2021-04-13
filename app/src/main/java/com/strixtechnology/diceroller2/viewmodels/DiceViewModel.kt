@@ -52,8 +52,10 @@ class DiceViewModel @ViewModelInject constructor(
     * I then go through the list of Dice objects, and roll each one.
     * I then update the Dice liveData, so that the observer in the Fragment gets triggered
     * */
-    fun rollDice() {
+    fun hideWelcomeText(){
         showWelcomeText.value = false
+    }
+    fun rollDice() {
         val currentDice = _dice.value!!
         currentDice.forEach { dice ->
             dice.roll()
@@ -68,7 +70,6 @@ class DiceViewModel @ViewModelInject constructor(
      */
     fun removeDice() {
         viewModelScope.launch{
-            showWelcomeText.value = false
             dataStoreRepository.decreaseDiceNumber()
             rollDice()
         }
@@ -81,7 +82,6 @@ class DiceViewModel @ViewModelInject constructor(
      */
     fun addDice() {
         viewModelScope.launch{
-            showWelcomeText.value = false
             dataStoreRepository.increaseDiceNumber()
             rollDice()
         }
