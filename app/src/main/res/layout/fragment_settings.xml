@@ -103,7 +103,8 @@
                             android:text="@string/_6"
                             app:chipEndPadding="20dp"
                             app:chipMinHeight="30dp"
-                            app:chipStartPadding="20dp" />
+                            app:chipStartPadding="20dp"
+                            android:checked="@{vm.diceInformation.selectedDiceSides == 6}"/>
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/eightSides_chip"
@@ -114,7 +115,8 @@
                             android:text="@string/_8"
                             app:chipEndPadding="20dp"
                             app:chipMinHeight="30dp"
-                            app:chipStartPadding="20dp" />
+                            app:chipStartPadding="20dp"
+                            android:checked="@{vm.diceInformation.selectedDiceSides == 8}"/>
                     </com.google.android.material.chip.ChipGroup>
 
                     <TextView
@@ -301,7 +303,8 @@
                             android:text="@string/disable"
                             app:chipEndPadding="20dp"
                             app:chipMinHeight="30dp"
-                            app:chipStartPadding="20dp" />
+                            app:chipStartPadding="20dp"
+                            android:checked="@{!vm.diceInformation.selectedDarkMode}"/>
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/enableDarkMode_chip"
@@ -312,7 +315,8 @@
                             android:text="@string/enable"
                             app:chipEndPadding="20dp"
                             app:chipMinHeight="30dp"
-                            app:chipStartPadding="20dp" />
+                            app:chipStartPadding="20dp"
+                            android:checked="@{vm.diceInformation.selectedDarkMode}"/>
                     </com.google.android.material.chip.ChipGroup>
 
                     <TextView
@@ -399,7 +403,8 @@
                             android:text="Animate"
                             app:chipEndPadding="20dp"
                             app:chipMinHeight="30dp"
-                            app:chipStartPadding="20dp" />
+                            app:chipStartPadding="20dp"
+                            android:checked="@{vm.diceInformation.selectedAnimationOption}"/>
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/removeAnimationChip"
@@ -410,7 +415,8 @@
                             android:text="Inanimate"
                             app:chipEndPadding="20dp"
                             app:chipMinHeight="30dp"
-                            app:chipStartPadding="20dp" />
+                            app:chipStartPadding="20dp"
+                            android:checked="@{!vm.diceInformation.selectedAnimationOption}"/>
                     </com.google.android.material.chip.ChipGroup>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

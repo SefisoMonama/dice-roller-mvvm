@@ -36,7 +36,6 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-
         binding = FragmentSettingsBinding.inflate(layoutInflater)
         binding.vm = settingsViewModel
         binding.lifecycleOwner = this
@@ -62,7 +61,7 @@ class SettingsFragment : Fragment() {
             settingsViewModel.saveDiceSides(numberOfSides)
         }
 
-        binding.diceNumberChipGroup.setOnCheckedChangeListener { group, selectedChipId ->
+        binding.diceNumberChipGroup.setOnCheckedChangeListener { _ , selectedChipId ->
             val diceNumber = when(selectedChipId){
                 R.id.oneDice_chip -> 1
                 R.id.twoDice_chip -> 2
@@ -82,7 +81,7 @@ class SettingsFragment : Fragment() {
             settingsViewModel.saveDiceAnimationOption(shouldAnimate)
         }
 
-        binding.darkModeChipGroup.setOnCheckedChangeListener{ group, selectedChipId ->
+        binding.darkModeChipGroup.setOnCheckedChangeListener{ _, selectedChipId ->
             val darkModeSelected = selectedChipId == R.id.enableDarkMode_chip
             settingsViewModel.saveAppModeSettings(darkModeSelected)
         }
@@ -100,6 +99,5 @@ class SettingsFragment : Fragment() {
         )
         startActivity(Intent.createChooser(intent, "Send mail to DiceRoller.co support"))
     }
-
 }
 

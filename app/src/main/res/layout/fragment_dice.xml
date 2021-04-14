@@ -27,13 +27,13 @@
         android:text="@string/welcome_to_dice_roller"
         android:textAlignment="center"
         android:textSize="25sp"
-        android:visibility="gone"
+        android:visibility="@{vm.showWelcomeText ? View.VISIBLE : View.GONE}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.29000002" />
+        app:layout_constraintVertical_bias="0.29000002"/>
 
     <TextView
         android:id="@+id/welcome_instructions_textView"
@@ -44,7 +44,7 @@
         android:text="@string/add_dice_or_configure_your_dice_by_tapping_the_buttons_below"
         android:textAlignment="center"
         android:textSize="18sp"
-        android:visibility="gone"
+        android:visibility="@{vm.showWelcomeText ? View.VISIBLE : View.GONE}"
         app:layout_constraintEnd_toEndOf="@+id/welcome_textView"
         app:layout_constraintStart_toStartOf="@+id/welcome_textView"
         app:layout_constraintTop_toBottomOf="@+id/welcome_textView" />
@@ -164,7 +164,7 @@
             app:layout_constraintEnd_toStartOf="@+id/dice4_imageView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dice1_imageView"
-            app:layout_constraintVertical_bias="0.110000014" />
+            app:layout_constraintVertical_bias="0.110000014" />n
 
         <ImageView
             android:id="@+id/dice4_imageView"
@@ -187,7 +187,7 @@
             android:text="@{`Dice Total: ` + vm.diceTotal}"
             android:textAlignment="center"
             android:textSize="22sp"
-            android:visibility="@{ vm.diceInformationChanged.selectedDisplayTotal ? View.VISIBLE : View.GONE }"
+            android:visibility="@{vm.diceInformationChanged.selectedDisplayTotal ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toTopOf="@+id/bottom_cardView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"

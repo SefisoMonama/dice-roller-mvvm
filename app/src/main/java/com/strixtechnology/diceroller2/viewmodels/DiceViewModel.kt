@@ -14,6 +14,8 @@ class DiceViewModel @ViewModelInject constructor(
     private val dataStoreRepository: DataStoreRepository,
 ) : ViewModel() {
 
+
+
     val diceInformation = dataStoreRepository.diceInformation.asLiveData()
     /*
     * LiveData of your Dice model.
@@ -24,6 +26,7 @@ class DiceViewModel @ViewModelInject constructor(
     private val _dice = MutableLiveData<ArrayList<Dice>>(ArrayList())
     val dice: LiveData<ArrayList<Dice>> get() = _dice
 
+    val showWelcomeText = MutableLiveData<Boolean>(true)
     /*
     * Live data which executes whenever the DataStore values of your dice info changes.
     * In here I update the Dice live data with the new values from the datastore
@@ -47,9 +50,11 @@ class DiceViewModel @ViewModelInject constructor(
     /*
     * This is called by the fragment when a user taps the roll button.
     * I then go through the list of Dice objects, and roll each one.
-    *
     * I then update the Dice liveData, so that the observer in the Fragment gets triggered
     * */
+    fun hideWelcomeText(){
+        showWelcomeText.value = false
+    }
     fun rollDice() {
         val currentDice = _dice.value!!
         currentDice.forEach { dice ->
@@ -70,19 +75,20 @@ class DiceViewModel @ViewModelInject constructor(
         }
     }
 
-
     /*
     *this function will add 1 dice every time it is called
     * we used the help of coroutine to specify the sequential order the function should follow
     * when it is called, it'll add 1 dice first and roll Dice visible
      */
     fun addDice() {
-        viewModelScope.launch(){
+        viewModelScope.launch{
             dataStoreRepository.increaseDiceNumber()
             rollDice()
         }
     }
 }
+
+
 
 
 
