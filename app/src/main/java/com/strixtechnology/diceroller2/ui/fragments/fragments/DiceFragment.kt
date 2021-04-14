@@ -61,7 +61,6 @@ class DiceFragment : Fragment() {
         binding.rollDiceButton.setOnClickListener {
             animateButton(binding.rollDiceButton)
             subscribeUi()
-            !viewModel.welcomeText.value!!
             viewModel.rollDice()
         }
 
