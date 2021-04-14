@@ -2,6 +2,7 @@ package com.strixtechnology.diceroller2.viewmodels
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.strixtechnology.diceroller2.data.DataStoreRepository
 import com.strixtechnology.diceroller2.util.Constants.Companion.DEFAULT_DARK_THEME
@@ -16,17 +17,7 @@ class SettingsViewModel @ViewModelInject constructor(
     private val dataStoreRepository: DataStoreRepository
 ) : ViewModel() {
 
-    var diceSidesChip = DEFAULT_DICE_SIDES
-    var diceNumberChip = DEFAULT_DICE_NUM
-    var displayTotalChip = DEFAULT_DISPLAY_DICE_TOTAL
-    var darkThemeChip = DEFAULT_DARK_THEME
-    var diceAnimationChip = DEFAULT_DICE_ANIMATION
-
-    val readDiceSides = dataStoreRepository.readDiceSides
-    val readDiceNumbers = dataStoreRepository.readDiceNumbers
-    val readDisplayDiceTotal = dataStoreRepository.readDisplayDiceTotal
-    val readAppModeSettings = dataStoreRepository.readAppModeSettings
-    val readDiceAnimationOption = dataStoreRepository.readDiceAnimationOption
+    val diceInformation = dataStoreRepository.diceInformation.asLiveData()
 
     fun saveDiceAnimationOption(diceAnimate: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -46,33 +37,15 @@ class SettingsViewModel @ViewModelInject constructor(
         }
     }
 
-    fun saveAppModeSettings(darkTheme: String) {
+    fun saveAppModeSettings(darkTheme: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
-            dataStoreRepository.saveAppModeSettings(
-                darkTheme
-            )
+            dataStoreRepository.saveAppModeSettings(darkTheme)
         }
     }
 
     fun saveDisplayDiceTotal(displayDiceTotal: Boolean){
-        viewModelScope.launch (Dispatchers.IO){
+        viewModelScope.launch {
             dataStoreRepository.saveDisplayDiceTotal(displayDiceTotal)
-        }
-    }
-
-    fun addDiceAnimation(selectedChipId: Int, chipId: Int): Boolean{
-        return if(selectedChipId == chipId){
-            diceAnimationChip
-        }else{
-            !diceAnimationChip
-        }
-    }
-
-    fun displayTotalChipChanged(selectedChipId: Int, chipId: Int): Boolean {
-        return if (selectedChipId == chipId) {
-            displayTotalChip
-        } else {
-            !displayTotalChip
         }
     }
 }
