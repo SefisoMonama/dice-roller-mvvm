@@ -27,7 +27,7 @@
         android:text="@string/welcome_to_dice_roller"
         android:textAlignment="center"
         android:textSize="25sp"
-        android:visibility="@{vm.showWelcomeText ? View.VISIBLE : View.GONE}"
+        android:visibility="@{vm.welcomeText ? View.VISIBLE : View.GONE}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -44,7 +44,7 @@
         android:text="@string/add_dice_or_configure_your_dice_by_tapping_the_buttons_below"
         android:textAlignment="center"
         android:textSize="18sp"
-        android:visibility="@{vm.showWelcomeText ? View.VISIBLE : View.GONE}"
+        android:visibility="@{vm.welcomeText ? View.VISIBLE : View.GONE}"
         app:layout_constraintEnd_toEndOf="@+id/welcome_textView"
         app:layout_constraintStart_toStartOf="@+id/welcome_textView"
         app:layout_constraintTop_toBottomOf="@+id/welcome_textView" />

@@ -55,13 +55,13 @@ class DiceFragment : Fragment() {
         binding.settingsImageView.setOnClickListener {
             lifecycleScope.launch {
                 findNavController().navigate(R.id.action_diceFragment_to_settingsFragment)
-                viewModel.hideWelcomeText()
             }
         }
 
         binding.rollDiceButton.setOnClickListener {
             animateButton(binding.rollDiceButton)
             subscribeUi()
+            !viewModel.welcomeText.value!!
             viewModel.rollDice()
         }
 
@@ -101,8 +101,9 @@ class DiceFragment : Fragment() {
             if (it.size > 3) {
                 binding.dice4ImageView.setImageResource(it[3].getDiceImageResourceFor8Sides())
             }
+            viewModel.rollDice()
         }
-        viewModel.rollDice()
+
     }
 
     private fun animateDice() {

@@ -8,6 +8,8 @@ import com.strixtechnology.diceroller2.util.Constants.Companion.DEFAULT_DICE_ANI
 import com.strixtechnology.diceroller2.util.Constants.Companion.DEFAULT_DICE_NUM
 import com.strixtechnology.diceroller2.util.Constants.Companion.DEFAULT_DICE_SIDES
 import com.strixtechnology.diceroller2.util.Constants.Companion.DEFAULT_DISPLAY_DICE_TOTAL
+import com.strixtechnology.diceroller2.util.Constants.Companion.DEFAULT_WELCOME_TEXT
+import com.strixtechnology.diceroller2.util.Constants.Companion.PREFERENCES_FIRST_TIME_USE
 import com.strixtechnology.diceroller2.util.Constants.Companion.PREFERENCES_NAME
 import com.strixtechnology.diceroller2.util.Constants.Companion.PREFERENCE_DARK_MODE
 import com.strixtechnology.diceroller2.util.Constants.Companion.PREFERENCE_DICE_ANIMATION
@@ -32,6 +34,7 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
         val selectedDisplayTotal = preferencesKey<Boolean>(PREFERENCE_DISPLAY_TOTAL)
         val selectedDarkMode = preferencesKey<Boolean>(PREFERENCE_DARK_MODE)
         val selectedDiceAnimation = preferencesKey<Boolean>(PREFERENCE_DICE_ANIMATION)
+        val firstTimeUse = preferencesKey<Boolean>(PREFERENCES_FIRST_TIME_USE)
     }
 
     private val dataStore: DataStore<Preferences> = context.createDataStore(
@@ -46,6 +49,10 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
             preferences[PreferenceKeys.selectedDiceSides] = diceSides
         }
     }
+
+    /*
+    *
+     */
 
     /*
     *this suspend function saves dice Animation Option selected to dataStore using preferences
@@ -88,7 +95,8 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
      */
     suspend fun decreaseDiceNumber() {
         dataStore.edit { preferences ->
-            val currentDiceNumber = preferences[PreferenceKeys.selectedDiceNumbers] ?: DEFAULT_DICE_NUM
+            val currentDiceNumber =
+                preferences[PreferenceKeys.selectedDiceNumbers] ?: DEFAULT_DICE_NUM
             preferences[PreferenceKeys.selectedDiceNumbers] = currentDiceNumber - 1
         }
     }
@@ -98,15 +106,19 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
      */
     suspend fun increaseDiceNumber() {
         dataStore.edit { preferences ->
-            val currentDiceNumber = preferences[PreferenceKeys.selectedDiceNumbers] ?: DEFAULT_DICE_NUM
+            val currentDiceNumber =
+                preferences[PreferenceKeys.selectedDiceNumbers] ?: DEFAULT_DICE_NUM
             preferences[PreferenceKeys.selectedDiceNumbers] = currentDiceNumber + 1
         }
     }
 
-    /*
-    * Instead of reading the prefs for each variable you have, just read it once.
-    * */
-    var diceInformation: Flow<DiceInformation> = dataStore.data
+    suspend fun saveWelcomeText(firstTimeUse: Boolean) {
+        dataStore.edit { preferences ->
+            preferences[PreferenceKeys.firstTimeUse] = firstTimeUse
+        }
+    }
+
+    var welcomeText: Flow<welcomeText> = dataStore.data
         .catch { exception ->
             if (exception is IOException) {
                 emit(emptyPreferences())
@@ -115,29 +127,55 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
             }
         }
         .map { preferences ->
-            val selectedDiceSides =
-                preferences[PreferenceKeys.selectedDiceSides] ?: DEFAULT_DICE_SIDES
-            val selectedDiceNumbers =
-                preferences[PreferenceKeys.selectedDiceNumbers] ?: DEFAULT_DICE_NUM
-            val selectedDisplayTotal =
-                preferences[PreferenceKeys.selectedDisplayTotal] ?: DEFAULT_DISPLAY_DICE_TOTAL
-            val selectedDarkMode =
-                preferences[PreferenceKeys.selectedDarkMode] ?: DEFAULT_DARK_THEME
-            val selectedAnimation =
-                preferences[PreferenceKeys.selectedDiceAnimation] ?: DEFAULT_DICE_ANIMATION
-            return@map DiceInformation(
-                selectedDiceSides = selectedDiceSides,
-                selectedDiceNumbers = selectedDiceNumbers,
-                selectedDisplayTotal = selectedDisplayTotal,
-                selectedDarkMode = selectedDarkMode,
-                selectedAnimationOption = selectedAnimation)
+            val firstTimeUse =
+                preferences[PreferenceKeys.firstTimeUse] ?: DEFAULT_WELCOME_TEXT
+            return@map welcomeText(
+                firstTimeUse = firstTimeUse
+            )
+        }
+
+
+
+/*
+* Instead of reading the prefs for each variable you have, just read it once.
+* */
+var diceInformation: Flow<DiceInformation> = dataStore.data
+    .catch { exception ->
+        if (exception is IOException) {
+            emit(emptyPreferences())
+        } else {
+            throw exception
         }
     }
+    .map { preferences ->
+        val selectedDiceSides =
+            preferences[PreferenceKeys.selectedDiceSides] ?: DEFAULT_DICE_SIDES
+        val selectedDiceNumbers =
+            preferences[PreferenceKeys.selectedDiceNumbers] ?: DEFAULT_DICE_NUM
+        val selectedDisplayTotal =
+            preferences[PreferenceKeys.selectedDisplayTotal] ?: DEFAULT_DISPLAY_DICE_TOTAL
+        val selectedDarkMode =
+            preferences[PreferenceKeys.selectedDarkMode] ?: DEFAULT_DARK_THEME
+        val selectedAnimation =
+            preferences[PreferenceKeys.selectedDiceAnimation] ?: DEFAULT_DICE_ANIMATION
+        return@map DiceInformation(
+            selectedDiceSides = selectedDiceSides,
+            selectedDiceNumbers = selectedDiceNumbers,
+            selectedDisplayTotal = selectedDisplayTotal,
+            selectedDarkMode = selectedDarkMode,
+            selectedAnimationOption = selectedAnimation
+        )
+    }
+}
 
-    data class DiceInformation(
-        var selectedAnimationOption: Boolean,
-        val selectedDiceSides: Int,
-        val selectedDiceNumbers: Int,
-        val selectedDisplayTotal: Boolean,
-        val selectedDarkMode: Boolean
-    )
+data class DiceInformation(
+    var selectedAnimationOption: Boolean,
+    val selectedDiceSides: Int,
+    val selectedDiceNumbers: Int,
+    val selectedDisplayTotal: Boolean,
+    val selectedDarkMode: Boolean
+)
+
+data class welcomeText(
+    var firstTimeUse: Boolean
+)
