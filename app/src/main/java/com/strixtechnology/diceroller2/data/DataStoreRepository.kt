@@ -21,7 +21,6 @@ import dagger.hilt.android.scopes.ActivityRetainedScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
 import java.io.IOException
 import javax.inject.Inject
 
@@ -49,10 +48,6 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
             preferences[PreferenceKeys.selectedDiceSides] = diceSides
         }
     }
-
-    /*
-    *
-     */
 
     /*
     *this suspend function saves dice Animation Option selected to dataStore using preferences
@@ -112,13 +107,7 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
         }
     }
 
-    suspend fun saveWelcomeText(firstTimeUse: Boolean) {
-        dataStore.edit { preferences ->
-            preferences[PreferenceKeys.firstTimeUse] = firstTimeUse
-        }
-    }
-
-    var welcomeText: Flow<welcomeText> = dataStore.data
+    var welcomeText: Flow<WelcomeText> = dataStore.data
         .catch { exception ->
             if (exception is IOException) {
                 emit(emptyPreferences())
@@ -129,43 +118,42 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
         .map { preferences ->
             val firstTimeUse =
                 preferences[PreferenceKeys.firstTimeUse] ?: DEFAULT_WELCOME_TEXT
-            return@map welcomeText(
+            return@map WelcomeText(
                 firstTimeUse = firstTimeUse
             )
         }
 
 
-
-/*
-* Instead of reading the prefs for each variable you have, just read it once.
-* */
-var diceInformation: Flow<DiceInformation> = dataStore.data
-    .catch { exception ->
-        if (exception is IOException) {
-            emit(emptyPreferences())
-        } else {
-            throw exception
+    /*
+    * Instead of reading the prefs for each variable you have, just read it once.
+    * */
+    var diceInformation: Flow<DiceInformation> = dataStore.data
+        .catch { exception ->
+            if (exception is IOException) {
+                emit(emptyPreferences())
+            } else {
+                throw exception
+            }
         }
-    }
-    .map { preferences ->
-        val selectedDiceSides =
-            preferences[PreferenceKeys.selectedDiceSides] ?: DEFAULT_DICE_SIDES
-        val selectedDiceNumbers =
-            preferences[PreferenceKeys.selectedDiceNumbers] ?: DEFAULT_DICE_NUM
-        val selectedDisplayTotal =
-            preferences[PreferenceKeys.selectedDisplayTotal] ?: DEFAULT_DISPLAY_DICE_TOTAL
-        val selectedDarkMode =
-            preferences[PreferenceKeys.selectedDarkMode] ?: DEFAULT_DARK_THEME
-        val selectedAnimation =
-            preferences[PreferenceKeys.selectedDiceAnimation] ?: DEFAULT_DICE_ANIMATION
-        return@map DiceInformation(
-            selectedDiceSides = selectedDiceSides,
-            selectedDiceNumbers = selectedDiceNumbers,
-            selectedDisplayTotal = selectedDisplayTotal,
-            selectedDarkMode = selectedDarkMode,
-            selectedAnimationOption = selectedAnimation
-        )
-    }
+        .map { preferences ->
+            val selectedDiceSides =
+                preferences[PreferenceKeys.selectedDiceSides] ?: DEFAULT_DICE_SIDES
+            val selectedDiceNumbers =
+                preferences[PreferenceKeys.selectedDiceNumbers] ?: DEFAULT_DICE_NUM
+            val selectedDisplayTotal =
+                preferences[PreferenceKeys.selectedDisplayTotal] ?: DEFAULT_DISPLAY_DICE_TOTAL
+            val selectedDarkMode =
+                preferences[PreferenceKeys.selectedDarkMode] ?: DEFAULT_DARK_THEME
+            val selectedAnimation =
+                preferences[PreferenceKeys.selectedDiceAnimation] ?: DEFAULT_DICE_ANIMATION
+            return@map DiceInformation(
+                selectedDiceSides = selectedDiceSides,
+                selectedDiceNumbers = selectedDiceNumbers,
+                selectedDisplayTotal = selectedDisplayTotal,
+                selectedDarkMode = selectedDarkMode,
+                selectedAnimationOption = selectedAnimation
+            )
+        }
 }
 
 data class DiceInformation(
@@ -176,6 +164,6 @@ data class DiceInformation(
     val selectedDarkMode: Boolean
 )
 
-data class welcomeText(
+data class WelcomeText(
     var firstTimeUse: Boolean
 )

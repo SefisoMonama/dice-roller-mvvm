@@ -4,18 +4,14 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.strixtechnology.diceroller2.data.DataStoreRepository
 import com.strixtechnology.diceroller2.data.Dice
-import com.strixtechnology.diceroller2.util.Constants.Companion.DEFAULT_DISPLAY_DICE_TOTAL
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import okhttp3.Dispatcher
+import java.util.*
 
 class DiceViewModel @ViewModelInject constructor(
     private val dataStoreRepository: DataStoreRepository,
 ) : ViewModel() {
 
-
-    private val showWelcomeText = dataStoreRepository.welcomeText.asLiveData()
+    val welcomeText = dataStoreRepository.welcomeText.asLiveData()
     private val diceInformation = dataStoreRepository.diceInformation.asLiveData()
     /*
     * LiveData of your Dice model.
@@ -25,6 +21,8 @@ class DiceViewModel @ViewModelInject constructor(
     * */
     private val _dice = MutableLiveData<ArrayList<Dice>>(ArrayList())
     val dice: LiveData<ArrayList<Dice>> get() = _dice
+
+    val showWelcomeText = MutableLiveData<Boolean>(true)
 
     //val showWelcomeText = MutableLiveData<Boolean>(true)
     /*
@@ -46,16 +44,14 @@ class DiceViewModel @ViewModelInject constructor(
     val diceTotal = Transformations.map(dice) { diceArray ->
         return@map diceArray.sumOf { it.currentDiceValue }
     }
-
     /*
     * This is called by the fragment when a user taps the roll button.
     * I then go through the list of Dice objects, and roll each one.
     * I then update the Dice liveData, so that the observer in the Fragment gets triggered
     * */
-    val welcomeText = Transformations.map(showWelcomeText){
-        return@map it.firstTimeUse
-    }
     fun rollDice() {
+        hideWelcomeText()
+        calculatedDiceTotal()
         val currentDice = _dice.value!!
         currentDice.forEach { dice ->
             dice.roll()
@@ -70,11 +66,14 @@ class DiceViewModel @ViewModelInject constructor(
      */
     fun removeDice() {
         viewModelScope.launch{
+            hideWelcomeText()
+            calculatedDiceTotal()
             dataStoreRepository.decreaseDiceNumber()
             rollDice()
         }
     }
 
+    val zeroDiceTotal = MutableLiveData<Boolean>(true)
     /*
     *this function will add 1 dice every time it is called
     * we used the help of coroutine to specify the sequential order the function should follow
@@ -82,9 +81,23 @@ class DiceViewModel @ViewModelInject constructor(
      */
     fun addDice() {
         viewModelScope.launch{
+            hideWelcomeText()
+            calculatedDiceTotal()
             dataStoreRepository.increaseDiceNumber()
             rollDice()
         }
+    }
+
+    private fun calculatedDiceTotal(){
+        zeroDiceTotal.value = false
+    }
+
+    fun zeroDiceTotal(){
+        zeroDiceTotal.value = true
+    }
+
+    fun hideWelcomeText(){
+        showWelcomeText.value = false
     }
 }
 

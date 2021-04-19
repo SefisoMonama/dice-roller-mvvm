@@ -2,21 +2,14 @@ package com.strixtechnology.diceroller2.ui.fragments.fragments
 
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
-import android.animation.ValueAnimator
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.style.ForegroundColorSpan
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.OvershootInterpolator
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -47,7 +40,6 @@ class DiceFragment : Fragment() {
         binding.vm = viewModel
         binding.lifecycleOwner = this
         setupUi()
-        subscribeUi()
         return binding.root
     }
 
@@ -55,27 +47,30 @@ class DiceFragment : Fragment() {
         binding.settingsImageView.setOnClickListener {
             lifecycleScope.launch {
                 findNavController().navigate(R.id.action_diceFragment_to_settingsFragment)
+                viewModel.hideWelcomeText()
+                viewModel.zeroDiceTotal()
             }
         }
 
+
         binding.rollDiceButton.setOnClickListener {
+            viewModel.hideWelcomeText()
             animateButton(binding.rollDiceButton)
             subscribeUi()
-            viewModel.rollDice()
         }
 
         binding.decrementImageView.setOnClickListener {
+            viewModel.hideWelcomeText()
             viewModel.removeDice()
             animateImageView(binding.decrementImageView)
             subscribeUi()
-            viewModel.rollDice()
         }
 
         binding.incrementImageView.setOnClickListener {
+            viewModel.hideWelcomeText()
             viewModel.addDice()
             animateImageView(binding.incrementImageView)
             subscribeUi()
-            viewModel.rollDice()
         }
     }
 
@@ -86,6 +81,8 @@ class DiceFragment : Fragment() {
                 animateDice()
             }
         }
+
+        viewModel.rollDice()
 
         viewModel.dice.observe(viewLifecycleOwner) {
             if (it.size > 0) {
@@ -100,9 +97,7 @@ class DiceFragment : Fragment() {
             if (it.size > 3) {
                 binding.dice4ImageView.setImageResource(it[3].getDiceImageResourceFor8Sides())
             }
-            viewModel.rollDice()
         }
-
     }
 
     private fun animateDice() {
@@ -142,6 +137,9 @@ class DiceFragment : Fragment() {
         }.start()
     }
 }
+
+
+
 
 
 

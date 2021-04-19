@@ -86,7 +86,7 @@ class SettingsFragment : Fragment() {
             settingsViewModel.saveAppModeSettings(darkModeSelected)
         }
 
-        binding.contactSupportButton.setOnClickListener() {
+        binding.contactSupportButton.setOnClickListener{
             sendMail()
         }
         return binding.root
