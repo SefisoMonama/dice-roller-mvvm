@@ -275,7 +275,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="@string/dark_mode"
+                        android:text="Dark mode"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="@+id/appSettings_textView"
                         app:layout_constraintStart_toStartOf="@+id/appSettings_textView"
@@ -289,34 +289,35 @@
                         android:paddingStart="4dp"
                         android:paddingEnd="4dp"
                         app:layout_constraintEnd_toEndOf="@+id/darMode_textView"
+                        app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toStartOf="@+id/darMode_textView"
                         app:layout_constraintTop_toBottomOf="@+id/darMode_textView"
                         app:selectionRequired="true"
                         app:singleSelection="true">
 
                         <com.google.android.material.chip.Chip
-                            android:id="@+id/disableDarkMode_chip"
-                            style="@style/customChipStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:elevation="5dp"
-                            android:text="@string/disable"
-                            app:chipEndPadding="20dp"
-                            app:chipMinHeight="30dp"
-                            app:chipStartPadding="20dp"
-                            android:checked="@{!vm.diceInformation.selectedDarkMode}"/>
-
-                        <com.google.android.material.chip.Chip
                             android:id="@+id/enableDarkMode_chip"
                             style="@style/customChipStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:checked="@{vm.diceInformation.selectedDarkMode}"
                             android:elevation="5dp"
                             android:text="@string/enable"
                             app:chipEndPadding="20dp"
                             app:chipMinHeight="30dp"
-                            app:chipStartPadding="20dp"
-                            android:checked="@{vm.diceInformation.selectedDarkMode}"/>
+                            app:chipStartPadding="20dp" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/disableDarkMode_chip"
+                            style="@style/customChipStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="@{!vm.diceInformation.selectedDarkMode}"
+                            android:elevation="5dp"
+                            android:text="@string/disable"
+                            app:chipEndPadding="20dp"
+                            app:chipMinHeight="30dp"
+                            app:chipStartPadding="20dp" />
                     </com.google.android.material.chip.ChipGroup>
 
                     <TextView
@@ -400,7 +401,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:elevation="5dp"
-                            android:text="Animate"
+                            android:text="@string/enable"
                             app:chipEndPadding="20dp"
                             app:chipMinHeight="30dp"
                             app:chipStartPadding="20dp"
@@ -412,7 +413,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:elevation="5dp"
-                            android:text="Inanimate"
+                            android:text="@string/disable"
                             app:chipEndPadding="20dp"
                             app:chipMinHeight="30dp"
                             app:chipStartPadding="20dp"

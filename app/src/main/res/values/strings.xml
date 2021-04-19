@@ -18,8 +18,7 @@
     <string name="no">No</string>
     <string name="app_settings">App Settings</string>
     <string name="dark_mode">Dark Mode</string>
-    <string name="enable">Enable</string>
-    <string name="disable">Disable</string>
+    <string name="Enable">Disable</string>
     <string name="support">Support</string>
     <string name="version">Version</string>
     <string name="v1_0_0">v1.0.0</string>
@@ -30,4 +29,6 @@
     <string name="dice_total">Dice Total</string>
     <string name="add_dice_or_configure_your_dice_by_tapping_the_buttons_below_or_roll_dice">add dice or configure your dice by tapping the buttons below or roll dice</string>
     <string name="yes">Yes</string>
+    <string name="disable">Disable</string>
+    <string name="enable">Enable</string>
 </resources>
