@@ -11,7 +11,6 @@ class DiceViewModel @ViewModelInject constructor(
     private val dataStoreRepository: DataStoreRepository,
 ) : ViewModel() {
 
-    val welcomeText = dataStoreRepository.welcomeText.asLiveData()
     private val diceInformation = dataStoreRepository.diceInformation.asLiveData()
     /*
     * LiveData of your Dice model.
@@ -24,7 +23,6 @@ class DiceViewModel @ViewModelInject constructor(
 
     val showWelcomeText = MutableLiveData<Boolean>(true)
 
-    //val showWelcomeText = MutableLiveData<Boolean>(true)
     /*
     * Live data which executes whenever the DataStore values of your dice info changes.
     * In here I update the Dice live data with the new values from the datastore
@@ -38,6 +36,7 @@ class DiceViewModel @ViewModelInject constructor(
         for (i in 1..numberOfDice) {
             currentDiceModel?.add(Dice(numberOfSides))
         }
+        _dice.value = currentDiceModel
         return@map it
     }
 
@@ -51,7 +50,6 @@ class DiceViewModel @ViewModelInject constructor(
     * */
     fun rollDice() {
         hideWelcomeText()
-        calculatedDiceTotal()
         val currentDice = _dice.value!!
         currentDice.forEach { dice ->
             dice.roll()
@@ -67,13 +65,11 @@ class DiceViewModel @ViewModelInject constructor(
     fun removeDice() {
         viewModelScope.launch{
             hideWelcomeText()
-            calculatedDiceTotal()
             dataStoreRepository.decreaseDiceNumber()
             rollDice()
         }
     }
 
-    val zeroDiceTotal = MutableLiveData<Boolean>(true)
     /*
     *this function will add 1 dice every time it is called
     * we used the help of coroutine to specify the sequential order the function should follow
@@ -82,19 +78,11 @@ class DiceViewModel @ViewModelInject constructor(
     fun addDice() {
         viewModelScope.launch{
             hideWelcomeText()
-            calculatedDiceTotal()
             dataStoreRepository.increaseDiceNumber()
             rollDice()
         }
     }
 
-    private fun calculatedDiceTotal(){
-        zeroDiceTotal.value = false
-    }
-
-    fun zeroDiceTotal(){
-        zeroDiceTotal.value = true
-    }
 
     fun hideWelcomeText(){
         showWelcomeText.value = false

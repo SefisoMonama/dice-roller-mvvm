@@ -40,6 +40,7 @@ class DiceFragment : Fragment() {
         binding.vm = viewModel
         binding.lifecycleOwner = this
         setupUi()
+        subscribeUi()
         return binding.root
     }
 
@@ -47,30 +48,22 @@ class DiceFragment : Fragment() {
         binding.settingsImageView.setOnClickListener {
             lifecycleScope.launch {
                 findNavController().navigate(R.id.action_diceFragment_to_settingsFragment)
-                viewModel.hideWelcomeText()
-                viewModel.zeroDiceTotal()
             }
         }
 
-
         binding.rollDiceButton.setOnClickListener {
-            viewModel.hideWelcomeText()
-            animateButton(binding.rollDiceButton)
-            subscribeUi()
+            viewModel.rollDice()
+            animateDice()
         }
 
         binding.decrementImageView.setOnClickListener {
-            viewModel.hideWelcomeText()
             viewModel.removeDice()
             animateImageView(binding.decrementImageView)
-            subscribeUi()
         }
 
         binding.incrementImageView.setOnClickListener {
-            viewModel.hideWelcomeText()
             viewModel.addDice()
             animateImageView(binding.incrementImageView)
-            subscribeUi()
         }
     }
 
@@ -82,8 +75,7 @@ class DiceFragment : Fragment() {
             }
         }
 
-        viewModel.rollDice()
-
+        viewModel.diceTotal.observe(viewLifecycleOwner) { }
         viewModel.dice.observe(viewLifecycleOwner) {
             if (it.size > 0) {
                 binding.dice1ImageView.setImageResource(it[0].getDiceImageResourceFor8Sides())
@@ -116,18 +108,6 @@ class DiceFragment : Fragment() {
         ObjectAnimator.ofFloat(binding.dice4ImageView, View.ROTATION, 0f, 360f).apply {
             duration = 500
         }.start()
-    }
-
-    private fun animateButton(button: Button) {
-        //PropertyValueHolder to specify Scale and Alpha values
-        val scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, 0.5F, 1F)
-        val scaleY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 0.5F, 1F)
-        val alpha = PropertyValuesHolder.ofFloat(View.ALPHA, 0F, 1F)
-
-        ObjectAnimator.ofPropertyValuesHolder(button, scaleX, scaleY, alpha)
-            .apply {
-                interpolator = OvershootInterpolator()
-            }.start()
     }
 
     private fun animateImageView(imageView: ImageView) {

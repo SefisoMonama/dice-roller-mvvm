@@ -8,8 +8,6 @@ import com.strixtechnology.diceroller2.util.Constants.Companion.DEFAULT_DICE_ANI
 import com.strixtechnology.diceroller2.util.Constants.Companion.DEFAULT_DICE_NUM
 import com.strixtechnology.diceroller2.util.Constants.Companion.DEFAULT_DICE_SIDES
 import com.strixtechnology.diceroller2.util.Constants.Companion.DEFAULT_DISPLAY_DICE_TOTAL
-import com.strixtechnology.diceroller2.util.Constants.Companion.DEFAULT_WELCOME_TEXT
-import com.strixtechnology.diceroller2.util.Constants.Companion.PREFERENCES_FIRST_TIME_USE
 import com.strixtechnology.diceroller2.util.Constants.Companion.PREFERENCES_NAME
 import com.strixtechnology.diceroller2.util.Constants.Companion.PREFERENCE_DARK_MODE
 import com.strixtechnology.diceroller2.util.Constants.Companion.PREFERENCE_DICE_ANIMATION
@@ -33,7 +31,6 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
         val selectedDisplayTotal = preferencesKey<Boolean>(PREFERENCE_DISPLAY_TOTAL)
         val selectedDarkMode = preferencesKey<Boolean>(PREFERENCE_DARK_MODE)
         val selectedDiceAnimation = preferencesKey<Boolean>(PREFERENCE_DICE_ANIMATION)
-        val firstTimeUse = preferencesKey<Boolean>(PREFERENCES_FIRST_TIME_USE)
     }
 
     private val dataStore: DataStore<Preferences> = context.createDataStore(
@@ -107,23 +104,6 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
         }
     }
 
-    var welcomeText: Flow<WelcomeText> = dataStore.data
-        .catch { exception ->
-            if (exception is IOException) {
-                emit(emptyPreferences())
-            } else {
-                throw exception
-            }
-        }
-        .map { preferences ->
-            val firstTimeUse =
-                preferences[PreferenceKeys.firstTimeUse] ?: DEFAULT_WELCOME_TEXT
-            return@map WelcomeText(
-                firstTimeUse = firstTimeUse
-            )
-        }
-
-
     /*
     * Instead of reading the prefs for each variable you have, just read it once.
     * */
@@ -162,8 +142,4 @@ data class DiceInformation(
     val selectedDiceNumbers: Int,
     val selectedDisplayTotal: Boolean,
     val selectedDarkMode: Boolean
-)
-
-data class WelcomeText(
-    var firstTimeUse: Boolean
 )

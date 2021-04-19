@@ -4,7 +4,7 @@ import com.strixtechnology.diceroller2.R
 import kotlinx.coroutines.flow.Flow
 
 class Dice(private val numSides: Int) {
-    var currentDiceValue: Int = 0
+    var currentDiceValue: Int = 1
 
 
     /**
