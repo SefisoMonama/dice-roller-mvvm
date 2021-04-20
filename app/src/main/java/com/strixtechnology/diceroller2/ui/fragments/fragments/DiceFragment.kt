@@ -19,6 +19,7 @@ import com.strixtechnology.diceroller2.R
 import com.strixtechnology.diceroller2.databinding.FragmentDiceBinding
 import com.strixtechnology.diceroller2.viewmodels.DiceViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -49,6 +50,7 @@ class DiceFragment : Fragment() {
         binding.settingsImageView.setOnClickListener {
             lifecycleScope.launch {
                 animateImageView(binding.settingsImageView)
+                delay(100)
                 findNavController().navigate(R.id.action_diceFragment_to_settingsFragment)
             }
         }
@@ -125,11 +127,13 @@ class DiceFragment : Fragment() {
         val scaleY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 0.5F, 1F)
         val alpha = PropertyValuesHolder.ofFloat(View.ALPHA, 1F, 1F)
 
-        ObjectAnimator.ofPropertyValuesHolder(imageView, scaleX, scaleY, alpha)
+        ObjectAnimator.ofPropertyValuesHolder(imageView, scaleY, scaleX, alpha)
             .apply {
                 duration = 100
             }.start()
     }
+
+
 }
 
 
