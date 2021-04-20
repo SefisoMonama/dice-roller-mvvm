@@ -24,9 +24,5 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         navController = findNavController(R.id.hostFragment)
-
-    }
-
-    override fun onBackPressed() {
     }
 }

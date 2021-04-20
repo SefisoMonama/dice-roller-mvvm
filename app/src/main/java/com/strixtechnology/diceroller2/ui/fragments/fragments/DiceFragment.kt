@@ -1,5 +1,6 @@
 package com.strixtechnology.diceroller2.ui.fragments.fragments
 
+import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.annotation.SuppressLint
@@ -50,7 +51,7 @@ class DiceFragment : Fragment() {
         binding.settingsImageView.setOnClickListener {
             lifecycleScope.launch {
                 animateImageView(binding.settingsImageView)
-                delay(100)
+                delay(150)
                 findNavController().navigate(R.id.action_diceFragment_to_settingsFragment)
             }
         }
