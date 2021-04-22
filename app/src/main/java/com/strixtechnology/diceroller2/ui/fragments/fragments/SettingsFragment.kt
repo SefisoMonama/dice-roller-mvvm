@@ -45,7 +45,7 @@ class SettingsFragment : Fragment() {
         val toolbar = binding.settingsToolBar
         toolbar.setNavigationIcon(R.drawable.ic_back_home_arrow)
         toolbar.setNavigationOnClickListener {
-            findNavController().navigateUp()
+            findNavController().navigate(R.id.diceFragment)
         }
 
         settingsViewModel.diceInformation.observe(viewLifecycleOwner) { value ->
