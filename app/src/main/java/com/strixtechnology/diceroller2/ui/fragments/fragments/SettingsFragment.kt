@@ -3,6 +3,7 @@ package com.strixtechnology.diceroller2.ui.fragments.fragments
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatDelegate

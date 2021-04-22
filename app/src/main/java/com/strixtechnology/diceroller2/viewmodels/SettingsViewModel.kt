@@ -5,14 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.strixtechnology.diceroller2.data.DataStoreRepository
-import com.strixtechnology.diceroller2.util.Constants.Companion.DEFAULT_DARK_THEME
-import com.strixtechnology.diceroller2.util.Constants.Companion.DEFAULT_DICE_ANIMATION
-import com.strixtechnology.diceroller2.util.Constants.Companion.DEFAULT_DICE_NUM
-import com.strixtechnology.diceroller2.util.Constants.Companion.DEFAULT_DICE_SIDES
-import com.strixtechnology.diceroller2.util.Constants.Companion.DEFAULT_DISPLAY_DICE_TOTAL
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.launch
 
+@FlowPreview
+@ExperimentalCoroutinesApi
 class SettingsViewModel @ViewModelInject constructor(
     private val dataStoreRepository: DataStoreRepository
 ) : ViewModel() {

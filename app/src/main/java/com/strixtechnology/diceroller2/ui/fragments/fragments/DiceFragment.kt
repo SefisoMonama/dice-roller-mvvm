@@ -133,8 +133,6 @@ class DiceFragment : Fragment() {
                 duration = 100
             }.start()
     }
-
-
 }
 
 
