@@ -1,6 +1,6 @@
 package com.strixtechnology.diceroller2.ui.fragments.fragments
 
-import android.animation.Animator
+
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.annotation.SuppressLint
@@ -8,8 +8,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.OvershootInterpolator
-import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
@@ -86,8 +84,9 @@ class DiceFragment : Fragment() {
             }
 
         }
-
-        viewModel.diceTotal.observe(viewLifecycleOwner) { }
+        /*
+        *will observe dice model for changes - and assign a view with a drawable, every time the dice model value changes
+         */
         viewModel.dice.observe(viewLifecycleOwner) {
             if (it.size > 0) {
                 binding.dice1ImageView.setImageResource(it[0].getDiceImageResourceFor8Sides())
@@ -104,6 +103,9 @@ class DiceFragment : Fragment() {
         }
     }
 
+    /*
+    *will rotate specified view from 0 - 360 degrees, for 500 milliseconds
+    */
     private fun animateDice() {
         ObjectAnimator.ofFloat(binding.dice1ImageView, View.ROTATION, 0f, 360f).apply {
             duration = 500
@@ -123,12 +125,11 @@ class DiceFragment : Fragment() {
     }
 
     private fun animateImageView(imageView: ImageView) {
-        //when imageView is clicked, it'll make an alpha effect from 0.1 to 1f(it'll go from grey to it's normal fill color), for the duration of 500 milliseconds
+        //when imageView is clicked - it'll zoom in & out - in a space of 100 milliseconds
         val scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, 0.5F, 1F)
         val scaleY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 0.5F, 1F)
-        val alpha = PropertyValuesHolder.ofFloat(View.ALPHA, 1F, 1F)
 
-        ObjectAnimator.ofPropertyValuesHolder(imageView, scaleY, scaleX, alpha)
+        ObjectAnimator.ofPropertyValuesHolder(imageView, scaleY, scaleX)
             .apply {
                 duration = 100
             }.start()

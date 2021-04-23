@@ -57,7 +57,7 @@ class SettingsFragment : Fragment() {
             }
         }
 
-        binding.diceSidesChipGroup.setOnCheckedChangeListener { group, selectedChipId ->
+        binding.diceSidesChipGroup.setOnCheckedChangeListener { _, selectedChipId ->
             val numberOfSides = when (selectedChipId){
                 R.id.eightSides_chip ->  8
                 else ->  6
@@ -75,6 +75,7 @@ class SettingsFragment : Fragment() {
             settingsViewModel.saveDiceNumbers(diceNumber)
         }
 
+        //set shouldDisplayTotal variable to true is selected chip is 'yes' chip
         binding.displayTotalChipGroup.setOnCheckedChangeListener { _, selectedChipId ->
             val shouldDisplayTotal = selectedChipId == R.id.yes_chip
             settingsViewModel.saveDisplayDiceTotal(shouldDisplayTotal)
@@ -99,7 +100,7 @@ class SettingsFragment : Fragment() {
     private fun sendMail() {
         val intent = Intent(
             Intent.ACTION_SENDTO,
-            Uri.fromParts("mailto", "sefiso@strixtechnology.com", null)
+            Uri.fromParts("mailto", "sgmonama@gmail.com", null)
         )
         startActivity(Intent.createChooser(intent, "Send mail to DiceRoller.co support"))
     }

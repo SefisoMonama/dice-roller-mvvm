@@ -84,7 +84,10 @@ class DiceViewModel @ViewModelInject constructor(
     }
 
 
-    fun hideWelcomeText(){
+    /*
+    *set welcome text boolean value to false - It'll make the welcome text and instruction to disappear
+     */
+    private fun hideWelcomeText(){
         showWelcomeText.value = false
     }
 }
