@@ -9,5 +9,5 @@
   <li>Choose Number of dice to roll (<i> 1 - 4 dices</i>).</li>
   <li>Dice animation (<i>dice will show a roll effect when dice anim is 'enabled'</i>).</li>
   <li>Display dice rolled total (<i>if enable we'll show you sum of the dice/s rolled</i>).</li>
-  <li></li>
+  <li>Contact support button (<i>you can send direct mail to our support team by using this feature</i>)</li>
  </ul>
