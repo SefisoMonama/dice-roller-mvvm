@@ -1,6 +1,6 @@
 <h1>Dice roller</h1>
 <h3>ABOUT</h3><hr>
-<p>Dice rolling application was designed following MVVM design pattern - it specifically was designed to simplify the life of dice game players </p><br>
+<p>Dice rolling application was designed following MVVM design pattern - it was specifically designed to simplify the life of dice game players - The application allows you to roll up to 4 different types of dice (8 & 6 sided) at a time - some more specified added functionality is specified below</p><br>
 <h3>Application Functionality</h3><hr>
 <ul>
   <li>Add dice (<i>with a single button click</i>)</li>
