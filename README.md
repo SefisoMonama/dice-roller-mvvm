@@ -1,6 +1,6 @@
 <h1>Dice roller</h1>
 <h3>ABOUT</h3><hr>
-<p>Dice rolling application was designed following MVVM design pattern - it specifically was designed to simplify the life of dice game players </p>
+<p>Dice rolling application was designed following MVVM design pattern - it specifically was designed to simplify the life of dice game players </p><br>
 <h3>Application Functionality</h3><hr>
 <ul>
   <li>Add dice (<i>with a single button click</i>)</li>
