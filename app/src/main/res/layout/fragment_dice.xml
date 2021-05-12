@@ -146,8 +146,7 @@
                     android:visibility="@{vm.dice.size() >= 1 ? View.VISIBLE : View.GONE}"
                     app:layout_constraintEnd_toStartOf="@+id/dice2_imageView"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/dice2_imageView"

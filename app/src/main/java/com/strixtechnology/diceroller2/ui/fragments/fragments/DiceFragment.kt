@@ -18,6 +18,7 @@ import com.strixtechnology.diceroller2.R
 import com.strixtechnology.diceroller2.databinding.FragmentDiceBinding
 import com.strixtechnology.diceroller2.viewmodels.DiceViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -58,7 +59,7 @@ class DiceFragment : Fragment() {
             viewModel.rollDice()
             animateDice()
         }
-
+        
         binding.decrementImageView.setOnClickListener {
             viewModel.removeDice()
             animateImageView(binding.decrementImageView)
@@ -68,6 +69,9 @@ class DiceFragment : Fragment() {
             viewModel.addDice()
             animateImageView(binding.incrementImageView)
         }
+    }
+    fun multiply(x: Double, y: Double) {
+        (x * y).toDouble()
     }
 
     @SuppressLint("SetTextI18n")
@@ -89,16 +93,16 @@ class DiceFragment : Fragment() {
          */
         viewModel.dice.observe(viewLifecycleOwner) {
             if (it.size > 0) {
-                binding.dice1ImageView.setImageResource(it[0].getDiceImageResourceFor8Sides())
+                binding.dice1ImageView.setImageResource(it[0].getDiceImageResource())
             }
             if (it.size > 1) {
-                binding.dice2ImageView.setImageResource(it[1].getDiceImageResourceFor8Sides())
+                binding.dice2ImageView.setImageResource(it[1].getDiceImageResource())
             }
             if (it.size > 2) {
-                binding.dice3ImageView.setImageResource(it[2].getDiceImageResourceFor8Sides())
+                binding.dice3ImageView.setImageResource(it[2].getDiceImageResource())
             }
             if (it.size > 3) {
-                binding.dice4ImageView.setImageResource(it[3].getDiceImageResourceFor8Sides())
+                binding.dice4ImageView.setImageResource(it[3].getDiceImageResource())
             }
         }
     }
@@ -135,8 +139,6 @@ class DiceFragment : Fragment() {
             }.start()
     }
 }
-
-
 
 
 
