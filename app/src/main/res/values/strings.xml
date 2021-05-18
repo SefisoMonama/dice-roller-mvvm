@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">diceRoller2</string>
+    <string name="app_name">Dice-Roll</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="welcome_to_dice_roller">Welcome To Dice Roller</string>
