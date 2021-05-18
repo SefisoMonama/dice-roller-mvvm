@@ -70,9 +70,6 @@ class DiceFragment : Fragment() {
             animateImageView(binding.incrementImageView)
         }
     }
-    fun multiply(x: Double, y: Double) {
-        (x * y).toDouble()
-    }
 
     @SuppressLint("SetTextI18n")
     private fun subscribeUi() {
