@@ -1,5 +1,6 @@
 package com.strixtechnology.diceroller2.ui.fragments.fragments
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -14,6 +15,7 @@ import com.strixtechnology.diceroller2.R
 import com.strixtechnology.diceroller2.databinding.FragmentSettingsBinding
 import com.strixtechnology.diceroller2.viewmodels.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.FlowPreview
 import java.util.*
 
 @AndroidEntryPoint
@@ -35,6 +37,7 @@ class SettingsFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(callback)
     }
 
+    @FlowPreview
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -86,12 +89,25 @@ class SettingsFragment : Fragment() {
             settingsViewModel.saveDiceAnimationOption(shouldAnimate)
         }
 
-        binding.darkModeChipGroup.setOnCheckedChangeListener{ _, selectedChipId ->
-            val darkModeSelected = selectedChipId == R.id.enableDarkMode_chip
-            settingsViewModel.saveAppModeSettings(darkModeSelected)
+        //set onClickListener on the switch - when it is checked it set boolean value darkModeSelected to true, that'll change the app layout to dark theme
+        binding.darkModeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                val darkModeSelected = true
+                settingsViewModel.saveAppModeSettings(darkModeSelected)
+            } else {
+                val darkModeSelected = false
+                settingsViewModel.saveAppModeSettings(darkModeSelected)
+            }
         }
 
-        binding.contactSupportButton.setOnClickListener{
+        //set Onclick listener on support text view and floating action bar - that whichever that is pressed first it open mail application
+        binding.supportDescTextView.setOnClickListener{
+            sendMail()
+        }
+        binding.supportTextView.setOnClickListener {
+            sendMail()
+        }
+        binding.mailFloatingActionButton.setOnClickListener {
             sendMail()
         }
         return binding.root

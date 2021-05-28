@@ -4,12 +4,15 @@ package com.strixtechnology.diceroller2.ui.fragments.fragments
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -46,6 +49,7 @@ class DiceFragment : Fragment() {
         return binding.root
     }
 
+
     private fun setupUi() {
         binding.settingsImageView.setOnClickListener {
             lifecycleScope.launch {
@@ -55,6 +59,10 @@ class DiceFragment : Fragment() {
             }
         }
 
+        //open dialog onClick
+        binding.infoImageView.setOnClickListener {
+            dialogue()
+        }
         binding.rollDiceButton.setOnClickListener {
             viewModel.rollDice()
             animateDice()
@@ -135,6 +143,15 @@ class DiceFragment : Fragment() {
                 duration = 100
             }.start()
     }
+
+    //when this function is called it open information dialog - alertDialog
+    private fun dialogue(){
+        val dialog = AlertDialog.Builder(context)
+        val dialogView = layoutInflater.inflate(R.layout.information_dialog, null)
+        dialog.setView(dialogView)
+        dialog.show()
+    }
+
 }
 
 

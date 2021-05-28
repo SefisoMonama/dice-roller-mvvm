@@ -19,6 +19,17 @@
         android:background="@color/mainBackgroundColor"
         tools:context=".ui.fragments.fragments.DiceFragment">
 
+        <ImageView
+            android:id="@+id/info_imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.95"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_info" />
+
         <TextView
             android:id="@+id/welcome_textView"
             style="@style/titleDiceFrag"
@@ -34,7 +45,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/info_imageView"
             app:layout_constraintVertical_bias="0.29000002" />
 
         <TextView
@@ -131,9 +142,11 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="@{vm.showWelcomeText  ? View.GONE : View.VISIBLE}"
                 app:layout_constraintBottom_toTopOf="@id/bottom_cardView"
-                android:visibility="@{vm.showWelcomeText  ? View.GONE : View.VISIBLE}">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:id="@+id/dice1_imageView"
@@ -171,8 +184,7 @@
                     app:layout_constraintBottom_toTopOf="@+id/total_textView"
                     app:layout_constraintEnd_toStartOf="@+id/dice4_imageView"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/dice1_imageView"
-                     />
+                    app:layout_constraintTop_toBottomOf="@+id/dice1_imageView" />
 
                 <ImageView
                     android:id="@+id/dice4_imageView"
@@ -199,7 +211,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 

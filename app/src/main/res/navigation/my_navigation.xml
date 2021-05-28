@@ -17,6 +17,9 @@
             android:name="toSettingsFragment"
             app:argType="boolean"
             android:defaultValue="false" />
+        <action
+            android:id="@+id/action_diceFragment_to_diceInformationFragment"
+            app:destination="@id/diceInformationFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -34,4 +37,13 @@
             android:id="@+id/action_settingsFragment_to_diceFragment2"
             app:popUpTo="@id/diceFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/diceInformationFragment"
+        android:name="com.strixtechnology.diceroller2.ui.fragments.fragments.DiceInformationFragment"
+        android:label="diceInformationFragment" >
+        <action
+            android:id="@+id/action_diceInformationFragment_to_diceFragment"
+            app:destination="@id/diceFragment" />
+    </fragment>
+
 </navigation>

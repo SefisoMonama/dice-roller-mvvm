@@ -22,6 +22,8 @@
     <color name="mainBackgroundColor">#FFFFFF</color>
     <color name="toolbarTextColor">#63657A</color>
     <color name="subTitleTextColor">#7063657A</color>
+    <color name="switchTrackColor">#000000</color>
+    <color name="switchThumbTint">#FFFFFF</color>
 
 
     <!--Light Theme -->
@@ -33,6 +35,6 @@
     <color name="strokeColor">@color/strokeColors</color>
     <color name="saveButtonBColor">@color/saveButton</color>
     <color name="uncheckedchipBackground">@color/white</color>
-
+    <color name="floatingActionBarBackground">@color/white</color>
 
 </resources>

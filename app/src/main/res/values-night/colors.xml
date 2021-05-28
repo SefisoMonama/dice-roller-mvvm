@@ -21,6 +21,9 @@
     <color name="uncheckedchipBackground">#FFFFFF</color>
     <color name="toolbarTextColor">#FFFFFF</color>
     <color name="subTitleTextColor">#7063657A</color>
+    <color name="switchTrackColor">#82828D</color>
+    <color name="switchThumbTint">#82828D</color>
+    <color name="floatingActionBarBackground">#95FFFFFF</color>
 
     <!--Dark Theme -->
     <color name="AppBackgroundColor">@color/white</color>
@@ -30,6 +33,7 @@
     <color name="welcomeTitle">@color/diceTitle</color>
     <color name="strokeColor">@color/strokeColors</color>
     <color name="saveButtonBColor">@color/saveButton</color>
+
 
 
 </resources>
