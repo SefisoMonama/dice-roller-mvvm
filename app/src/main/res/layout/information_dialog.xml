@@ -7,266 +7,333 @@
     android:background="@drawable/dialog_shape"
     tools:context=".ui.fragments.fragments.DiceFragment">
 
-        <TextView
-            android:id="@+id/rate_review_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
-            android:layout_marginBottom="8dp"
-            android:text="Copyright (c) 2021"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Toggle between dark theme and default (light) theme in-app"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView14"
-            app:layout_constraintEnd_toEndOf="@+id/textView6"
-            app:layout_constraintStart_toEndOf="@+id/imageView14"
-            app:layout_constraintTop_toTopOf="@+id/imageView14" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/playingHeading_textView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
-            android:text="Playing"
-            android:textAlignment="center"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
-        <ImageView
-            android:id="@+id/press_imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/ic_press"
-            app:layout_constraintStart_toStartOf="@+id/playingHeading_textView"
-            app:layout_constraintTop_toBottomOf="@+id/playingHeading_textView" />
+            <TextView
+                android:id="@+id/rate_review_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:layout_marginBottom="10dp"
+                android:text="Copyright (c) 2021"
+                android:textColor="@color/dialogText"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/darkMode_info_textView" />
 
-        <TextView
-            android:id="@+id/addDice_textView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Press the roll button to roll number of dice available"
-            app:layout_constraintBottom_toBottomOf="@+id/press_imageView"
-            app:layout_constraintEnd_toEndOf="@+id/playingHeading_textView"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/press_imageView"
-            app:layout_constraintTop_toTopOf="@+id/press_imageView"
-            app:layout_constraintVertical_bias="0.483" />
+            <TextView
+                android:id="@+id/darkMode_info_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Toggle between dark theme and default (light) theme in-app"
+                android:textColor="@color/dialogText"
+                app:layout_constraintBottom_toTopOf="@+id/rate_review_textView"
+                app:layout_constraintEnd_toEndOf="@+id/animateDice_info_textView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/darkMode_info_imageView"
+                app:layout_constraintTop_toBottomOf="@+id/animateDice_info_textView" />
 
-        <TextView
-            android:id="@+id/appFeatureTitle_textView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:text="Dice Features"
-            android:textAlignment="center"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/addDice_textView"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/playingHeading_textView"
-            app:layout_constraintTop_toBottomOf="@+id/press_imageView" />
+            <TextView
+                android:id="@+id/playingHeading_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:text="Playing"
+                android:textAlignment="center"
+                android:textColor="@color/dialogText"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dialogHeading_textView" />
 
-        <ImageView
-            android:id="@+id/addDice_imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/ic_info_add"
-            app:layout_constraintStart_toStartOf="@+id/press_imageView"
-            app:layout_constraintTop_toBottomOf="@+id/appFeatureTitle_textView" />
+            <ImageView
+                android:id="@+id/press_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_press"
+                app:layout_constraintEnd_toStartOf="@+id/addDice_textView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@+id/playingHeading_textView"
+                app:layout_constraintTop_toBottomOf="@+id/playingHeading_textView" />
 
-        <TextView
-            android:id="@+id/addDiceExplained_textView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Press the '+' icon to add dice."
-            app:layout_constraintBottom_toBottomOf="@+id/addDice_imageView"
-            app:layout_constraintEnd_toEndOf="@+id/appFeatureTitle_textView"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/addDice_imageView"
-            app:layout_constraintTop_toTopOf="@+id/addDice_imageView"
-            app:layout_constraintVertical_bias="0.483" />
+            <TextView
+                android:id="@+id/addDice_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Press the roll button to roll number of dice available"
+                android:textColor="@color/dialogText"
+                app:layout_constraintBottom_toBottomOf="@+id/press_imageView"
+                app:layout_constraintEnd_toEndOf="@+id/playingHeading_textView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/press_imageView"
+                app:layout_constraintTop_toTopOf="@+id/press_imageView" />
 
-        <ImageView
-            android:id="@+id/removeDice_imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:src="@drawable/ic_info_substract"
-            app:layout_constraintStart_toStartOf="@+id/addDice_imageView"
-            app:layout_constraintTop_toBottomOf="@+id/addDice_imageView" />
+            <TextView
+                android:id="@+id/appFeatureTitle_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Dice Features"
+                android:textAlignment="center"
+                android:textColor="@color/dialogText"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/playingHeading_textView"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/playingHeading_textView"
+                app:layout_constraintTop_toBottomOf="@+id/addDice_textView" />
 
-        <TextView
-            android:id="@+id/removeDiceExplained_textView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Press the '-' icon to remove a dice."
-            app:layout_constraintBottom_toBottomOf="@+id/removeDice_imageView"
-            app:layout_constraintEnd_toEndOf="@+id/addDiceExplained_textView"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/addDice_imageView"
-            app:layout_constraintTop_toBottomOf="@+id/addDice_imageView"
-            app:layout_constraintVertical_bias="0.483" />
+            <ImageView
+                android:id="@+id/addDice_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_info_add"
+                app:layout_constraintEnd_toStartOf="@+id/addDiceExplained_textView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@+id/appFeatureTitle_textView"
+                app:layout_constraintTop_toBottomOf="@+id/appFeatureTitle_textView" />
 
-        <TextView
-            android:id="@+id/settingsTitle_textView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="Settings"
-            android:textAlignment="center"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/removeDiceExplained_textView"
-            app:layout_constraintStart_toStartOf="@+id/appFeatureTitle_textView"
-            app:layout_constraintTop_toBottomOf="@+id/removeDice_imageView" />
+            <TextView
+                android:id="@+id/addDiceExplained_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Press the '+' icon to add dice."
+                android:textColor="@color/dialogText"
+                app:layout_constraintBottom_toBottomOf="@+id/addDice_imageView"
+                app:layout_constraintEnd_toEndOf="@+id/appFeatureTitle_textView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/addDice_imageView"
+                app:layout_constraintTop_toTopOf="@+id/addDice_imageView" />
 
-        <ImageView
-            android:id="@+id/settingsIcon_imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
-            android:src="@drawable/ic_info_settings"
-            app:layout_constraintStart_toStartOf="@+id/settingsTitle_textView"
-            app:layout_constraintTop_toBottomOf="@+id/settingsTitle_textView" />
+            <ImageView
+                android:id="@+id/removeDice_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_info_substract"
+                app:layout_constraintEnd_toStartOf="@+id/removeDiceExplained_textView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@+id/addDice_imageView"
+                app:layout_constraintTop_toBottomOf="@+id/addDice_imageView" />
 
-        <TextView
-            android:id="@+id/settings_textView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Click the gear Icon to get access to advanced dice settings"
-            app:layout_constraintBottom_toBottomOf="@+id/settingsIcon_imageView"
-            app:layout_constraintEnd_toEndOf="@+id/settingsTitle_textView"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/settingsIcon_imageView"
-            app:layout_constraintTop_toTopOf="@+id/settingsIcon_imageView" />
+            <TextView
+                android:id="@+id/removeDiceExplained_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Press the '-' icon to remove a dice."
+                android:textColor="@color/dialogText"
+                app:layout_constraintBottom_toBottomOf="@+id/removeDice_imageView"
+                app:layout_constraintEnd_toEndOf="@+id/addDiceExplained_textView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/removeDice_imageView"
+                app:layout_constraintTop_toTopOf="@+id/removeDice_imageView" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Click the mail icon to send your queries to dice roller support team. "
-            app:layout_constraintBottom_toBottomOf="@+id/imageView10"
-            app:layout_constraintEnd_toEndOf="@+id/settings_textView"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/imageView10"
-            app:layout_constraintTop_toTopOf="@+id/imageView10" />
+            <TextView
+                android:id="@+id/settingsTitle_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Settings"
+                android:textAlignment="center"
+                android:textColor="@color/dialogText"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/appFeatureTitle_textView"
+                app:layout_constraintStart_toStartOf="@+id/appFeatureTitle_textView"
+                app:layout_constraintTop_toBottomOf="@+id/removeDiceExplained_textView" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/white"
-            android:text="DiceRoller."
-            android:textColor="@color/primary"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="@+id/playingHeading_textView"
-            app:layout_constraintStart_toStartOf="@+id/playingHeading_textView"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/settingsIcon_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_info_settings"
+                app:layout_constraintEnd_toStartOf="@+id/settings_textView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@+id/settingsTitle_textView"
+                app:layout_constraintTop_toBottomOf="@+id/settingsTitle_textView" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Choose number of sides your dice should have(6/8 only respectively)."
-            app:layout_constraintBottom_toBottomOf="@+id/imageView11"
-            app:layout_constraintEnd_toEndOf="@+id/textView"
-            app:layout_constraintStart_toEndOf="@+id/imageView11"
-            app:layout_constraintTop_toTopOf="@+id/imageView11" />
+            <TextView
+                android:id="@+id/settings_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Click the gear Icon to get access to advanced dice settings"
+                android:textColor="@color/dialogText"
+                android:textSize="0015sp"
+                app:layout_constraintBottom_toBottomOf="@+id/settingsIcon_imageView"
+                app:layout_constraintEnd_toEndOf="@+id/settingsTitle_textView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/settingsIcon_imageView"
+                app:layout_constraintTop_toTopOf="@+id/settingsIcon_imageView" />
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Choose if you want to display dice total."
-            app:layout_constraintBottom_toBottomOf="@+id/imageView12"
-            app:layout_constraintEnd_toEndOf="@+id/textView3"
-            app:layout_constraintStart_toEndOf="@+id/imageView12"
-            app:layout_constraintTop_toTopOf="@+id/imageView12" />
+            <TextView
+                android:id="@+id/mail_info_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="Click the mail icon to send your queries to dice roller support team. "
+                android:textColor="@color/dialogText"
+                app:layout_constraintBottom_toBottomOf="@+id/mail_info_imageView"
+                app:layout_constraintEnd_toEndOf="@+id/settings_textView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/mail_info_imageView"
+                app:layout_constraintTop_toTopOf="@+id/mail_info_imageView" />
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Make your dice to show roll effect after rolling."
-            app:layout_constraintBottom_toBottomOf="@+id/imageView13"
-            app:layout_constraintEnd_toEndOf="@+id/textView5"
-            app:layout_constraintStart_toEndOf="@+id/imageView13"
-            app:layout_constraintTop_toTopOf="@+id/imageView13" />
+            <TextView
+                android:id="@+id/dialogHeading_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="DiceRoller."
+                android:textColor="#1877F2"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/playingHeading_textView"
+                app:layout_constraintStart_toStartOf="@+id/playingHeading_textView"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/imageView10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            app:layout_constraintBottom_toTopOf="@+id/imageView11"
-            app:layout_constraintStart_toStartOf="@+id/settingsIcon_imageView"
-            app:layout_constraintTop_toBottomOf="@+id/settingsIcon_imageView"
-            app:srcCompat="@drawable/ic_info_email" />
+            <TextView
+                android:id="@+id/diceSide_info_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Choose number of sides your dice should have(6/8 only respectively)."
+                android:textColor="@color/dialogText"
+                app:layout_constraintBottom_toTopOf="@+id/showTotal_info_textView"
+                app:layout_constraintEnd_toEndOf="@+id/mail_info_textView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/diceSide_info_imageView"
+                app:layout_constraintTop_toBottomOf="@+id/mail_info_textView"
+                app:layout_constraintVertical_chainStyle="spread" />
 
-        <ImageView
-            android:id="@+id/imageView11"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:layout_constraintStart_toStartOf="@+id/imageView10"
-            app:layout_constraintTop_toBottomOf="@+id/imageView10"
-            app:srcCompat="@drawable/ic_info_dice_sides" />
+            <TextView
+                android:id="@+id/showTotal_info_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Choose if you want to display dice total."
+                android:textColor="@color/dialogText"
+                app:layout_constraintBottom_toTopOf="@+id/animateDice_info_textView"
+                app:layout_constraintEnd_toEndOf="@+id/diceSide_info_textView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/showTotal_info_imageView"
+                app:layout_constraintTop_toBottomOf="@+id/diceSide_info_textView" />
 
-        <ImageView
-            android:id="@+id/imageView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:layout_constraintStart_toStartOf="@+id/imageView11"
-            app:layout_constraintTop_toBottomOf="@+id/imageView11"
-            app:srcCompat="@drawable/ic_info_total" />
+            <TextView
+                android:id="@+id/animateDice_info_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Make your dice to show roll effect after rolling."
+                android:textColor="@color/dialogText"
+                app:layout_constraintBottom_toTopOf="@+id/darkMode_info_textView"
+                app:layout_constraintEnd_toEndOf="@+id/showTotal_info_textView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/animateDice_info_imageView"
+                app:layout_constraintTop_toBottomOf="@+id/showTotal_info_textView" />
 
-        <ImageView
-            android:id="@+id/imageView13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:layout_constraintStart_toStartOf="@+id/imageView12"
-            app:layout_constraintTop_toBottomOf="@+id/imageView12"
-            app:srcCompat="@drawable/ic_info_roll_effect" />
+            <ImageView
+                android:id="@+id/mail_info_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/mail_info_textView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@+id/settingsIcon_imageView"
+                app:layout_constraintTop_toBottomOf="@+id/settings_textView"
+                app:srcCompat="@drawable/ic_info_email" />
 
-        <ImageView
-            android:id="@+id/imageView14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:layout_constraintStart_toStartOf="@+id/imageView13"
-            app:layout_constraintTop_toBottomOf="@+id/imageView13"
-            app:srcCompat="@drawable/ic_info_darh_theme" />
+            <ImageView
+                android:id="@+id/diceSide_info_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/diceSide_info_textView"
+                app:layout_constraintEnd_toStartOf="@+id/diceSide_info_textView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@+id/mail_info_imageView"
+                app:layout_constraintTop_toTopOf="@+id/diceSide_info_textView"
+                app:srcCompat="@drawable/ic_info_dice_sides" />
 
+            <ImageView
+                android:id="@+id/showTotal_info_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/showTotal_info_textView"
+                app:layout_constraintEnd_toStartOf="@+id/showTotal_info_textView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@+id/diceSide_info_imageView"
+                app:layout_constraintTop_toTopOf="@+id/showTotal_info_textView"
+                app:srcCompat="@drawable/ic_info_total" />
+
+            <ImageView
+                android:id="@+id/animateDice_info_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/animateDice_info_textView"
+                app:layout_constraintEnd_toStartOf="@+id/animateDice_info_textView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@+id/showTotal_info_imageView"
+                app:layout_constraintTop_toTopOf="@+id/animateDice_info_textView"
+                app:srcCompat="@drawable/ic_info_roll_effect" />
+
+            <ImageView
+                android:id="@+id/darkMode_info_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/darkMode_info_textView"
+                app:layout_constraintEnd_toStartOf="@+id/darkMode_info_textView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@+id/animateDice_info_imageView"
+                app:layout_constraintTop_toTopOf="@+id/darkMode_info_textView"
+                app:srcCompat="@drawable/ic_info_darh_theme" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

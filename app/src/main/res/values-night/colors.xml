@@ -24,6 +24,8 @@
     <color name="switchTrackColor">#82828D</color>
     <color name="switchThumbTint">#82828D</color>
     <color name="floatingActionBarBackground">#95FFFFFF</color>
+    <color name="dialogText">#63657A</color>
+    <color name="whatsNewBackground">#63657A</color>
 
     <!--Dark Theme -->
     <color name="AppBackgroundColor">@color/white</color>

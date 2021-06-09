@@ -24,6 +24,8 @@
     <color name="subTitleTextColor">#7063657A</color>
     <color name="switchTrackColor">#000000</color>
     <color name="switchThumbTint">#FFFFFF</color>
+    <color name="dialogText">#63657A</color>
+    <color name="whatsNewBackground">#EA8212</color>
 
 
     <!--Light Theme -->

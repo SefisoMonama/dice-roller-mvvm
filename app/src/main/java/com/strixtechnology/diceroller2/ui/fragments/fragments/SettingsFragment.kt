@@ -107,7 +107,7 @@ class SettingsFragment : Fragment() {
         binding.supportTextView.setOnClickListener {
             sendMail()
         }
-        binding.mailFloatingActionButton.setOnClickListener {
+        binding.mailImageView.setOnClickListener {
             sendMail()
         }
         return binding.root

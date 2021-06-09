@@ -347,9 +347,10 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
+                        android:layout_marginEnd="16dp"
                         android:text="@string/support"
                         android:textSize="16sp"
-                        app:layout_constraintEnd_toEndOf="@+id/darkMode_switch"
+                        app:layout_constraintEnd_toStartOf="@+id/mail_imageView"
                         app:layout_constraintStart_toStartOf="@+id/darkMode_switch"
                         app:layout_constraintTop_toBottomOf="@+id/darkMode_switch" />
 
@@ -357,9 +358,10 @@
                         android:id="@+id/supportDesc_textView"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
                         android:text="Send mail to DiceRoller.co support team"
                         android:textSize="12sp"
-                        app:layout_constraintEnd_toEndOf="@+id/support_textView"
+                        app:layout_constraintEnd_toStartOf="@+id/mail_imageView"
                         app:layout_constraintStart_toStartOf="@+id/support_textView"
                         app:layout_constraintTop_toBottomOf="@+id/support_textView" />
 
@@ -379,25 +381,26 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
+                        android:layout_marginBottom="24dp"
                         android:text="@string/v1_0_0"
                         android:textColor="@color/primary"
                         android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/VersionTitle_textView"
                         app:layout_constraintStart_toStartOf="@+id/VersionTitle_textView"
                         app:layout_constraintTop_toBottomOf="@+id/VersionTitle_textView" />
 
-                    <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:id="@+id/mail_floatingActionButton"
+                    <ImageView
+                        android:id="@+id/mail_imageView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="32dp"
-                        android:layout_marginBottom="24dp"
-                        android:clickable="true"
-                        app:backgroundTint="@color/white"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@+id/supportDesc_textView"
+                        app:layout_constraintEnd_toEndOf="@+id/darkMode_switch"
+                        app:layout_constraintStart_toEndOf="@+id/support_textView"
+                        app:layout_constraintTop_toTopOf="@+id/support_textView"
                         app:srcCompat="@drawable/ic_email"
                         app:tint="@color/primary" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
         </ScrollView>

@@ -5,13 +5,13 @@ import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -59,9 +59,19 @@ class DiceFragment : Fragment() {
             }
         }
 
+
         //open dialog onClick
         binding.infoImageView.setOnClickListener {
-            dialogue()
+            lifecycleScope.launch {
+                animateImageView(binding.infoImageView)
+                delay(150)
+                dialog(layoutInflater.inflate(R.layout.information_dialog, null))
+            }
+        }
+
+        binding.whatsNewImageView.setOnClickListener {
+            animateImageView(binding.whatsNewImageView)
+            dialog(layoutInflater.inflate(R.layout.whatsnew_dialog, null))
         }
         binding.rollDiceButton.setOnClickListener {
             viewModel.rollDice()
@@ -145,10 +155,9 @@ class DiceFragment : Fragment() {
     }
 
     //when this function is called it open information dialog - alertDialog
-    private fun dialogue(){
+    private fun dialog(view: View){
         val dialog = AlertDialog.Builder(context)
-        val dialogView = layoutInflater.inflate(R.layout.information_dialog, null)
-        dialog.setView(dialogView)
+        dialog.setView(view)
         dialog.show()
     }
 
