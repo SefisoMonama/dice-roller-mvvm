@@ -12,6 +12,7 @@ class DiceViewModel @ViewModelInject constructor(
 ) : ViewModel() {
 
     private val diceInformation = dataStoreRepository.diceInformation.asLiveData()
+
     /*
     * LiveData of your Dice model.
     * Read up on what an ArrayList is and how it can be used.
@@ -43,6 +44,7 @@ class DiceViewModel @ViewModelInject constructor(
     val diceTotal = Transformations.map(dice) { diceArray ->
         return@map diceArray.sumOf { it.currentDiceValue }
     }
+
     /*
     * This is called by the fragment when a user taps the roll button.
     * I then go through the list of Dice objects, and roll each one.
@@ -63,7 +65,7 @@ class DiceViewModel @ViewModelInject constructor(
     * when it is called, it'll remove 1 dice first and roll Dice visible
      */
     fun removeDice() {
-        viewModelScope.launch{
+        viewModelScope.launch {
             hideWelcomeText()
             dataStoreRepository.decreaseDiceNumber()
             rollDice()
@@ -76,18 +78,17 @@ class DiceViewModel @ViewModelInject constructor(
     * when it is called, it'll add 1 dice first and roll Dice visible
      */
     fun addDice() {
-        viewModelScope.launch{
+        viewModelScope.launch {
             hideWelcomeText()
             dataStoreRepository.increaseDiceNumber()
             rollDice()
         }
     }
 
-
     /*
     *set welcome text boolean value to false - It'll make the welcome text and instruction to disappear
      */
-    private fun hideWelcomeText(){
+    private fun hideWelcomeText() {
         showWelcomeText.value = false
     }
 }

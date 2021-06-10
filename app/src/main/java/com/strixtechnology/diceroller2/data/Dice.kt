@@ -5,15 +5,14 @@ import com.strixtechnology.diceroller2.R
 class Dice(private val numSides: Int) {
     var currentDiceValue: Int = 1
 
-
-    /**
+    /*
      * Do a random dice roll and return the result.
      */
     fun roll() {
         currentDiceValue = (1..numSides).random()
     }
 
-    /**
+    /*
      * Store Image Resources
      */
     fun getDiceImageResource(): Int {

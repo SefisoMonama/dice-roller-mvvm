@@ -1,6 +1,5 @@
 package com.strixtechnology.diceroller2.ui.fragments.fragments
 
-import android.animation.ObjectAnimator
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -12,11 +11,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.strixtechnology.diceroller2.R
+import com.strixtechnology.diceroller2.data.Dice
 import com.strixtechnology.diceroller2.databinding.FragmentSettingsBinding
 import com.strixtechnology.diceroller2.viewmodels.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import java.util.*
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
@@ -29,7 +29,7 @@ class SettingsFragment : Fragment() {
         setHasOptionsMenu(true)
         settingsViewModel = ViewModelProvider(requireActivity()).get(SettingsViewModel::class.java)
 
-        val callback = object : OnBackPressedCallback(true){
+        val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 findNavController().navigate(R.id.diceFragment)
             }
@@ -37,6 +37,7 @@ class SettingsFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(callback)
     }
 
+    @ExperimentalCoroutinesApi
     @FlowPreview
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,15 +62,15 @@ class SettingsFragment : Fragment() {
         }
 
         binding.diceSidesChipGroup.setOnCheckedChangeListener { _, selectedChipId ->
-            val numberOfSides = when (selectedChipId){
-                R.id.eightSides_chip ->  8
-                else ->  6
+            val numberOfSides = when (selectedChipId) {
+                R.id.eightSides_chip -> 8
+                else -> 6
             }
             settingsViewModel.saveDiceSides(numberOfSides)
         }
 
-        binding.diceNumberChipGroup.setOnCheckedChangeListener { _ , selectedChipId ->
-            val diceNumber = when(selectedChipId){
+        binding.diceNumberChipGroup.setOnCheckedChangeListener { _, selectedChipId ->
+            val diceNumber = when (selectedChipId) {
                 R.id.oneDice_chip -> 1
                 R.id.twoDice_chip -> 2
                 R.id.threeDice_chip -> 3
@@ -85,8 +86,15 @@ class SettingsFragment : Fragment() {
         }
 
         binding.diceAnimationChipGroup.setOnCheckedChangeListener { _, selectedChipId ->
-            val shouldAnimate = selectedChipId == R.id.addAnimationChip
-            settingsViewModel.saveDiceAnimationOption(shouldAnimate)
+            //val shouldAnimate = selectedChipId == R.id.addAnimationChip
+            //settingsViewModel.saveDiceAnimationOption(shouldAnimate)
+            if(selectedChipId == R.id.addAnimationChip) {
+                val shouldAnimate = true
+                settingsViewModel.saveDiceAnimationOption(shouldAnimate)
+            }else{
+                val shouldAnimate = false
+                settingsViewModel.saveDiceAnimationOption(shouldAnimate)
+            }
         }
 
         //set onClickListener on the switch - when it is checked it set boolean value darkModeSelected to true, that'll change the app layout to dark theme
@@ -101,7 +109,7 @@ class SettingsFragment : Fragment() {
         }
 
         //set Onclick listener on support text view and floating action bar - that whichever that is pressed first it open mail application
-        binding.supportDescTextView.setOnClickListener{
+        binding.supportDescTextView.setOnClickListener {
             sendMail()
         }
         binding.supportTextView.setOnClickListener {
@@ -113,6 +121,9 @@ class SettingsFragment : Fragment() {
         return binding.root
     }
 
+    /*
+    *when this function is called it'll send a mail to the mail host sgmonama@gmail.com
+     */
     private fun sendMail() {
         val intent = Intent(
             Intent.ACTION_SENDTO,
