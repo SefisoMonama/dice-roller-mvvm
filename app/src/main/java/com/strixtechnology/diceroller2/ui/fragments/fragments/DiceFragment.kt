@@ -4,7 +4,9 @@ package com.strixtechnology.diceroller2.ui.fragments.fragments
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,10 +17,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.strixtechnology.diceroller2.R
+import com.strixtechnology.diceroller2.data.Dice
 import com.strixtechnology.diceroller2.databinding.FragmentDiceBinding
 import com.strixtechnology.diceroller2.viewmodels.DiceViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -46,6 +48,7 @@ class DiceFragment : Fragment() {
         return binding.root
     }
 
+
     private fun setupUi() {
         binding.settingsImageView.setOnClickListener {
             lifecycleScope.launch {
@@ -55,9 +58,23 @@ class DiceFragment : Fragment() {
             }
         }
 
+
+        //open dialog onClick
+        binding.infoImageView.setOnClickListener {
+            lifecycleScope.launch {
+                animateImageView(binding.infoImageView)
+                delay(150)
+                dialog(layoutInflater.inflate(R.layout.information_dialog, null))
+            }
+        }
+
+        binding.whatsNewImageView.setOnClickListener {
+            animateImageView(binding.whatsNewImageView)
+            dialog(layoutInflater.inflate(R.layout.whatsnew_dialog, null))
+        }
         binding.rollDiceButton.setOnClickListener {
             viewModel.rollDice()
-            animateDice()
+            subscribeUi()
         }
         
         binding.decrementImageView.setOnClickListener {
@@ -135,6 +152,14 @@ class DiceFragment : Fragment() {
                 duration = 100
             }.start()
     }
+
+    //when this function is called it open information dialog - alertDialog
+    private fun dialog(view: View){
+        val dialog = AlertDialog.Builder(context)
+        dialog.setView(view)
+        dialog.show()
+    }
+
 }
 
 

@@ -11,7 +11,7 @@
             name="vm"
             type="com.strixtechnology.diceroller2.viewmodels.DiceViewModel" />
     </data>
-
+    <!-- -->
     <androidx.constraintlayout.widget.ConstraintLayout
         style="@style/AppBackgroundColor"
         android:layout_width="match_parent"
@@ -50,22 +50,16 @@
             app:layout_constraintEnd_toEndOf="@+id/welcome_textView"
             app:layout_constraintStart_toStartOf="@+id/welcome_textView"
             app:layout_constraintTop_toBottomOf="@+id/welcome_textView" />
+        <!-- -->
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0">
-
+        <!-- -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/bottom_cardView"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 app:cardCornerRadius="10dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/primary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
@@ -87,7 +81,7 @@
                         android:textSize="12sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"></Button>
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
                         android:id="@+id/settings_imageView"
@@ -127,82 +121,116 @@
                         tools:ignore="UseAppTint" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
+        <!-- -->
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="@{vm.showWelcomeText  ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_cardView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+            <ImageView
+                android:id="@+id/dice1_imageView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginEnd="24dp"
+                android:adjustViewBounds="false"
+                android:cropToPadding="false"
+                android:src="@drawable/dice1"
+                android:visibility="@{vm.dice.size() >= 1 ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toTopOf="@+id/dice3_imageView"
+                app:layout_constraintEnd_toStartOf="@+id/dice2_imageView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintTop_toBottomOf="@+id/whatsNew_imageView"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+
+            <ImageView
+                android:id="@+id/dice2_imageView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/dice1"
+                android:visibility="@{vm.dice.size() >= 2 ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@+id/dice1_imageView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/dice1_imageView"
+                app:layout_constraintTop_toTopOf="@+id/dice1_imageView" />
+
+            <ImageView
+                android:id="@+id/dice3_imageView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:adjustViewBounds="false"
+                android:cropToPadding="false"
+                android:src="@drawable/dice1"
+                android:visibility="@{vm.dice.size() >= 3 ? View.VISIBLE : View.GONE }"
+                app:layout_constraintBottom_toTopOf="@+id/total_textView"
+                app:layout_constraintEnd_toStartOf="@+id/dice4_imageView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dice1_imageView" />
+
+            <ImageView
+                android:id="@+id/dice4_imageView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/dice1"
+                android:visibility="@{vm.dice.size() >= 4 ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@+id/dice3_imageView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/dice3_imageView"
+                app:layout_constraintTop_toTopOf="@+id/dice3_imageView" />
+
+            <TextView
+                android:id="@+id/total_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/baloo_thambi"
+                android:text="@{`Dice Total: ` + vm.diceTotal}"
+                android:textAlignment="center"
+                android:textSize="22sp"
+                android:visibility="@{vm.diceInformationChanged.selectedDisplayTotal ? (!vm.showWelcomeText) ? View.VISIBLE : View.GONE  : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/info_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/bottom_cardView"
-                android:visibility="@{vm.showWelcomeText  ? View.GONE : View.VISIBLE}">
+                app:srcCompat="@drawable/ic_info" />
 
-                <ImageView
-                    android:id="@+id/dice1_imageView"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="168dp"
-                    android:adjustViewBounds="false"
-                    android:cropToPadding="false"
-                    android:src="@drawable/dice1"
-                    android:visibility="@{vm.dice.size() >= 1 ? View.VISIBLE : View.GONE}"
-                    app:layout_constraintEnd_toStartOf="@+id/dice2_imageView"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/dice2_imageView"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginEnd="80dp"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/dice1"
-                    android:visibility="@{vm.dice.size() >= 2 ? View.VISIBLE : View.GONE}"
-                    app:layout_constraintBottom_toBottomOf="@+id/dice1_imageView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/dice1_imageView" />
-
-                <ImageView
-                    android:id="@+id/dice3_imageView"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:adjustViewBounds="false"
-                    android:cropToPadding="false"
-                    android:src="@drawable/dice1"
-                    android:visibility="@{vm.dice.size() >= 3 ? View.VISIBLE : View.GONE }"
-                    app:layout_constraintBottom_toTopOf="@+id/total_textView"
-                    app:layout_constraintEnd_toStartOf="@+id/dice4_imageView"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/dice1_imageView"
-                     />
-
-                <ImageView
-                    android:id="@+id/dice4_imageView"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginEnd="80dp"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/dice1"
-                    android:visibility="@{vm.dice.size() >= 4 ? View.VISIBLE : View.GONE}"
-                    app:layout_constraintBottom_toBottomOf="@+id/dice3_imageView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/dice3_imageView" />
-
-                <TextView
-                    android:id="@+id/total_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:fontFamily="@font/baloo_thambi"
-                    android:text="@{`Dice Total: ` + vm.diceTotal}"
-                    android:textAlignment="center"
-                    android:textSize="22sp"
-                    android:visibility="@{vm.diceInformationChanged.selectedDisplayTotal ? (!vm.showWelcomeText) ? View.VISIBLE : View.GONE  : View.GONE}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"/>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
+            <ImageView
+                android:id="@+id/whatsNew_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:tint="@color/whatsNewBackground"
+                app:layout_constraintBottom_toBottomOf="@+id/info_imageView"
+                app:layout_constraintEnd_toStartOf="@+id/info_imageView"
+                app:layout_constraintTop_toTopOf="@+id/info_imageView"
+                app:srcCompat="@drawable/ic_whats_new" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

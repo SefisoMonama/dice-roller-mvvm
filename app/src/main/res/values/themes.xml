@@ -19,6 +19,10 @@
         <item name="chipBackgroundColor">@color/chipbackgroundcolor</item>
         <item name="android:textColor">@color/chip_text_color</item>
     </style>
+    
+    <!--<style name="togglerSwitchStyle" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name=""
+    </style>-->
     <style name="SplashScreenStyle" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowBackground">@drawable/splashscreen</item>
         <item name="android:fitsSystemWindows">true</item>

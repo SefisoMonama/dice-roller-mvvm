@@ -4,7 +4,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="welcome_to_dice_roller">Welcome To Dice Roller</string>
     <string name="add_dice_or_configure_your_dice_by_tapping_the_buttons_below">Add dice or configure your dice by tapping the buttons below</string>
-    <string name="settings">Settings</string>
     <string name="dice_settings">Dice Settings</string>
     <string name="number_of_dice_sides">Number of dice sides</string>
     <string name="_6">6</string>
@@ -20,7 +19,6 @@
     <string name="dark_mode">Dark Mode</string>
     <string name="Enable">Disable</string>
     <string name="support">Support</string>
-    <string name="version">Version</string>
     <string name="v1_0_0">v1.0.0</string>
     <string name="contact_support">Contact Support</string>
     <string name="Roll">Roll</string>
@@ -31,4 +29,24 @@
     <string name="yes">Yes</string>
     <string name="disable">Disable</string>
     <string name="enable">Enable</string>
+    <string name="what_s_new">What\'s new!</string>
+    <string name="copyright_c_2021">Copyright (c) 2021</string>
+    <string name="toggle_between_dark_theme_and_default_light_theme_in_app">Toggle between dark theme and default (light) theme in-app</string>
+    <string name="playing">Playing</string>
+    <string name="press_the_roll_button_to_roll_number_of_dice_available">Press the roll button to roll number of dice available</string>
+    <string name="dice_features">Dice Features</string>
+    <string name="press_the_icon_to_add_dice">Press the \'+\' icon to add dice.</string>
+    <string name="press_the_icon_to_remove_a_dice">Press the \'-\' icon to remove a dice.</string>
+    <string name="settings">Settings</string>
+    <string name="click_the_gear_icon_to_get_access_to_advanced_dice_settings">Click the gear Icon to get access to advanced dice settings</string>
+    <string name="click_the_mail_icon_to_send_your_queries_to_dice_roller_support_team">Click the mail icon to send your queries to dice roller support team.</string>
+    <string name="diceroller">DiceRoller.</string>
+    <string name="choose_number_of_sides_your_dice_should_have_6_8_only_respectively">Choose number of sides your dice should have(6/8 only respectively).</string>
+    <string name="choose_if_you_want_to_display_dice_total">Choose if you want to display dice total.</string>
+    <string name="make_your_dice_to_show_roll_effect_after_rolling">Make your dice to show roll effect after rolling.</string>
+    <string name="dice_animation">Dice Animation</string>
+    <string name="enabled">Enabled</string>
+    <string name="disabled">Disabled</string>
+    <string name="send_mail_to_diceroller_co_support_team">Send mail to DiceRoller.co support team</string>
+    <string name="version">Version</string>
 </resources>
